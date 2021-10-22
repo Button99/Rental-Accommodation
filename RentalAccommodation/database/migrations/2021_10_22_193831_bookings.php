@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Accommodations extends Migration
+class Bookings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class Accommodations extends Migration
      */
     public function up()
     {
-        Schema::create('accommodations', function(Blueprint $table) {
+        Schema::create('bookings', function(Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->int('rooms');
-            $table->text('description');
-            $table->string('town');
-            $table->enum('accommodation_type', ['Apartment', 'House', 'Unique space', 'Boutique Hotel']);
-            $table->timestaps();
-        
+            $table->boolean('is_available');
+            $table->int('persons');
+            $table->date('start_date');
+            $table->date('end_date');
+
+            $table->foreignId('accommodation_id')->constrained('accommodations')
+                ->onDelete('cascade')->onUpdate('cascade');
+
             $table->foreignId('user_id')->constrained('users')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
@@ -34,6 +35,6 @@ class Accommodations extends Migration
      */
     public function down()
     {
-        Schema::dropDatabaseIfExists('accommodations');
+        Schema::dropIfExists('bookings');
     }
 }

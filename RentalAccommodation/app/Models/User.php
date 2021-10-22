@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Accommodation;
+use App\Models\Booking;
+use App\Models\Picture;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -18,11 +22,30 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
+        'first_name',
+        'last_name',
+        'date_of_birth',
         'password',
+        'email',
+        'gender',
+        'phone',
+        'goverment_id',
     ];
 
+
+    public function accommodations() {
+        return $this->hasMany(Accommodation::class);
+    }
+    
+    public function booking() {
+        return $this->hasOne(Booking::class);
+    }
+
+    public function picture() {
+        return $this->hasOne(Picture::class);
+    }
+
+    
     /**
      * The attributes that should be hidden for serialization.
      *
