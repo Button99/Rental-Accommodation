@@ -16,11 +16,11 @@ class Accommodations extends Migration
         Schema::create('accommodations', function(Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->int('rooms');
+            $table->integer('rooms');
             $table->text('description');
             $table->string('town');
             $table->enum('accommodation_type', ['Apartment', 'House', 'Unique space', 'Boutique Hotel']);
-            $table->timestaps();
+            $table->timestamps();
         
             $table->foreignId('user_id')->constrained('users')
                 ->onDelete('cascade')->onUpdate('cascade');

@@ -16,7 +16,7 @@ class Bookings extends Migration
         Schema::create('bookings', function(Blueprint $table) {
             $table->id();
             $table->boolean('is_available');
-            $table->int('persons');
+            $table->integer('persons');
             $table->date('start_date');
             $table->date('end_date');
 
