@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Todo: Create the api
 
-Route::get('/', ['AuthController', 'index']);
+Route::get('/', [AuthController::class, 'index']);
 
 Route::post('/login', [AuthController::class, 'login']);
 

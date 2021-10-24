@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+
     public function login(Request $request) {
         $validated= $request->validate([
             'email' => ['required', 'email'],
@@ -14,7 +15,7 @@ class AuthController extends Controller
         ]);
 
         if($validated) {
-            dd('Make Login Attempt');
+            return response()->json('worked');
         }
 
         return response()->toJson('Error!');
@@ -32,11 +33,11 @@ class AuthController extends Controller
                 'Female',
                 'Non binary'
                 ])],
-            'phone' => ['required', 'min:20', 'numeric']
+            'phone' => ['required', 'max:20', 'numeric']
         ]);
 
         if($validated) {
-            dd('Make a register');
+            return response()->json('Worked');
         }
 
         return response()->toJson('Error with validation!');
