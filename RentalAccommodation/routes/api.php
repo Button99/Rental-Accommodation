@@ -19,7 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Todo: Create the api
+// Protected routes
+
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
 Route::get('/', [AuthController::class, 'index']);
 

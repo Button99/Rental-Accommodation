@@ -6,6 +6,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Facade\FlareClient\Http\Response;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +30,11 @@ class AuthController extends Controller
         // Login function 
         if(!$validated->fails()) {
             if(Auth::attempt($credentials)) {
-                return response()->json('Logged in!');
+                $user= Auth::user();
+                $token= $user->createToken('userToken')->plainTextToken;
+                $res= ['user' => $user,
+                    'token' => $token];
+                return response()->json($res, HttpResponse::HTTP_ACCEPTED);
             }
             return response()->json('Wrong email or password');
         }
@@ -72,5 +78,13 @@ class AuthController extends Controller
         }
 
         return response()->json('Error with validation!');
+    }
+
+    public function logout() {
+        if(auth()->user()->currentAccessToken()->delete()) {
+            return response()->json('Logged out successfully', HttpResponse::HTTP_ACCEPTED);
+        }
+
+        return response()->json('Logged out!', HttpResponse::HTTP_FORBIDDEN);
     }
 }
