@@ -6,8 +6,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use Facade\FlareClient\Http\Response;
-use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,12 +33,11 @@ class AuthController extends Controller
                 $token= $user->createToken('userToken')->plainTextToken;
                 $res= ['user' => $user,
                     'token' => $token];
-                return response()->json($res, HttpResponse::HTTP_ACCEPTED);
+                return response()->json($res, Response::HTTP_ACCEPTED);
             }
-            return response()->json('Wrong email or password');
         }
 
-        return response()->json('Wrong email or password');
+        return response()->json('Wrong email or password', Response::HTTP_FORBIDDEN);
     }
     
 
@@ -71,20 +69,20 @@ class AuthController extends Controller
                 'phone' => $request->phone
             ]);
             if($user) {
-                return response()->json('User created Successfully');
+                return response()->json('User created Successfully', Response::HTTP_CREATED);
             }
 
-            return response()->json('Error with db');
+            return response()->json('Error with db', Response::HTTP_FORBIDDEN);
         }
 
-        return response()->json('Error with validation!');
+        return response()->json('Error with validation!', Response::HTTP_FORBIDDEN);
     }
 
     public function logout() {
         if(auth()->user()->currentAccessToken()->delete()) {
-            return response()->json('Logged out successfully', HttpResponse::HTTP_ACCEPTED);
+            return response()->json('Logged out successfully', Response::HTTP_ACCEPTED);
         }
 
-        return response()->json('Logged out!', HttpResponse::HTTP_FORBIDDEN);
+        return response()->json('Logged out!', Response::HTTP_FORBIDDEN);
     }
 }
