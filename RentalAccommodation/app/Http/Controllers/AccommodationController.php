@@ -76,8 +76,6 @@ class AccommodationController extends Controller
                 ])]
             ]);
 
-
-
             if(!$validated->fails()) {
                 $accommodation= Accommodation::find($id)->update([
                     'name' => $request->name,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +20,17 @@ use Illuminate\Support\Facades\Route;
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
     
+    // Users
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
+    Route::delete('/settings/user/{id}/delete', [UserController::class, 'delete']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Accommodations 
 
     Route::post('/accommodation/create', [AccommodationController::class, 'create']);
 
