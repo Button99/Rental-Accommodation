@@ -28,7 +28,11 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::delete('/settings/user/{id}/delete', [UserController::class, 'delete']);
 
+    Route::post('/settings/user/{id}/changePassword', [UserController::class, 'changePassword']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::post('/settings/user/{id}/changeData', [UserController::class, 'changeUserData']);
 
     // Accommodations 
 
