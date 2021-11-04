@@ -12,7 +12,7 @@ class Picture extends Model
 {
     use HasFactory;
 
-    protected $fillabel= [
+    protected $fillable= [
         'path',
         'extension'
     ];

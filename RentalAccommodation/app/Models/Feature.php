@@ -22,7 +22,7 @@ class Feature extends Model
         'air_conditioning',
         'washer',
         'fire_extinguisher',
-        'smoke_alarm'
+        'smoke_alarm',
     ];
 
     public function accommodation() {
