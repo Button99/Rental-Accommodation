@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Accommodation;
 use App\Models\Feature;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -32,7 +33,10 @@ class FeatureFactory extends Factory
             'air_conditioning' => $this->faker->boolean(50),
             'washer' => $this->faker->boolean(50),
             'fire_extinguisher' => $this->faker->boolean(50),
-            'smoke_alarm' => $this->faker->boolean(50)
+            'smoke_alarm' => $this->faker->boolean(50),
+            'accommodation_id' => function() {
+                return Accommodation::all()->random();
+            }
         ];
     }
 }

@@ -15,7 +15,9 @@ class Booking extends Model
         'is_available',
         'persons',
         'start_date',
-        'end_date'
+        'end_date',
+        'accommodation_id',
+        'user_id'
     ];
 
     public function accommodation() {

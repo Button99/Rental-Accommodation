@@ -15,11 +15,12 @@ class Bookings extends Migration
     {
         Schema::create('bookings', function(Blueprint $table) {
             $table->id();
-            $table->boolean('is_available');
+            $table->boolean('is_available')->default(0);
             $table->integer('persons');
             $table->date('start_date');
             $table->date('end_date');
-
+            $table->timestamps();
+            
             $table->foreignId('accommodation_id')->constrained('accommodations')
                 ->onDelete('cascade')->onUpdate('cascade');
 

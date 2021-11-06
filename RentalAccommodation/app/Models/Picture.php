@@ -14,7 +14,10 @@ class Picture extends Model
 
     protected $fillable= [
         'path',
-        'extension'
+        'ext',
+        'description',
+        'accommodation_id',
+        'user_id'
     ];
 
     public function user() {

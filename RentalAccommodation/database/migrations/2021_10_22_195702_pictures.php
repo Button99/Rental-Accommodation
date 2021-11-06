@@ -17,7 +17,8 @@ class Pictures extends Migration
             $table->id();
             $table->string('path');
             $table->string('ext');
-
+            $table->string('description');
+            $table->timestamps();
             $table->foreignId('accommodation_id')->constrained('accommodations')
                 ->onDelete('cascade')->onDelete('cascade');
 

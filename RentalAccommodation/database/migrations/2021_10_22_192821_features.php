@@ -15,17 +15,19 @@ class Features extends Migration
     {
         Schema::create('features', function(Blueprint $table) {
             $table->id();
-            $table->boolean('pool');
-            $table->boolean('bbq');
-            $table->boolean('pool_table');
-            $table->boolean('tv');
-            $table->boolean('kitchen');
-            $table->boolean('parking');
-            $table->boolean('air_conditionings');
-            $table->boolean('washer');
-            $table->boolean('fire_extinguisher');
-            $table->boolean('smoke_alarm');
-     
+            $table->boolean('pool')->default(0);
+            $table->boolean('bbq')->default(0);
+            $table->boolean('pool_table')->default(0);
+            $table->boolean('wifi')->defautl(0);
+            $table->boolean('tv')->default(0);
+            $table->boolean('kitchen')->default(0);
+            $table->boolean('parking')->default(0);
+            $table->boolean('air_conditioning')->default(0);
+            $table->boolean('washer')->default(0);
+            $table->boolean('fire_extinguisher')->default(0);
+            $table->boolean('smoke_alarm')->default(0);
+            $table->timestamps();
+            
             $table->foreignId('accommodation_id')->constrained('accommodations')
                 ->onDelete('restrict')->onUpdate('restrict');
         });

@@ -23,6 +23,7 @@ class Feature extends Model
         'washer',
         'fire_extinguisher',
         'smoke_alarm',
+        'accommodation_id'
     ];
 
     public function accommodation() {
