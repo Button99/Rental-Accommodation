@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Rental Accommodation</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,34 +15,10 @@
     <body>
         <div id="app">
         <div>
-                <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #36311F;">
-                    <router-link class="navbar-brand" to="/">Rental Accommodations</router-link>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <router-link to="/" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
-                            </li>
-                            <li class="nav-item active">
-                                <router-link class="nav-link" to="/accommodations">Accommodations</router-link>
-                            </li>
-                            <li class="nav-item active">
-                                <router-link to="/signin" class="nav-link">Log in</router-link>
-                            </li>
-                            <li class="nav-item active">
-                                <router-link to="/createUser" class="nav-link">Create account</router-link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            <example-component>
-            </example-component>
+            <app-component></app-component>
         </div>
 
-        <script src="../js/app.js"></script>
+        
     </body>
+    <script src="../js/app.js" type="application/javascript"></script>
 </html>
