@@ -11,7 +11,7 @@
                     <router-link to="/" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
                 </li>
                 <li class="nav-item active">
-                    <router-link class="nav-link" to="/#">Accommodations</router-link>
+                    <router-link class="nav-link" to="/accommodations">Accommodations</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
