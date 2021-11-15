@@ -2,6 +2,8 @@
     <div id="container">
         <navbar></navbar>
         <router-view></router-view>
+        <footerbar></footerbar>
+
     </div>
 </template>
 
@@ -11,8 +13,9 @@
 
 <script>
     import navbar from './Navbar.vue';
+    import footerbar from './Footer.vue';
 
     export default {
-        components: {navbar}
+        components: {navbar, footerbar}
     }
 </script>

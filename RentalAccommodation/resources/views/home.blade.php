@@ -17,7 +17,6 @@
         <div id="app">
         <div>
             <app-component></app-component>
-            <view-router></view-router>
         </div>
 
         <script src="../js/app.js" type="application/javascript"></script>        
