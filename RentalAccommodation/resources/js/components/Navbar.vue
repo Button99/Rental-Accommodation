@@ -16,10 +16,10 @@
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item active">
-                    <router-link to="/#" class="nav-link">Log in</router-link>
+                    <router-link to="/login" class="nav-link">Log in</router-link>
                 </li>
                 <li class="nav-item active">
-                    <router-link to="/#" class="nav-link">Create account</router-link>
+                    <router-link to="/register" class="nav-link">Create account</router-link>
                 </li>
             </ul>
         </div>
