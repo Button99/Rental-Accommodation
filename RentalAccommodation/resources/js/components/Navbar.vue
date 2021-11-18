@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-inverse" style="background-color: #b5b2b0;">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-inverse" style=" background-image: linear-gradient(to right, #D4B8E9, #BD81BF);">
         <router-link class="navbar-brand" to="/">Rental Accommodations</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

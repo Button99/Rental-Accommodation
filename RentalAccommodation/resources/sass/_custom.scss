@@ -1,22 +1,35 @@
 #container {
-    background-color: #fcfaf0
+    background-color: #fcfaf0;
 }
 
 #footer {
     background-color: #8a9ea0;
     min-height: 80vh;
     max-height: 100vh;
+    background-image: linear-gradient(to right, #FD6B6C, #BD81BF);
 }
 
 #footer-card {
-    background-color: #99b0b0;
     min-height: 80vh;
     max-height: 100vh;
 }
 
 .index-layout {
-    min-height: 60vh;
-    max-height: 80vh;
+    align-content: center;
+}
+
+.index-layout ul {
+    display: flex;
+}
+
+.index-layout li {
+    list-style: none;
+    
+}
+
+.index-layout .card {
+    width: 18em;
+    height: 30vh;
 }
 
 .accommodations-layout {
