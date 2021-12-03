@@ -63,6 +63,21 @@
                 </div>
             </div>
         </div>
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <div class="row text-center">
+                <p class="col-md-5 border-right border-bottom" id="how-to-book"> How to book
+                    <br />
+                    TO BOOK YOUR TRAVEL ALL YOU NEED TO DO IS TO LOGIN AND THEN YOU MUST
+                </p>
+                <p class="col-md-5 border-bottom" id="about-us"> About us
+                    <br />
+                    THIS WEBSITE HAS BEEN MADE FROM ...
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 
