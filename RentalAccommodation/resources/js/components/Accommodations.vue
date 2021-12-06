@@ -1,5 +1,5 @@
 <template>
     <div class="accommodations-layout">
-        <p>Here you can find the best accommodations</p>
+        <h3>Here you can find the best accommodations</h3>
     </div>
 </template>

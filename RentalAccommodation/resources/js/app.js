@@ -16,6 +16,7 @@ const router= new VueRouter({
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('index', require('./components/Index.vue'));
 Vue.component('accommodations', require('./components/Accommodations.vue'));
+Vue.component('login', require('./components/Login.vue'));
 
 const app = new Vue({
     el: '#app',
