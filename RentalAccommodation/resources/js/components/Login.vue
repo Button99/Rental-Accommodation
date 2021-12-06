@@ -45,7 +45,7 @@
         data() {
             return {
                 form: {
-                    email: '',
+                    username: '',
                     password: ''
                 },
                 errors: []
