@@ -5,13 +5,13 @@
                 <div class="card shadow-3-strong m-4">
                     <h3 class="card-header d-flex border-0 color-light"> Log in</h3>
                     <div class="card-body text-center m-5">
-                        <form action="#" @submit.prevent="" method="POST">
+                        <form action="#" @submit.prevent="loginUser()" method="POST">
                             <div class="form-outline mb-4">
-                                <label for="username" class="form-label">
-                                    Name:
+                                <label for="email" class="form-label">
+                                    Email:
                                 </label>
                                 <br />
-                                <input type="text" name="username"  class="form-control" />
+                                <input type="text" name="email" v-model="form.email" id="email" class="form-control" />
                                 <br />
                             </div>
                             <div class="form-outline mb-4">
@@ -19,7 +19,7 @@
                                     Password:
                                 </label>
                                 <br />
-                                <input type="password" name="password"  class="form-control" />
+                                <input type="password" name="password" v-model="form.password" id="password" class="form-control" />
                                 <br />
                             </div>
 
@@ -38,3 +38,37 @@
         </div>
     </div>
 </template>
+
+<script>
+
+    export default {
+        data() {
+            return {
+                form: {
+                    email: '',
+                    password: ''
+                },
+                errors: []
+            }
+        },
+
+        methods: {
+            loginUser() {
+                axios.get('/sanctum/csrf-cookie');
+
+                axios.post('api/login', this.form)
+                    .then((res) => {
+                        if(res.status === 200) {
+                            localStorage.setItem('user', JSON.stringify(res.data));
+                        //    this.$router.push({name: 'dash'})
+                            console.log('works');
+                        }
+                    }).catch((err) => {
+                        if(err.res.fail) {
+                            alert(err.res.data.errors);
+                        }
+                    });
+            }
+        }
+    }
+</script>
