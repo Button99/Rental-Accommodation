@@ -2252,7 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        username: '',
+        email: '',
         password: ''
       },
       errors: []
@@ -2376,23 +2376,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: _defineProperty({
-        firstName: '',
-        lastName: '',
-        dateOfBirth: '',
+        first_name: '',
+        last_name: '',
+        date_of_birth: '',
         password: '',
         confirmPassword: '',
         phone: '',
@@ -2402,7 +2392,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: []
     };
   },
-  methods: {}
+  methods: {
+    signup: function signup() {
+      axios.post('/api/signup', this.form).then(function (res) {
+        if (res.status === 200) {
+          console.log('works');
+        }
+      })["catch"](function (err) {
+        if (err.res.fail) {
+          alert(err.res.data.errors);
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -39403,7 +39405,7 @@ var render = function () {
                   on: {
                     submit: function ($event) {
                       $event.preventDefault()
-                      return _vm.register()
+                      return _vm.signup()
                     },
                   },
                 },
@@ -39413,7 +39415,7 @@ var render = function () {
                       "label",
                       {
                         staticClass: "form-label",
-                        attrs: { for: "firstName" },
+                        attrs: { for: "first_name" },
                       },
                       [
                         _vm._v(
@@ -39429,23 +39431,23 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.firstName,
-                          expression: "form.firstName",
+                          value: _vm.form.first_name,
+                          expression: "form.first_name",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
-                        name: "firstName",
-                        id: "firstName",
+                        name: "first_name",
+                        id: "first_name",
                       },
-                      domProps: { value: _vm.form.firstName },
+                      domProps: { value: _vm.form.first_name },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "firstName", $event.target.value)
+                          _vm.$set(_vm.form, "first_name", $event.target.value)
                         },
                       },
                     }),
@@ -39456,7 +39458,10 @@ var render = function () {
                   _c("div", { staticClass: "form-outline mb-1" }, [
                     _c(
                       "label",
-                      { staticClass: "form-label", attrs: { for: "lastName" } },
+                      {
+                        staticClass: "form-label",
+                        attrs: { for: "last_name" },
+                      },
                       [
                         _vm._v(
                           "\n                                Last name:\n                            "
@@ -39471,19 +39476,23 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.lastName,
-                          expression: "form.lastName",
+                          value: _vm.form.last_name,
+                          expression: "form.last_name",
                         },
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", name: "lastName", id: "lastName" },
-                      domProps: { value: _vm.form.lastName },
+                      attrs: {
+                        type: "text",
+                        name: "last_name",
+                        id: "last_name",
+                      },
+                      domProps: { value: _vm.form.last_name },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "lastName", $event.target.value)
+                          _vm.$set(_vm.form, "last_name", $event.target.value)
                         },
                       },
                     }),
@@ -39496,7 +39505,7 @@ var render = function () {
                       "label",
                       {
                         staticClass: "form-label",
-                        attrs: { for: "dateOfBirth" },
+                        attrs: { for: "date_of_birth" },
                       },
                       [
                         _vm._v(
@@ -39512,23 +39521,27 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.dateOfBirth,
-                          expression: "form.dateOfBirth",
+                          value: _vm.form.date_of_birth,
+                          expression: "form.date_of_birth",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: {
-                        type: "text",
-                        name: "dateOfBirth",
-                        id: "dateOfBirth",
+                        type: "date",
+                        name: "date_of_birth",
+                        id: "date_of_birth",
                       },
-                      domProps: { value: _vm.form.dateOfBirth },
+                      domProps: { value: _vm.form.date_of_birth },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "dateOfBirth", $event.target.value)
+                          _vm.$set(
+                            _vm.form,
+                            "date_of_birth",
+                            $event.target.value
+                          )
                         },
                       },
                     }),
@@ -39559,7 +39572,11 @@ var render = function () {
                         },
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", name: "password", id: "password" },
+                      attrs: {
+                        type: "password",
+                        name: "password",
+                        id: "password",
+                      },
                       domProps: { value: _vm.form.password },
                       on: {
                         input: function ($event) {
@@ -39711,191 +39728,60 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                Male:\n                            "
+                            "\n                                Gender:\n                            "
                           ),
                         ]
                       ),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.gender,
-                            expression: "form.gender",
-                          },
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "checkbox",
-                          name: "male",
-                          id: "gender",
-                          value: "1",
-                        },
-                        domProps: {
-                          checked: Array.isArray(_vm.form.gender)
-                            ? _vm._i(_vm.form.gender, "1") > -1
-                            : _vm.form.gender,
-                        },
-                        on: {
-                          change: function ($event) {
-                            var $$a = _vm.form.gender,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = "1",
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  _vm.$set(
-                                    _vm.form,
-                                    "gender",
-                                    $$a.concat([$$v])
-                                  )
-                              } else {
-                                $$i > -1 &&
-                                  _vm.$set(
-                                    _vm.form,
-                                    "gender",
-                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                  )
-                              }
-                            } else {
-                              _vm.$set(_vm.form, "gender", $$c)
-                            }
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.gender,
+                              expression: "form.gender",
+                            },
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: { name: "gender", id: "gender" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "gender",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
                           },
                         },
-                      }),
+                        [
+                          _c("option", { attrs: { value: "Male" } }, [
+                            _vm._v("Male"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Female" } }, [
+                            _vm._v("Female"),
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Non binary" } }, [
+                            _vm._v("Non binary"),
+                          ]),
+                        ]
+                      ),
                     ]
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check form-check-inline" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "female" },
-                      },
-                      [
-                        _vm._v(
-                          "\n                                female:\n                            "
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.gender,
-                          expression: "form.gender",
-                        },
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "checkbox",
-                        name: "female",
-                        id: "gender",
-                        value: "1",
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.form.gender)
-                          ? _vm._i(_vm.form.gender, "1") > -1
-                          : _vm.form.gender,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = _vm.form.gender,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "1",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(_vm.form, "gender", $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  _vm.form,
-                                  "gender",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(_vm.form, "gender", $$c)
-                          }
-                        },
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check form-check-inline" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "nonBinary" },
-                      },
-                      [
-                        _vm._v(
-                          "\n                                Non Binary:\n                            "
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.gender,
-                          expression: "form.gender",
-                        },
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "checkbox",
-                        name: "nonBinary",
-                        id: "nonBinary",
-                        value: "1",
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.form.gender)
-                          ? _vm._i(_vm.form.gender, "1") > -1
-                          : _vm.form.gender,
-                      },
-                      on: {
-                        change: function ($event) {
-                          var $$a = _vm.form.gender,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "1",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(_vm.form, "gender", $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  _vm.form,
-                                  "gender",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(_vm.form, "gender", $$c)
-                          }
-                        },
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("br"),
-                  ]),
                   _vm._v(" "),
                   _vm._m(0),
                 ]
