@@ -54,20 +54,7 @@
 
         methods: {
             loginUser() {
-                axios.get('/sanctum/csrf-cookie');
-
-                axios.post('api/login', this.form)
-                    .then((res) => {
-                        if(res.status === 200) {
-                            localStorage.setItem('user', JSON.stringify(res.data));
-                        //    this.$router.push({name: 'dash'})
-                            console.log('works');
-                        }
-                    }).catch((err) => {
-                        if(err.res.fail) {
-                            alert(err.res.data.errors);
-                        }
-                    });
+                User.loginUser(this.form);
             }
         }
     }

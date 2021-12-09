@@ -2260,18 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     loginUser: function loginUser() {
-      axios.get('/sanctum/csrf-cookie');
-      axios.post('api/login', this.form).then(function (res) {
-        if (res.status === 200) {
-          localStorage.setItem('user', JSON.stringify(res.data)); //    this.$router.push({name: 'dash'})
-
-          console.log('works');
-        }
-      })["catch"](function (err) {
-        if (err.res.fail) {
-          alert(err.res.data.errors);
-        }
-      });
+      User.loginUser(this.form);
     }
   }
 });
@@ -2417,26 +2406,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/User */ "./resources/js/helpers/User.js");
+
 
 
 
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
+window.User = _helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"];
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   mode: 'history',
   routes: _routes__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('app-component', __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('index', __webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue"));
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('accommodations', __webpack_require__(/*! ./components/Accommodations.vue */ "./resources/js/components/Accommodations.vue"));
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('login', __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
-var app = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('app-component', __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('index', __webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue"));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('accommodations', __webpack_require__(/*! ./components/Accommodations.vue */ "./resources/js/components/Accommodations.vue"));
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('login', __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   el: '#app',
   router: router
 });
@@ -2484,6 +2476,53 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/helpers/User.js":
+/*!**************************************!*\
+  !*** ./resources/js/helpers/User.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var User = /*#__PURE__*/function () {
+  function User() {
+    _classCallCheck(this, User);
+  }
+
+  _createClass(User, [{
+    key: "loginUser",
+    value: function loginUser(data) {
+      axios.get('/sanctum/csrf-cookie');
+      axios.post('api/login', data).then(function (res) {
+        if (res.status === 200) {
+          localStorage.setItem('user', JSON.stringify(res.data)); //    this.$router.push({name: 'dash'})
+
+          console.log('works');
+        }
+      })["catch"](function (err) {
+        if (err.res.fail) {
+          alert(err.res.data.errors);
+        }
+      });
+    }
+  }]);
+
+  return User;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (User = new User());
 
 /***/ }),
 

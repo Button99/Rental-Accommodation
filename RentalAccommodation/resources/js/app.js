@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
+import User from './helpers/User';
 
 require('./bootstrap');
 
 Vue.use(VueRouter);
 
 window.Vue = require('vue').default;
+window.User= User;
 
 const router= new VueRouter({
     mode: 'history',
