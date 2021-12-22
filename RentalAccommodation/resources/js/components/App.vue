@@ -1,9 +1,8 @@
 <template>
     <div id="container">
-        <navbar></navbar>
+        <navbar></navbar> 
         <router-view></router-view>
         <footerbar></footerbar>
-
     </div>
 </template>
 

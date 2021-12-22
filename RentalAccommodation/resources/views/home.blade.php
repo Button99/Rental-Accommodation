@@ -15,10 +15,9 @@
     </head>
     <body>
         <div id="app">
-        <div>
             <app-component></app-component>
         </div>
-
-        <script src="../js/app.js" type="application/javascript"></script>        
     </body>
+    <script src="../js/app.js" type="application/javascript"></script>        
+
 </html>

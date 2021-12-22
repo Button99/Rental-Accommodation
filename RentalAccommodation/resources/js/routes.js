@@ -2,6 +2,7 @@ import Index from './components/Index.vue';
 import Accommodations from './components/Accommodations.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
+import Dashboard from './components/Dashboard.vue';
 
 const routes= [
     {
@@ -23,8 +24,12 @@ const routes= [
         path: '/register',
         name: 'register',
         component: Register
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard
     }
-
 ];
 
 export default routes;

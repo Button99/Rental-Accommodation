@@ -3,7 +3,7 @@
         <div class="container p-5">
             <div class="row d-flex justify-content-center align-items-center m-5">
                 <div class="card shadow-3-strong m-4">
-                    <h3 class="card-header d-flex border-0 color-light"> Log in</h3>
+                    <h3 class="card-header d-flex border-0 color-light"> Register</h3>
                     <div class="card-body text-center m-5">
                         <form action="#" @submit.prevent="signup()" method="POST">
                             <div class="form-outline mb-1">
@@ -105,18 +105,8 @@
 
         methods: {
             signup() {
-                axios.post('/api/signup', this.form)
-                    .then((res) => {
-                        if(res.status === 200) {
-                            console.log('works');
-                        }
-                    }).catch((err) => {
-                        if(err.res.fail) {
-                            alert(err.res.data.errors);
-                        }
-                    });
-         
-         }
+                User.signup(this.form);
+            }
         }
     }
 </script>
