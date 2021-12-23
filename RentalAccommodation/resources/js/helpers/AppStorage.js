@@ -1,5 +1,6 @@
 class AppStorage {
     storeToken(token) {
+        console.log(token);
         localStorage.setItem('token', token);
     }
 

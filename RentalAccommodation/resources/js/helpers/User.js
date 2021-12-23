@@ -1,5 +1,6 @@
 import {router} from '../app';
 import AppStorage from './AppStorage';
+import Token from './Token';
 
 class User {
     loginUser(data) {
@@ -7,11 +8,16 @@ class User {
 
         axios.post('api/login', data)
             .then((res) => {
-                if(res.status === 202) {                    console.log('works');
-
+                if(res.status === 202) {
+                    Token.payload(res.data.token);
+                    // AppStorage.store(res.data.user, accessToken);
+                    const accessToken= res.data.token;
+                    const usr_data= res.data.user;
                     localStorage.setItem('user', JSON.stringify(res.data));
+                    // if(accessToken.isValid(accessToken)) {
+                    //     AppStorage.store(usr_data);
+                    // }
                     router.push({name: 'dashboard'});
-                    console.log('works');
                 }
             }).catch((err) => {
                 if(err) {
@@ -19,6 +25,7 @@ class User {
                 }
             });
     }
+
 
     signup(data) {
 
@@ -37,8 +44,8 @@ class User {
 
     getName() {
         var usr= AppStorage.getUser();
-        console.log(usr.first_name);
-        return usr.first_name;
+        let dat= JSON.parse(usr);
+        return dat.first_name;
     }
 }
 
