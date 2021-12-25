@@ -16,5 +16,9 @@
 
     export default {
         components: {navbar, footerbar}
+
+        mounted() {
+            this.$store.commit('setAuthUser', window.auth_user);
+        }
     }
 </script>

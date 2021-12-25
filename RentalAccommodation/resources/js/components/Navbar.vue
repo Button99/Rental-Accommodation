@@ -14,7 +14,7 @@
                     <router-link class="nav-link" to="/accommodations">Accommodations</router-link>
                 </li>
             </ul>
-            <ul class="navbar-nav navbar-right">
+            <ul class="navbar-nav navbar-right" v-if="!this.user">
                 <li class="nav-item active">
                     <router-link to="/login" class="nav-link">Log in</router-link>
                 </li>
@@ -22,9 +22,23 @@
                     <router-link to="/register" class="nav-link">Create account</router-link>
                 </li>
             </ul>
+            <ul class="navbar-nav navbar-right" v-else>
+                <li class="nav-item active">
+                    <router-link to="/#" class="nav-link">My Accommodations</router-link>
+                </li>
+                <li class="nav-item active">
+                    <router-link to="/#" class="nav-link">My Account</router-link>
+                </li>
+            </ul>
         </div>
     </nav>
 </template>
 
 <script>
+    
+    export default {
+        mounted() {
+            console.log(this.$user);
+        }
+    }
 </script>

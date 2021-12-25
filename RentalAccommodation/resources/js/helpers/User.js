@@ -42,6 +42,10 @@ class User {
             });
     }
 
+    logout() {
+        console.log('try that');
+    }
+
     getName() {
         var usr= AppStorage.getUser();
         let dat= JSON.parse(usr);
