@@ -1,6 +1,5 @@
 import {router, store} from '../app';
 import AppStorage from './AppStorage';
-import Token from './Token';
 
 class User {
     loginUser(data) {
@@ -43,7 +42,8 @@ class User {
     }
 
     logout() {
-        console.log('try that');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
     }
 
     getName() {

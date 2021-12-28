@@ -51,8 +51,10 @@ Vue.component('accommodations', require('./components/Accommodations.vue'));
 Vue.component('login', require('./components/Login.vue'));
 Vue.component('register', require('./components/Register.vue'));
 Vue.component('dashboard', require('./components/Dashboard.vue'));
+Vue.component('logout', require('./components/Logout.vue'));
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

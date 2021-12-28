@@ -3,6 +3,7 @@ import Accommodations from './components/Accommodations.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import Dashboard from './components/Dashboard.vue';
+import Logout from './components/Logout.vue';
 
 const routes= [
     {
@@ -29,6 +30,14 @@ const routes= [
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/logout',
+        name: 'logout',
+        component: Logout,
         meta: {
             requiresAuth: true
         }

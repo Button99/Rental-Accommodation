@@ -1,15 +1,15 @@
 <template>
-    
+    <div class="container">
+        <p>Logged out successfully!</p>
+    </div>
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
-
-export default {
-    mounted () {
-        localStorage.removeItem('token');
-        store.commit('logoutUser');
-        router.push({name: 'login'});
+    export default {
+        
+        mounted () {
+            this.$store.commit('logoutUser');
+            this.$router.push({name: 'login'});
+        }
     }
-}
 </script>

@@ -3,12 +3,13 @@
         <h3> Hello {{user.name}}</h3>
         <p> What would you like to do?</p>
         <ul>
-            <li><router-link to="/#" class="btn btn-default"> Create an accommodation</router-link></li>
+            <li><router-link to="/#" class="btn btn-primary"> Create an accommodation</router-link></li>
             <br />
-            <li><router-link to="/#" class="btn btn-default"> View Accommodations </router-link></li>
+            <li><router-link to="/#" class="btn btn-primary"> View Accommodations </router-link></li>
             <br />
-            <li><router-link to="/#" class="btn btn-default"> View your accommodations</router-link></li>
-            <li><router-link to="/logout">Logout</router-link></li>
+            <li><router-link to="/#" class="btn btn-primary"> View your accommodations</router-link></li>
+            <br />
+            <li><router-link to="/logout" class="btn btn-primary">Logout</router-link></li>
         </ul>
     </div>
 </template>
@@ -22,7 +23,7 @@
             return {
                 user: {
                     name: User.getName(),
-                    password: ''
+                    data: ''
                 },
                 errors: []
             }
