@@ -15,7 +15,35 @@ Vue.use(Vuex);
 export const router= new VueRouter({
     mode: 'history',
     routes
+});
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
+        next({name: 'login'});
+        return ;
+    }
+
+    if(to.path === '/login' && store.state.isLoggedIn) {
+        next({name: 'dashboard'});
+        return ;
+    }
+
+    next();
 })
+
+export const store= new Vuex.Store({
+    state: {
+        isLoggedIn: !!localStorage.getItem('token')
+    },
+    mutations: {
+        loginUser(state) {
+            state.isLoggedIn= true;
+        },
+        logoutUser(state) {
+            state.isLoggedIn= false;
+        }
+    }
+});
 
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('index', require('./components/Index.vue'));

@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <router-link to="/" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
+                    <router-link to="/" class="nav-link">Home</router-link>
                 </li>
                 <li class="nav-item active">
                     <router-link class="nav-link" to="/accommodations">Accommodations</router-link>
                 </li>
             </ul>
-            <ul class="navbar-nav navbar-right" v-if="!this.user">
+            <ul class="navbar-nav navbar-right" v-if="1 == 1">
                 <li class="nav-item active">
                     <router-link to="/login" class="nav-link">Log in</router-link>
                 </li>
@@ -35,10 +35,10 @@
 </template>
 
 <script>
-    
+    import store from '../app';
     export default {
         mounted() {
-            console.log(this.$user);
+            
         }
     }
 </script>

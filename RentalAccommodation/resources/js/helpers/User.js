@@ -1,4 +1,4 @@
-import {router} from '../app';
+import {router, store} from '../app';
 import AppStorage from './AppStorage';
 import Token from './Token';
 
@@ -9,7 +9,7 @@ class User {
         axios.post('api/login', data)
             .then((res) => {
                 if(res.status === 202) {
-                    Token.payload(res.data.token);
+                    store.commit('loginUser');
                     // AppStorage.store(res.data.user, accessToken);
                     const accessToken= res.data.token;
                     const usr_data= res.data.user;

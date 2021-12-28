@@ -15,10 +15,28 @@
     import footerbar from './Footer.vue';
 
     export default {
-        components: {navbar, footerbar}
+        components: {navbar, footerbar},
 
         mounted() {
-            this.$store.commit('setAuthUser', window.auth_user);
+
+        },
+
+        created() {
+            if(localStorage.token) {
+                axios.get('api/user', {
+                    headers: {
+                        Authorization: 'Bearer' + localStorage.setItem('token')
+                    }
+                }).then(res => {
+                    store.commit('loginUser');
+                }).catch(err => {
+                    if(err.response.status === 401 || err.response.status === 403) {
+                        store.commit('logoutUser');
+                        localStorage.setItem('token', '');
+                        router.push({name: 'login'});
+                    }
+                });
+            }
         }
     }
 </script>
