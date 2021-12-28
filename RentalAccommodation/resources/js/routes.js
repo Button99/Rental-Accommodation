@@ -4,6 +4,9 @@ import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import Dashboard from './components/Dashboard.vue';
 import Logout from './components/Logout.vue';
+import MyAccommodations from './components/MyAccommodations.vue';
+import MyAccount from './components/MyAccount.vue';
+import Search from './components/Search.vue';
 
 const routes= [
     {
@@ -41,6 +44,27 @@ const routes= [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: '/myAccommodations',
+        name: 'myAccommodations',
+        component: MyAccommodations,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/myAccount',
+        name: 'myAccount',
+        component: MyAccount,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Search
     }
 ];
 

@@ -13,8 +13,11 @@
                 <li class="nav-item active">
                     <router-link class="nav-link" to="/accommodations">Accommodations</router-link>
                 </li>
+                <li class="nav-item active">
+                    <router-link class="nav-link" to="/search">Search</router-link>
+                </li>
             </ul>
-            <ul class="navbar-nav navbar-right" v-if="1 == 1">
+            <ul class="navbar-nav navbar-right" v-if="this.$store.state.isLoggedIn === false">
                 <li class="nav-item active">
                     <router-link to="/login" class="nav-link">Log in</router-link>
                 </li>
@@ -24,10 +27,13 @@
             </ul>
             <ul class="navbar-nav navbar-right" v-else>
                 <li class="nav-item active">
-                    <router-link to="/#" class="nav-link">My Accommodations</router-link>
+                    <router-link to="/myAccommodations" class="nav-link">My Accommodations</router-link>
                 </li>
                 <li class="nav-item active">
-                    <router-link to="/#" class="nav-link">My Account</router-link>
+                    <router-link to="/myAccount" class="nav-link">My Account</router-link>
+                </li>
+                <li class="nav-item active">
+                    <router-link to="/logout" class="nav-link">Logout </router-link>
                 </li>
             </ul>
         </div>
@@ -35,7 +41,6 @@
 </template>
 
 <script>
-    import store from '../app';
     export default {
         mounted() {
             
