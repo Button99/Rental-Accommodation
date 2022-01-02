@@ -1,11 +1,11 @@
 class AppStorage {
+
     storeToken(token) {
-        console.log(token);
         localStorage.setItem('token', token);
     }
 
-    storeUser(user) {
-        localStorage.setItem('user', user);
+    storeUser(usr_data) {
+        localStorage.setItem('user', JSON.stringify(usr_data));
     }
 
     getToken() {
@@ -16,14 +16,21 @@ class AppStorage {
         return localStorage.getItem('user');
     }
 
-    store(token, user) {
+    tokenExists() {
+        if(localStorage.getItem('token') && localStorage.getItem('token') !== undefined) {
+            return true;
+        }
+        return false;
+    }
+
+    store(usr_data, token) {
         this.storeToken(token);
-        this.storeUser(user);
+        this.storeUser(usr_data);
     }
 
     clear() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('user');
     }
 }
 

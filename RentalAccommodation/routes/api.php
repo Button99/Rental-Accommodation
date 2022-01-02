@@ -26,10 +26,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
         return $request->user();
     });
 
-    // Route::get('/dashboard', function() {
-    //     return response()->json(['data' => 'test']);
-    // });
-
     Route::delete('/settings/user/{id}/delete', [UserController::class, 'delete']);
 
     Route::post('/settings/user/{id}/changePassword', [UserController::class, 'changePassword']);

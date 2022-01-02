@@ -13,6 +13,7 @@
 <script>
     import navbar from './Navbar.vue';
     import footerbar from './Footer.vue';
+    import AppStorage from '../helpers/AppStorage';
 
     export default {
         components: {navbar, footerbar},
@@ -22,17 +23,17 @@
         },
 
         created() {
-            if(localStorage.token) {
+            if(AppStorage.tokenExists()) {
                 axios.get('api/user', {
                     headers: {
-                        Authorization: 'Bearer' + localStorage.setItem('token')
+                        Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
                     }
                 }).then(res => {
-                    store.commit('loginUser');
+                    this.$store.commit('loginUser');
                 }).catch(err => {
                     if(err.response.status === 401 || err.response.status === 403) {
-                        store.commit('logoutUser');
-                        localStorage.setItem('token', '');
+                        console.log(JSON.parse(AppStorage.getToken()));
+                        this.$store.commit('logoutUser');
                         router.push({name: 'login'});
                     }
                 });

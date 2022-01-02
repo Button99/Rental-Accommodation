@@ -9,13 +9,10 @@ class User {
             .then((res) => {
                 if(res.status === 202) {
                     store.commit('loginUser');
-                    // AppStorage.store(res.data.user, accessToken);
                     const accessToken= res.data.token;
-                    const usr_data= res.data.user;
-                    localStorage.setItem('user', JSON.stringify(res.data));
-                    // if(accessToken.isValid(accessToken)) {
-                    //     AppStorage.store(usr_data);
-                    // }
+                    const usr_name= res.data.first_name;
+                    const usr_last= res.data.last_name;
+                    AppStorage.store([usr_name, usr_last], JSON.stringify(accessToken));
                     router.push({name: 'dashboard'});
                 }
             }).catch((err) => {
@@ -42,14 +39,13 @@ class User {
     }
 
     logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        store.commit('logoutUser');
+        AppStorage.clear();
     }
 
     getName() {
-        var usr= AppStorage.getUser();
-        let dat= JSON.parse(usr);
-        return dat.first_name;
+        var usr= JSON.parse(AppStorage.getUser());
+        return usr[0];
     }
 }
 

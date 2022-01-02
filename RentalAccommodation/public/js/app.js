@@ -2067,6 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Navbar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Navbar.vue */ "./resources/js/components/Navbar.vue");
 /* harmony import */ var _Footer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer.vue */ "./resources/js/components/Footer.vue");
+/* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
 //
 //
 //
@@ -2079,6 +2080,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2088,17 +2090,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   created: function created() {
-    if (localStorage.token) {
+    var _this = this;
+
+    if (_helpers_AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].tokenExists()) {
       axios.get('api/user', {
         headers: {
-          Authorization: 'Bearer' + localStorage.setItem('token')
+          Authorization: 'Bearer ' + JSON.parse(_helpers_AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getToken())
         }
       }).then(function (res) {
-        store.commit('loginUser');
+        _this.$store.commit('loginUser');
       })["catch"](function (err) {
         if (err.response.status === 401 || err.response.status === 403) {
-          store.commit('logoutUser');
-          localStorage.setItem('token', '');
+          console.log(JSON.parse(_helpers_AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getToken()));
+
+          _this.$store.commit('logoutUser');
+
           router.push({
             name: 'login'
           });
@@ -2122,6 +2128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/User */ "./resources/js/helpers/User.js");
+/* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
 //
 //
 //
@@ -2137,29 +2144,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       user: {
-        name: _helpers_User__WEBPACK_IMPORTED_MODULE_0__["default"].getName(),
-        data: ''
+        name: JSON.parse(JSON.stringify(_helpers_User__WEBPACK_IMPORTED_MODULE_0__["default"].getName()))
       },
       errors: []
     };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('api/dashboard', {
-      headers: {
-        Authorization: 'Bearer' + localStorage.getItem('token')
-      }
-    }).then(function (res) {
-      _this.name = res.data.data;
-    })["catch"](function (err) {
-      alert(err);
-    });
   }
 });
 
@@ -2352,17 +2346,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
 //
 //
 //
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
+    _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].clear();
     this.$store.commit('logoutUser');
     this.$router.push({
-      name: 'login'
+      name: 'index'
     });
   }
 });
@@ -2647,11 +2644,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "router": () => (/* binding */ router),
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/User */ "./resources/js/helpers/User.js");
+/* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
+
 
 
 
@@ -2662,9 +2661,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 window.User = _helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"];
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_4__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_5__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   mode: 'history',
   routes: _routes__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
@@ -2687,9 +2686,9 @@ router.beforeEach(function (to, from, next) {
 
   next();
 });
-var store = new vuex__WEBPACK_IMPORTED_MODULE_4__["default"].Store({
+var store = new vuex__WEBPACK_IMPORTED_MODULE_5__["default"].Store({
   state: {
-    isLoggedIn: !!localStorage.getItem('token')
+    isLoggedIn: !!_helpers_AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getToken()
   },
   mutations: {
     loginUser: function loginUser(state) {
@@ -2700,16 +2699,16 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__["default"].Store({
     }
   }
 });
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('app-component', __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('index', __webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('accommodations', __webpack_require__(/*! ./components/Accommodations.vue */ "./resources/js/components/Accommodations.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('login', __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('register', __webpack_require__(/*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('dashboard', __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('logout', __webpack_require__(/*! ./components/Logout.vue */ "./resources/js/components/Logout.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('myAccommodations', __webpack_require__(/*! ./components/MyAccommodations.vue */ "./resources/js/components/MyAccommodations.vue"));
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].component('search', __webpack_require__(/*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
-var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('app-component', __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('index', __webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('accommodations', __webpack_require__(/*! ./components/Accommodations.vue */ "./resources/js/components/Accommodations.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('login', __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('register', __webpack_require__(/*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('dashboard', __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('logout', __webpack_require__(/*! ./components/Logout.vue */ "./resources/js/components/Logout.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('myAccommodations', __webpack_require__(/*! ./components/MyAccommodations.vue */ "./resources/js/components/MyAccommodations.vue"));
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('search', __webpack_require__(/*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
+var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#app',
   router: router,
   store: store
@@ -2781,13 +2780,12 @@ var AppStorage = /*#__PURE__*/function () {
   _createClass(AppStorage, [{
     key: "storeToken",
     value: function storeToken(token) {
-      console.log(token);
       localStorage.setItem('token', token);
     }
   }, {
     key: "storeUser",
-    value: function storeUser(user) {
-      localStorage.setItem('user', user);
+    value: function storeUser(usr_data) {
+      localStorage.setItem('user', JSON.stringify(usr_data));
     }
   }, {
     key: "getToken",
@@ -2800,16 +2798,25 @@ var AppStorage = /*#__PURE__*/function () {
       return localStorage.getItem('user');
     }
   }, {
+    key: "tokenExists",
+    value: function tokenExists() {
+      if (localStorage.getItem('token') && localStorage.getItem('token') !== undefined) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
     key: "store",
-    value: function store(token, user) {
+    value: function store(usr_data, token) {
       this.storeToken(token);
-      this.storeUser(user);
+      this.storeUser(usr_data);
     }
   }, {
     key: "clear",
     value: function clear() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      window.localStorage.removeItem('token');
+      window.localStorage.removeItem('user');
     }
   }]);
 
@@ -2853,14 +2860,11 @@ var User = /*#__PURE__*/function () {
       axios.get('/sanctum/csrf-cookie');
       axios.post('api/login', data).then(function (res) {
         if (res.status === 202) {
-          _app__WEBPACK_IMPORTED_MODULE_0__.store.commit('loginUser'); // AppStorage.store(res.data.user, accessToken);
-
+          _app__WEBPACK_IMPORTED_MODULE_0__.store.commit('loginUser');
           var accessToken = res.data.token;
-          var usr_data = res.data.user;
-          localStorage.setItem('user', JSON.stringify(res.data)); // if(accessToken.isValid(accessToken)) {
-          //     AppStorage.store(usr_data);
-          // }
-
+          var usr_name = res.data.first_name;
+          var usr_last = res.data.last_name;
+          _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].store([usr_name, usr_last], JSON.stringify(accessToken));
           _app__WEBPACK_IMPORTED_MODULE_0__.router.push({
             name: 'dashboard'
           });
@@ -2890,15 +2894,14 @@ var User = /*#__PURE__*/function () {
   }, {
     key: "logout",
     value: function logout() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      _app__WEBPACK_IMPORTED_MODULE_0__.store.commit('logoutUser');
+      _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
     }
   }, {
     key: "getName",
     value: function getName() {
-      var usr = _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUser();
-      var dat = JSON.parse(usr);
-      return dat.first_name;
+      var usr = JSON.parse(_AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUser());
+      return usr[0];
     }
   }]);
 

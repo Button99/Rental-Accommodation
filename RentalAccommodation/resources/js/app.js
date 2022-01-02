@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import User from './helpers/User';
+import AppStorage from './helpers/AppStorage';
 
 require('./bootstrap');
 
@@ -33,7 +34,7 @@ router.beforeEach((to, from, next) => {
 
 export const store= new Vuex.Store({
     state: {
-        isLoggedIn: !!localStorage.getItem('token')
+        isLoggedIn: !!AppStorage.getToken()
     },
     mutations: {
         loginUser(state) {

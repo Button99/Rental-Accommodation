@@ -15,28 +15,17 @@
 
 <script>
     import User from '../helpers/User';
+    import AppStorage from '../helpers/AppStorage';
     
     export default {
         
         data() {
             return {
                 user: {
-                    name: User.getName(),
-                    data: ''
+                    name: JSON.parse(JSON.stringify(User.getName())),
                 },
                 errors: []
             }
         },
-        mounted() {
-            axios.get('api/dashboard', {
-                headers: {
-                    Authorization: 'Bearer' + localStorage.getItem('token')
-                }
-            }).then(res => {
-                this.name= res.data.data;
-            }).catch(err => {
-                alert(err);
-            })
-        }
     }
 </script>
