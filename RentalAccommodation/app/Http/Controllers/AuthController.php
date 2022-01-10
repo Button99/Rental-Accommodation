@@ -79,11 +79,11 @@ class AuthController extends Controller
         return response()->json('Error with validation!', Response::HTTP_FORBIDDEN);
     }
 
-    public function logout() {
-        if(auth()->user()->currentAccessToken()->delete()) {
-            return response()->json('Logged out successfully', Response::HTTP_ACCEPTED);
-        }
+    public function logout(Request $request) {
 
-        return response()->json('Logged out!', Response::HTTP_FORBIDDEN);
+        if($request->user()->tokens()->delete()) {
+            return response()->json('Logged out!', Response::HTTP_ACCEPTED);
+        }
+        return response()->json('Not Logged out!', Response::HTTP_FORBIDDEN);
     }
 }

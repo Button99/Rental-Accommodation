@@ -5,13 +5,15 @@
 </template>
 
 <script>
-import AppStorage from '../helpers/AppStorage';
+    import AppStorage from '../helpers/AppStorage';
+    import User from '../helpers/User';
+
     export default {
         
         mounted () {
-            AppStorage.clear();
-            this.$store.commit('logoutUser')
+            User.logout();
             this.$router.push({name: 'index'});
         }
+
     }
 </script>

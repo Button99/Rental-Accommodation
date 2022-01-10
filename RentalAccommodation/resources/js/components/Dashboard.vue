@@ -15,7 +15,6 @@
 
 <script>
     import User from '../helpers/User';
-    import AppStorage from '../helpers/AppStorage';
     
     export default {
         

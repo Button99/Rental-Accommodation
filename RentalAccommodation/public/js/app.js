@@ -2128,7 +2128,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/User */ "./resources/js/helpers/User.js");
-/* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
 //
 //
 //
@@ -2144,7 +2143,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2347,6 +2345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
+/* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/User */ "./resources/js/helpers/User.js");
 //
 //
 //
@@ -2354,10 +2353,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
-    _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_0__["default"].clear();
-    this.$store.commit('logoutUser');
+    _helpers_User__WEBPACK_IMPORTED_MODULE_1__["default"].logout();
     this.$router.push({
       name: 'index'
     });
@@ -2739,6 +2738,8 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.withCredentials = true;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -2838,13 +2839,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
-/* harmony import */ var _AppStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppStorage */ "./resources/js/helpers/AppStorage.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
+/* harmony import */ var _AppStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppStorage */ "./resources/js/helpers/AppStorage.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -2857,15 +2861,15 @@ var User = /*#__PURE__*/function () {
   _createClass(User, [{
     key: "loginUser",
     value: function loginUser(data) {
-      axios.get('/sanctum/csrf-cookie');
-      axios.post('api/login', data).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/sanctum/csrf-cookie');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/login', data).then(function (res) {
         if (res.status === 202) {
-          _app__WEBPACK_IMPORTED_MODULE_0__.store.commit('loginUser');
+          _app__WEBPACK_IMPORTED_MODULE_1__.store.commit('loginUser');
           var accessToken = res.data.token;
           var usr_name = res.data.first_name;
           var usr_last = res.data.last_name;
-          _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].store([usr_name, usr_last], JSON.stringify(accessToken));
-          _app__WEBPACK_IMPORTED_MODULE_0__.router.push({
+          _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].store([usr_name, usr_last], JSON.stringify(accessToken));
+          _app__WEBPACK_IMPORTED_MODULE_1__.router.push({
             name: 'dashboard'
           });
         }
@@ -2878,29 +2882,36 @@ var User = /*#__PURE__*/function () {
   }, {
     key: "signup",
     value: function signup(data) {
-      axios.post('api/signup', data).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/signup', data).then(function (res) {
         if (res.status === 201) {
           console.log('Signup done');
-          _app__WEBPACK_IMPORTED_MODULE_0__.router.push({
+          _app__WEBPACK_IMPORTED_MODULE_1__.router.push({
             name: 'login'
           });
         }
       })["catch"](function (err) {
-        if (err) {
-          alert(err);
-        }
+        alert(err);
       });
     }
   }, {
     key: "logout",
     value: function logout() {
-      _app__WEBPACK_IMPORTED_MODULE_0__.store.commit('logoutUser');
-      _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/logout', {
+        headers: {
+          Authorization: 'Bearer ' + JSON.parse(_AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getToken())
+        }
+      }).then(function (res) {
+        console.log('Logged out!');
+        _AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].clear();
+        _app__WEBPACK_IMPORTED_MODULE_1__.store.commit('logoutUser');
+      })["catch"](function (err) {
+        alert(err);
+      });
     }
   }, {
     key: "getName",
     value: function getName() {
-      var usr = JSON.parse(_AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUser());
+      var usr = JSON.parse(_AppStorage__WEBPACK_IMPORTED_MODULE_2__["default"].getUser());
       return usr[0];
     }
   }]);

@@ -22,6 +22,10 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     // Users
 
+    Route::get('/abc', function() {
+        return 123;
+    });
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });

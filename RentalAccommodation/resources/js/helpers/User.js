@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {router, store} from '../app';
 import AppStorage from './AppStorage';
 
@@ -32,15 +33,23 @@ class User {
                     router.push({name: 'login'});
                 }
             }).catch((err) => {
-                if(err) {
-                    alert(err);
-                }
+                alert(err);
             });
     }
 
     logout() {
-        store.commit('logoutUser');
-        AppStorage.clear();
+
+        axios.post('api/logout', {
+            headers: {
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
+            }
+        }).then(res => {
+            console.log('Logged out!');
+            AppStorage.clear();
+            store.commit('logoutUser');                    
+        }).catch(err => {
+            alert(err);
+        });
     }
 
     getName() {
