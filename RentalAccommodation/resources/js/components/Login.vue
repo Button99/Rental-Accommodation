@@ -2,37 +2,26 @@
     <div class="login-layout">
         <div class="container p-5">
             <div class="row d-flex justify-content-center align-items-center m-5">
-                <b-card shadow-3-strong m-4>
-                    <h3 class="card-header d-flex border-0 color-light"> Log in</h3>
-                    <div class="card-body text-center m-5">
-                        <form action="#" @submit.prevent="loginUser()" method="POST">
-                            <div class="form-outline mb-4">
-                                <label for="email" class="form-label">
-                                    Email:
-                                </label>
-                                <br />
-                                <input type="text" name="email" v-model="form.email" id="email" class="form-control" />
-                                <br />
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label for="password" class="form-label">
-                                    Password:
-                                </label>
-                                <br />
-                                <input type="password" name="password" v-model="form.password" id="password" class="form-control" />
-                                <br />
-                            </div>
+                <b-card class="shadow-3-strong m-4 color-light border-0 d-flex" header-class="h3" header="Login" >
+                    <b-card-body class="text-center m-5">
+                        <b-form @submit.prevent="loginUser()" @reset="onReset()" action="#" method="POST">
+                            <b-form-group label="Email: " label-for="email" class="mb-4 ">
+                                <b-form-input id="email" v-model="form.email" type="email" placeholder="Enter email" required> </b-form-input>
+                            </b-form-group>
 
-                            <div class="form-outline mb-4">
-                                <a href="#"> Forgot password? </a>
+                            <b-form-group label="Password: " label-for="password" class="mb-4">
+                                <b-form-input id="password" v-model="form.password" type="password" placeholder="Enter password" required></b-form-input>
+                            </b-form-group>
+
+                            <b-form-group class="mb-4">
+                                <router-link to="#">Forgot password? </router-link>
                                 <br />
-                                <a href="#"> Create account </a>
-                            </div>
-                            <div class="mb-6">
-                                <button type="submit" class="submit btn btn-primary text-uppercase fw-bold">Login</button>
-                            </div>
-                        </form>
-                    </div>
+                                <router-link to="#">Create account </router-link>
+                            </b-form-group>
+
+                            <b-button type="submit" variant="submit btn btn-primary text-uppercase fw-bold">Login</b-button>
+                        </b-form>
+                    </b-card-body>
                 </b-card>
             </div>
         </div>

@@ -2,7 +2,7 @@
     <div class="search-layout">
         <div class="container-fluid w-25 p-3 h-75">
             <div class="row d-flex justify-content-center align-items-center">
-                <div class="card m-4">
+                <b-card header="Search "class="m-4">
                     <h3 class="card-header d-flex color-light h-75">Search</h3>
                     <div class="card-body text-left h-75 m-5">
                         <form action="#" @submit.prevent="search()">
@@ -47,7 +47,7 @@
 
                         </form>
                     </div>
-                </div>
+                </b-card>
             </div>
         </div>
 
