@@ -1,43 +1,43 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-inverse" style=" background-image: linear-gradient(to right, #D4B8E9, #BD81BF);">
-        <router-link class="navbar-brand" to="/">Rental Accommodations</router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <b-nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top navbar-inverse" style=" background-image: linear-gradient(to right, #D4B8E9, #BD81BF);">
+        <b-navbar-brand to="/" active>Rental Accommodation</b-navbar-brand>
+        <b-navbar-toggle target="navbarSupportedContent"></b-navbar-toggle>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <router-link to="/" class="nav-link">Home</router-link>
-                </li>
-                <li class="nav-item active">
-                    <router-link class="nav-link" to="/accommodations">Accommodations</router-link>
-                </li>
-                <li class="nav-item active">
-                    <router-link class="nav-link" to="/search">Search</router-link>
-                </li>
-            </ul>
-            <ul class="navbar-nav navbar-right" v-if="this.$store.state.isLoggedIn === false">
-                <li class="nav-item active">
-                    <router-link to="/login" class="nav-link">Log in</router-link>
-                </li>
-                <li class="nav-item active">
-                    <router-link to="/register" class="nav-link">Create account</router-link>
-                </li>
-            </ul>
-            <ul class="navbar-nav navbar-right" v-else>
-                <li class="nav-item active">
-                    <router-link to="/myAccommodations" class="nav-link">My Accommodations</router-link>
-                </li>
-                <li class="nav-item active">
-                    <router-link to="/myAccount" class="nav-link">My Account</router-link>
-                </li>
-                <li class="nav-item active">
-                    <router-link to="/logout" class="nav-link">Logout </router-link>
-                </li>
-            </ul>
-        </div>
-    </nav>
+        <b-collapse id="navbarSupportedContent" is-nav>
+            <b-navbar-nav class="mr-auto">
+                <b-nav-item active to="/">
+                    Home
+                </b-nav-item>
+                <b-nav-item to="/dashboard" active v-if="this.$store.state.isLoggedIn === true">
+                    Dashboard
+                </b-nav-item>
+                <b-nav-item to="/accommodations" active>
+                    Accommodations
+                </b-nav-item>
+                <b-nav-item to="/search" active>
+                    Search
+                </b-nav-item>
+            </b-navbar-nav>
+            <b-navbar-nav v-if="this.$store.state.isLoggedIn === false ">
+                    <b-nav-item to="/login" active>
+                        Log in
+                    </b-nav-item>
+                    <b-nav-item to="/register" active>
+                        Create account
+                    </b-nav-item>
+            </b-navbar-nav>
+            <b-navbar-nav v-else>
+                <b-nav-item to="/myAccommodations" active>
+                    My Accommodations
+                </b-nav-item>
+
+                <b-nav-item-dropdown text="Account Settings" >
+                    <b-dropdown-item to="/myAccount">My account</b-dropdown-item>
+                    <b-dropdown-item to="/logout">Logout</b-dropdown-item>
+                </b-nav-item-dropdown>
+            </b-navbar-nav>
+        </b-collapse>
+    </b-nav>
 </template>
 
 <script>

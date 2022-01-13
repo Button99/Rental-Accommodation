@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue';
 import routes from './routes';
 import User from './helpers/User';
 import AppStorage from './helpers/AppStorage';
@@ -12,6 +13,7 @@ window.User= User;
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(BootstrapVue);
 
 export const router= new VueRouter({
     mode: 'history',

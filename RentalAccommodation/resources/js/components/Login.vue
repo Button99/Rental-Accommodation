@@ -2,7 +2,7 @@
     <div class="login-layout">
         <div class="container p-5">
             <div class="row d-flex justify-content-center align-items-center m-5">
-                <div class="card shadow-3-strong m-4">
+                <b-card shadow-3-strong m-4>
                     <h3 class="card-header d-flex border-0 color-light"> Log in</h3>
                     <div class="card-body text-center m-5">
                         <form action="#" @submit.prevent="loginUser()" method="POST">
@@ -33,7 +33,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </b-card>
             </div>
         </div>
     </div>

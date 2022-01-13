@@ -43,11 +43,11 @@ class User {
             headers: {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
             }
-        }).then(res => {
+        }).then((res) => {
             console.log('Logged out!');
             AppStorage.clear();
             store.commit('logoutUser');                    
-        }).catch(err => {
+        }).catch((err) => {
             alert(err);
         });
     }

@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.21.2",
         "router-link": "^0.0.4",
         "router-view": "^1.1.7",
         "vue-router": "^3.5.3",
