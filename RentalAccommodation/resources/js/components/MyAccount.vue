@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1> This is the My account page </h1>
-        <!--TODO:: Need to create menu and add changes -->
+        <h1>General Account Settings</h1>
+        <
     </div>
 </template>

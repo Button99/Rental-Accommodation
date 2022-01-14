@@ -1,52 +1,30 @@
 <template>
     <div class="search-layout">
-        <div class="container-fluid w-25 p-3 h-75">
+        <div class="container-fluid w-30 p-3 h-75">
             <div class="row d-flex justify-content-center align-items-center">
-                <b-card header="Search "class="m-4">
-                    <h3 class="card-header d-flex color-light h-75">Search</h3>
-                    <div class="card-body text-left h-75 m-5">
-                        <form action="#" @submit.prevent="search()">
-                            <div class="form-outline mb-3">
-                                <label for="Location" class="form-label"> 
-                                    Location:
-                                </label>
-                                <br />
-                            <!-- Should find a way to store the locations -->
-                                <input type="text" name="Location" id="location" class="form-control" />
-                            </div>
-                            <div class="form-outline mb-3">
-                                <label for="checkIn" class="form-label"> 
-                                    Check in:
-                                </label>
-                                <br />
-                            
-                                <input type="text" name="checkIn" id="checkIn" class="form-control" />
-                            </div>
-                            <div class="form-outline mb-3">
-                                <label for="checkOut" class="form-label"> 
-                                    Check out:
-                                </label>
-                                <br />
-                                <input type="text" name="checkOut" id="checkOut" class="form-control" />
-                            </div>
-                            <div class="form-outline mb-3">
-                                <label for="guests" class="form-label"> 
-                                    Guests:
-                                </label>
-                                <br />
-                                <input type="text" name="guests" id="guests" class="form-control" />
-                            </div>
-                            <div class="form-outline mb-3">
-                                <label for="rooms" class="form-label"> 
-                                    Rooms:
-                                </label>
-                                <br />
-                                <input type="text" name="rooms" id="rooms" class="form-control" />
-                            </div>
-                            <button type="submit" class="submit btn btn-primary text-uppercase fw-bold">Search </button>
-
-                        </form>
-                    </div>
+                <b-card header="Search" class="m-4 shadow-3-strong">
+                    <b-card-body class="text-left h-75 m-5">
+                        <b-form action="#" @submit.prevent="search()" method="GET">
+                            <b-form-group label="Location: " label-for="location" class="md-4">
+                                <b-form-input id="location" v-model="form.location" type="text" />
+                            </b-form-group>
+                            <b-form-group label="Check in:" label-for="checkIn" class="md-4">
+                                <b-form-input id="checkIn" v-model="form.checkIn" type="date" />
+                            </b-form-group>
+                            <b-form-group label="Check out: " label-for="checkOut" class="md-4">
+                                <b-form-input id="checkOut" v-model="form.checkOut" type="date" />
+                            </b-form-group>
+                            <b-form-group label="Guests: " label-for="guests" class="md-4">
+                                <b-form-input id="guests" v-model="form.guests" type="number" />
+                            </b-form-group>
+                            <b-form-group label="Rooms: " label-for="rooms" class="md-4">
+                                <b-form-input id="rooms" v-model="form.rooms" type="number" />
+                            </b-form-group>
+                            <b-form-group >
+                                <b-button type="submit" variant="submit btn btn-primary text-uppercase fw-bold">Search </b-button>
+                            </b-form-group>
+                        </b-form>
+                    </b-card-body>
                 </b-card>
             </div>
         </div>

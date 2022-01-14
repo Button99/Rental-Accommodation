@@ -1,7 +1,6 @@
 <template>
     <div class="index-layout">
-        <h1> Welcome to Rental RentalAccommodation
-        </h1>
+        <h1> Welcome to Rental RentalAccommodation</h1>
         <br />
 
         <p>
@@ -25,19 +24,6 @@
                 <div class="col-md-5">
                     <div class="card" style="width: 18em;">
                         <div class="bg-image hover-overlay ripple">
-                            <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-chait-goli-1797161.jpg'" />
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">Rome</div>
-                                <p class="card-text">
-                                    Lorem ipsum in Rome
-                                </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="card" style="width: 18em;">
-                        <div class="bg-image hover-overlay ripple">
                             <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-jimmy-teoh-951539.jpg'" />
                         </div>
                         <div class="card-body">
@@ -51,7 +37,20 @@
                 <div class="col-md-5">
                     <div class="card" style="width: 18em;">
                         <div class="bg-image hover-overlay ripple">
-                            <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-lina-kivaka-3336154.jpg'" />
+                            <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-chait-goli-1797161.jpg'" />
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">Rome</div>
+                                <p class="card-text">
+                                    Lorem ipsum in Rome
+                                </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card" style="width: 18em;">
+                        <div class="bg-image hover-overlay ripple">
+                            <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() + 'pexels-lina-kivaka-3336154.jpg'" />
                         </div>
                         <div class="card-body">
                             <div class="card-title">UK</div>

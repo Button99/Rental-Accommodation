@@ -2,29 +2,29 @@
     <div class="login-layout">
         <div class="container p-5">
             <div class="row d-flex justify-content-center align-items-center m-5">
-                <b-card class="shadow-3-strong m-4 color-light" header-class="h3" header="Register">
-                    <b-card-body class=" text-center m-5">
+                <b-card class="shadow-3-strong m-4" header-class="h3" header="Register">
+                    <b-card-body class="text-center m-5">
                         <b-form action="#" @submit.prevent="signup()" method="POST">
-                            <b-form-group label="First name: " label-for="first_name" class="mb-4">
+                            <b-form-group label="First name: " label-for="first_name" class="md-4">
                                 <b-form-input id="first_name" v-model="form.first_name" type="text" placeholder="First name" required />
                             </b-form-group>
-                            <b-form-group label="Last name: " label-for="last_name" class="mb-4">
+                            <b-form-group label="Last name: " label-for="last_name" class="md-4">
                                 <b-form-input id="last_name" v-model="form.last_name" type="text" placeholder="Last name" required />
                             </b-form-group>
                             <b-form-group label="Date of Birth: " label-for="date" class="md-4">
                                 <b-form-input id="date" v-model="form.date_of_birth" type="date" required />
                             </b-form-group>
                             <b-form-group label="Password: " label-for="password" class="md-4">
-                                <b-form-input id="password" v-model="form.password" type="password" required />
+                                <b-form-input id="password" v-model="form.password" type="password" placeholder="Password" required />
                             </b-form-group>
                             <b-form-group label="Confirm password: " label-for="confirmPassword" class="md-4">
-                                <b-form-input id="confirmPassword" v-model="form.confirmPassword" type="password" required />
+                                <b-form-input id="confirmPassword" v-model="form.confirmPassword" type="password" placeholder="Confirm password" required />
                             </b-form-group>
                             <b-form-group label="Email: " label-for="email" class="md-4">
-                                <b-form-input id="email" v-model="form.email" type="text" required />
+                                <b-form-input id="email" v-model="form.email" type="email" placeholder="Email" required />
                             </b-form-group>
                             <b-form-group label="Phone: " label-for="phone" class="md-4">
-                                <b-form-input id="phone" v-model="form.phone" type="text" required />
+                                <b-form-input id="phone" v-model="form.phone" type="text" placeholder="Phone" required />
                             </b-form-group>
                             <b-form-group label="Gender" label-for="gender" class="md-4">
                                 <b-form-select v-model="form.gender" id="gender" name="gender">
@@ -37,7 +37,7 @@
                                 <b-form-checkbox id="accept_rules" v-model="form.accept" value="true" unchecked-value="false" >Accept with the rules</b-form-checkbox>
                             </b-form-group>
                             <div class="mb-6">
-                                <button type="submit" class="submit btn btn-primary text-uppercase fw-bold">Login</button>
+                                <b-button type="submit" variant="submit btn btn-primary text-uppercase fw-bold">Register</b-button>
                             </div>
                         </b-form>
                     </b-card-body>
