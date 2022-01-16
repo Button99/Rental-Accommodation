@@ -35,6 +35,14 @@
     text-align: center;
 }
 
-// .search-layout .card{
-//     width: 100%;
-// }
+.settings-menu {
+    width: 15%;
+    border-right: 1px solid black;
+    float: left;
+    height: auto;
+}
+
+.settings-options {
+    width: 100%;
+    min-height: 70vh;
+}

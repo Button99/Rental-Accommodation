@@ -7,6 +7,7 @@ import Logout from './components/Logout.vue';
 import MyAccommodations from './components/MyAccommodations.vue';
 import MyAccount from './components/MyAccount.vue';
 import Search from './components/Search.vue';
+import AccountSecurity from './components/AccountSecurity.vue';
 
 const routes= [
     {
@@ -54,7 +55,7 @@ const routes= [
         }
     },
     {
-        path: '/myAccount',
+        path: '/myAccount/general',
         name: 'myAccount',
         component: MyAccount,
         meta: {
@@ -65,6 +66,14 @@ const routes= [
         path: '/search',
         name: 'search',
         component: Search
+    },
+    {
+        path: '/myAccount/security',
+        name: 'security',
+        component: AccountSecurity,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 

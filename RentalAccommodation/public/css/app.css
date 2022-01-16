@@ -37,6 +37,18 @@
   text-align: center;
 }
 
+.settings-menu {
+  width: 15%;
+  border-right: 1px solid black;
+  float: left;
+  height: auto;
+}
+
+.settings-options {
+  width: 100%;
+  min-height: 70vh;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

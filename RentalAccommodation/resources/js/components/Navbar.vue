@@ -32,7 +32,7 @@
                 </b-nav-item>
 
                 <b-nav-item-dropdown text="Account Settings" >
-                    <b-dropdown-item to="/myAccount">My account</b-dropdown-item>
+                    <b-dropdown-item to="/myAccount/general">My account</b-dropdown-item>
                     <b-dropdown-item to="/logout">Logout</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
