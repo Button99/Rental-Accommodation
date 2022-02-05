@@ -14,11 +14,11 @@
             <h1>General Account Settings</h1>
             <br />
             <b-list-group>
-                <b-list-group-item> Name: </b-list-group-item>
-                <b-list-group-item> Phone: </b-list-group-item>
-                <b-list-group-item> Email: </b-list-group-item> <!-- Needs to go to security tab -->
-                <b-list-group-item> Gender: </b-list-group-item>
-                <b-list-group-item> Goverment ID: </b-list-group-item>
+                <b-list-group-item> Name: <b>{{first_name}}  {{last_name}}</b></b-list-group-item>
+                <b-list-group-item> Phone: <b>{{phone}}</b></b-list-group-item>
+                <b-list-group-item> Email: <b>{{email}}</b></b-list-group-item> <!-- Needs to go to security tab -->
+                <b-list-group-item> Gender: <b>{{gender}}</b></b-list-group-item>
+                <b-list-group-item> Goverment ID: <b>{{govermentID}}</b></b-list-group-item>
             </b-list-group>
             <br />
         </div>
@@ -27,9 +27,38 @@
 </template>
 
 <script>
+import AppStorage from '../../../Rental-Accommodation-main/RentalAccommodation/resources/js/helpers/AppStorage'
     export default {
         data() {
-            return {       
+            return {
+                first_name: User.getName(),
+                last_name: User.getLastName(),
+                phone: '',
+                email: '',
+                gender: '',
+                govermentID: ''      
+            }
+        },
+
+        created() {
+            this.fetchData();
+        },
+
+        methods: {
+            fetchData() {
+                axios.get('/api/user', {
+                    headers: {
+                        Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken())
+                    }
+                }).then((res) => {
+                    this.last_name= res.data.last_name;
+                    this.phone=res.data.phone;
+                    this.email= res.data.email;
+                    this.gender= res.data.gender;
+                    this.govermentID= res.data.govermentID;
+                    console.log(res.data.first_name);
+                    console.log('works');
+                })
             }
         }
     }

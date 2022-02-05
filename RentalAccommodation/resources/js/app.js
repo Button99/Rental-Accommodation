@@ -5,11 +5,13 @@ import BootstrapVue from 'bootstrap-vue';
 import routes from './routes';
 import User from './helpers/User';
 import AppStorage from './helpers/AppStorage';
+import Validate from './helpers/Validations';
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 window.User= User;
+window.Validate= Validate;
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -58,6 +60,7 @@ Vue.component('logout', require('./components/Logout.vue'));
 Vue.component('myAccommodations', require('./components/MyAccommodations.vue'));
 Vue.component('search', require('./components/Search.vue'));
 Vue.component('security', require('./components/AccountSecurity.vue'));
+Vue.component('delete', require('./components/DeleteAccount.vue'));
 
 const app = new Vue({
     el: '#app',

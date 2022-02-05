@@ -8,6 +8,7 @@ import MyAccommodations from './components/MyAccommodations.vue';
 import MyAccount from './components/MyAccount.vue';
 import Search from './components/Search.vue';
 import AccountSecurity from './components/AccountSecurity.vue';
+import DeleteAccount from './components/DeleteAccount.vue';
 
 const routes= [
     {
@@ -71,6 +72,14 @@ const routes= [
         path: '/myAccount/security',
         name: 'security',
         component: AccountSecurity,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/myAccount/deleteAccount',
+        name: 'delete',
+        component: DeleteAccount,
         meta: {
             requiresAuth: true
         }

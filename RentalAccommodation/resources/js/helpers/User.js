@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {router, store} from '../app';
 import AppStorage from './AppStorage';
+import Validations from './Validations';
 
 class User {
     loginUser(data) {
@@ -29,7 +30,6 @@ class User {
         axios.post('api/signup', data)
             .then((res) => {
                 if(res.status === 201) {
-                    console.log('Signup done');
                     router.push({name: 'login'});
                 }
             }).catch((err) => {
@@ -44,7 +44,6 @@ class User {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
             }
         }).then((res) => {
-            console.log('Logged out!');
             AppStorage.clear();
             store.commit('logoutUser');                    
         }).catch((err) => {
@@ -55,6 +54,40 @@ class User {
     getName() {
         var usr= JSON.parse(AppStorage.getUser());
         return usr[0];
+    }
+
+    getLastName() {
+        var usr= JSON.parse(AppStorage.getUser());
+        return usr[1];
+    }
+
+    deleteAcc(data) {
+        if(Validations.deleteAccountVal(data) === true) {
+            axios.get('/api/user', {
+                headers: {
+                    Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken()) 
+                }
+            }).then((res) => {
+                axios.delete('api/settings/user/'+ res.data.id + '/delete', {
+                    headers: {
+                        Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken())
+                    }
+                }).then((res) => {
+                    if(res.status === 201) {
+                        AppStorage.clear();
+                        store.commit('logoutUser');
+                        router.push({name: 'index'});
+                    }
+                }).catch((err) => {
+                    alert(err);
+                })
+            }).catch((err) => {
+                alert(err);
+            });
+        }
+        else {
+            alert('Please enter your name correctly!');
+        }
     }
 }
 
