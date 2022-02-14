@@ -5,8 +5,14 @@ class Validate{
 
     // For this I need to implement a boolean function 
     deleteAccountVal(data) {
-        console.log(data.first_name);
         if(data.first_name === User.getName()) {
+            return true;
+        }
+        return false;
+    }
+
+    changePasswordVal(data) {
+        if(data.new_password === data.new_passwordRetype && data.new_password.length >=8) {
             return true;
         }
         return false;

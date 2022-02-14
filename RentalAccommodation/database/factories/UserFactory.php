@@ -28,6 +28,8 @@ class UserFactory extends Factory
             'date_of_birth' => $this->faker->date(),
             'gender' => $this->faker->randomElement(['Male', 'Female', 'Non Binary']),
             'email' => $this->faker->unique()->safeEmail(),
+            'last_ip' => $this->faker->ipv4(),
+            'last_login' => now(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'phone' => $this->faker->phoneNumber(),

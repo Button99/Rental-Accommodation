@@ -38,14 +38,15 @@ class User {
     }
 
     logout() {
-
-        axios.post('api/logout', {
+        axios({
+            method: 'post',
+            url: 'api/logout',
             headers: {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
             }
         }).then((res) => {
             AppStorage.clear();
-            store.commit('logoutUser');                    
+            store.commit('logoutUser');
         }).catch((err) => {
             alert(err);
         });
@@ -88,6 +89,30 @@ class User {
         else {
             alert('Please enter your name correctly!');
         }
+    }
+
+    changePassword(data) {
+        console.log(data);
+        axios.get('api/user', {
+            headers: {
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken()),
+            }
+        }).then((res) => {
+            axios({
+                method: 'put',
+                url: 'api/settings/user/' + res.data.id + '/changePassword',
+                headers: {
+                    Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
+                },
+                data
+            }).then((res) => {
+                console.log('Done');
+            }).catch((err) => {
+                alert(err);
+            });
+        }).catch((err) => {
+            alert(err);
+        });
     }
 }
 

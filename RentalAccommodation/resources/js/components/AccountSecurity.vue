@@ -22,13 +22,13 @@
                             <b-card title="Change Password">
                                 <b-form @submit.prevent="changePassword()" @reset="onReset()" action="#" method="POST">
                                     <b-form-group label="Old password: " label-for="old-password" class="mb-4">
-                                        <b-form-input id="old-password" v-model="form.oldPassword" type="password" required> </b-form-input>
+                                        <b-form-input id="old-password" v-model="form.old_password" type="password" required> </b-form-input>
                                     </b-form-group>
                                     <b-form-group label="New password: " label-for="new-password" class="mb-4">
-                                        <b-form-input id="new-password" v-model="form.newPassword" type="password" required> </b-form-input>
+                                        <b-form-input id="new-password" v-model="form.new_password" type="password" required> </b-form-input>
                                     </b-form-group>
                                     <b-form-group label-for="new-password-retype" label="New password (Retype): ">
-                                        <b-form-input id="new-password-retype" v-model="form.newPasswordRetype" type="password" required> </b-form-input>
+                                        <b-form-input id="new-password-retype" v-model="form.new_passwordRetype" type="password" required> </b-form-input>
                                     </b-form-group>
                                     <b-button type="submit">Change Password</b-button>
                                 </b-form>
@@ -44,19 +44,29 @@
 </template>
 
 <script>
+    import Validate from '../helpers/Validations';
     export default {
         data() {
             return {
                 isVisible: false,
 
                 form: {
-                    oldPassword: '',
-                    newPassword: '',
-                    newPasswordRetype: ''
+                    old_password: '',
+                    new_password: '',
+                    new_passwordRetype: ''
                 },
                 
                 data: {
                     ip: ''
+                }
+            }
+        },
+
+        methods: {
+
+            changePassword() {
+                if(Validate.changePasswordVal(this.form) === true) {
+                    User.changePassword(this.form);
                 }
             }
         }

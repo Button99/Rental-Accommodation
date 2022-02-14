@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import AppStorage from '../../../Rental-Accommodation-main/RentalAccommodation/resources/js/helpers/AppStorage'
+    import AppStorage from '../helpers/AppStorage';
+
     export default {
         data() {
             return {

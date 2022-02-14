@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -82,6 +83,8 @@ class AuthController extends Controller
     public function logout(Request $request) {
 
         if($request->user()->tokens()->delete()) {
+            $request->user()->last_login= Carbon::now()->toDateTimeString();
+            $request->user()->last_ip= $request->getClientIp();
             return response()->json('Logged out!', Response::HTTP_ACCEPTED);
         }
         return response()->json('Not Logged out!', Response::HTTP_FORBIDDEN);

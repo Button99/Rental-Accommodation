@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->enum('gender', ['Male', 'Female', 'Non Binary']);
+            $table->timestamp('last_login')->nullable();
+            $table->string('last_ip')->nullable();
             $table->string('phone');
             $table->string('goverment_id')->unique()->nullable();
             $table->boolean('is_admin')->default('0');
