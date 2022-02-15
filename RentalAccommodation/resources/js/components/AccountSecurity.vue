@@ -20,6 +20,7 @@
                         </b-button>
                         <b-collapse id="collapse-changePassword" @hide="isVisible = false" @show="isVisible = true" v-model="visible">
                             <b-card title="Change Password">
+                                <br />
                                 <b-form @submit.prevent="changePassword()" @reset="onReset()" action="#" method="POST">
                                     <b-form-group label="Old password: " label-for="old-password" class="mb-4">
                                         <b-form-input id="old-password" v-model="form.old_password" type="password" required> </b-form-input>
@@ -35,7 +36,7 @@
                             </b-card>
                         </b-collapse>
                     </b-list-group-item>
-                    <b-list-group-item> Last Log in: {{data.ip}}</b-list-group-item>
+                    <b-list-group-item> Last Log in: <strong>{{data.ip}}</strong></b-list-group-item>
                 <br />
                 </b-list-group>
             </div>
@@ -44,11 +45,13 @@
 </template>
 
 <script>
+import AppStorage from '../helpers/AppStorage';
     import Validate from '../helpers/Validations';
     export default {
         data() {
             return {
                 isVisible: false,
+                success: false,
 
                 form: {
                     old_password: '',
@@ -62,12 +65,28 @@
             }
         },
 
+        created() {
+            this.getLastIp();
+        },
+
         methods: {
 
             changePassword() {
                 if(Validate.changePasswordVal(this.form) === true) {
                     User.changePassword(this.form);
                 }
+            },
+
+            getLastIp() {
+                axios.get('api/user', {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
+                    }
+                }).then((res) => {
+                    console.log(res);
+                    console.log(res.data.last_ip);
+                    this.data.ip= res.data.last_ip;
+                });
             }
         }
     }

@@ -5,7 +5,6 @@
 </template>
 
 <script>
-    import AppStorage from '../helpers/AppStorage';
     import User from '../helpers/User';
 
     export default {

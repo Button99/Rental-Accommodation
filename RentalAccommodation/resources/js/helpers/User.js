@@ -92,7 +92,6 @@ class User {
     }
 
     changePassword(data) {
-        console.log(data);
         axios.get('api/user', {
             headers: {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken()),
@@ -106,7 +105,7 @@ class User {
                 },
                 data
             }).then((res) => {
-                console.log('Done');
+                alert('Password changed Successfully!');
             }).catch((err) => {
                 alert(err);
             });

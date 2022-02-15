@@ -55,7 +55,7 @@ class UserController extends Controller
             'new_password' => ['required', 'min:8', 'max:40']
         ]);
 
-        if(!$validPsw->fails()) {
+        if(!$validPsw->fails() & $request->new_password === $request->new_passwordRetype) {
             $user= User::find($id);
             if(Hash::check($request->old_password, $user->password)) {
                 $updated= $user->update([

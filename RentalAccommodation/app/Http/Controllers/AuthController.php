@@ -85,6 +85,7 @@ class AuthController extends Controller
         if($request->user()->tokens()->delete()) {
             $request->user()->last_login= Carbon::now()->toDateTimeString();
             $request->user()->last_ip= $request->getClientIp();
+            $request->user()->save();
             return response()->json('Logged out!', Response::HTTP_ACCEPTED);
         }
         return response()->json('Not Logged out!', Response::HTTP_FORBIDDEN);

@@ -18,7 +18,7 @@
                 <b-list-group-item> Phone: <b>{{phone}}</b></b-list-group-item>
                 <b-list-group-item> Email: <b>{{email}}</b></b-list-group-item> <!-- Needs to go to security tab -->
                 <b-list-group-item> Gender: <b>{{gender}}</b></b-list-group-item>
-                <b-list-group-item> Goverment ID: <b>{{govermentID}}</b></b-list-group-item>
+                <b-list-group-item> Goverment ID: <b>{{govermentID}}</b> &nbsp;<p>Add</p></b-list-group-item>
             </b-list-group>
             <br />
         </div>
@@ -37,7 +37,7 @@
                 phone: '',
                 email: '',
                 gender: '',
-                govermentID: ''      
+                govermentID: 'Not provided'      
             }
         },
 
@@ -58,8 +58,7 @@
                     this.gender= res.data.gender;
                     this.govermentID= res.data.govermentID;
                     console.log(res.data.first_name);
-                    console.log('works');
-                })
+                });
             }
         }
     }
