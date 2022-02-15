@@ -13,9 +13,9 @@
     <!-- To implement this page I need to make a validation:<template>
         User needs to type their first_name so they can confirm the action -->
     <section class="delete-account">
-        <br />
-        <h3> To delete the account you need to write your First name</h3>
         <div class="container mx-auto mt-4">
+            <h3> To delete the account you need to write your First name</h3>
+            <br />
             <b-form @submit.prevent="deleteAccount()"  @reset="onReset()" action="#" method="POST">
                 <b-form-input type="text" v-model="form.first_name" placeholder="Enter your first name"></b-form-input>
                 <br />
