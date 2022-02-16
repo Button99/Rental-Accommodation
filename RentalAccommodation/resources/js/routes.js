@@ -9,6 +9,7 @@ import MyAccount from './components/MyAccount.vue';
 import Search from './components/Search.vue';
 import AccountSecurity from './components/AccountSecurity.vue';
 import DeleteAccount from './components/DeleteAccount.vue';
+import CreateAccommodation from './components/CreateAccommodation.vue';
 
 const routes= [
     {
@@ -80,6 +81,14 @@ const routes= [
         path: '/myAccount/deleteAccount',
         name: 'delete',
         component: DeleteAccount,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/createAccommodation',
+        name: 'createAccommodation',
+        component: CreateAccommodation,
         meta: {
             requiresAuth: true
         }

@@ -3,9 +3,9 @@
         <h3> Hello {{user.name}}</h3>
         <p> What would you like to do?</p>
         <ul>
-            <!-- <li><router-link to="/createAccommodation" class="btn btn-primary"> Create an accommodation</router-link></li> -->
+            <li><router-link to="/createAccommodation" class="btn btn-primary"> Be a host</router-link></li>
             <br />
-            <li><router-link to="/Accommodations" class="btn btn-primary"> View Accommodations </router-link></li>
+            <li><router-link to="/accommodations" class="btn btn-primary"> View Accommodations </router-link></li>
             <br />
             <li><router-link to="/myAccommodations" class="btn btn-primary"> View your accommodations</router-link></li>
             <br />
