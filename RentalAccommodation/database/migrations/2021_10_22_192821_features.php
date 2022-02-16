@@ -26,6 +26,7 @@ class Features extends Migration
             $table->boolean('washer')->default(0);
             $table->boolean('fire_extinguisher')->default(0);
             $table->boolean('smoke_alarm')->default(0);
+            $table->boolean('hot_tub')->default(0);
             $table->timestamps();
             
             $table->foreignId('accommodation_id')->constrained('accommodations')
