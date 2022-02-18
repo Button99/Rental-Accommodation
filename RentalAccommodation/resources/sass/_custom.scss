@@ -5,6 +5,7 @@
 #footer {
     background-color: #8a9ea0;
     background-image: linear-gradient(to right, #FD6B6C, #BD81BF);
+    min-height: 90%;
 }
 
 .index-layout {
@@ -49,4 +50,9 @@
 
 .delete-account-layout {
     min-height: 70vh;
+}
+
+.create-accommodation-layout {
+    min-height: 90%;
+    
 }
