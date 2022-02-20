@@ -1,6 +1,6 @@
 <template>
-    <div class="create-accommodation-layout">
-        <section class="float-left">
+    <div class="create-accommodation-layout container-fluid">
+        <section class="float-left m-3">
             <b-card header="Create Accommodation">
                 <b-card-body class="m-3">
                     <b-form action="#" @submit.prevent="create()" method="POST">
@@ -22,6 +22,56 @@
                     </b-form-group>
                 </b-card-body>
             </b-card>
+        </section>
+        <section class="float-right m-4">
+            <div class="container border p-4">
+                <b-row>
+                    <b-col class="m-3">
+                        <b-checkbox id="pool" v-model="form.pool" value="1">Pool</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="bbq" v-model="form.bbq" value="1"> BBQ</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="pool_table" v-model="form.pool_table" value="1"> Pool table</b-checkbox>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col class="m-3">
+                        <b-checkbox id="wifi" v-model="form.wifi" value="1">Wifi</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="tv" v-model="form.tv" value="1">TV</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="kitchen" v-model="form.kitchen" value="1">kitchen</b-checkbox>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col class="m-3">
+                        <b-checkbox id="parking" v-model="form.parking" value="1">Parking</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="air_conditioning" v-model="form.air_conditioning" value="1">Air Conditioning</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="washer" v-model="form.washer" value="1">Washer</b-checkbox>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col class="m-3">
+                        <b-checkbox id="fire_extinguisher" v-model="form.fire_extinguisher" value="1">Fire extinguiser</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="smoke_alarm" v-model="form.smoke_alarm" value="1">Smoke alarm</b-checkbox>
+                    </b-col>
+                    <b-col class="m-3">
+                        <b-checkbox id="hot_tub" v-model="form.hot_tub" value="1">Hot tub</b-checkbox>
+                    </b-col>
+                </b-row>
+            </div>
+            <br />
+            <b-button type="submit" class="btn">Create</b-button>
         </section>
     </div>
 </template>

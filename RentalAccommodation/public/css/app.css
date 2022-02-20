@@ -7,7 +7,9 @@
 #footer {
   background-color: #8a9ea0;
   background-image: linear-gradient(to right, #FD6B6C, #BD81BF);
-  min-height: 90%;
+  min-height: 200vh;
+  bottom: 0;
+  width: 100%;
 }
 
 .index-layout {
@@ -55,7 +57,12 @@
 }
 
 .create-accommodation-layout {
-  min-height: 90%;
+  min-height: 110vh;
+  min-width: 100%;
+}
+
+.create-accommodation-layout .btn {
+  width: 100%;
 }
 
 /*!
