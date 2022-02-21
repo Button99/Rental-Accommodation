@@ -69,7 +69,7 @@
   width: 50%;
 }
 
-.my-accommodations {
+.my-accommodations ul {
   display: flex;
   list-style-type: none;
 }
