@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Models\Accommodation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/settings/user/{id}/changeData', [UserController::class, 'changeUserData']);
 
     // Accommodations 
+
+    Route::get('/{id}/myAccommodations', [AccommodationController::class, 'showMyAccommodations']);
 
     Route::post('/accommodation/create', [AccommodationController::class, 'create']);
 

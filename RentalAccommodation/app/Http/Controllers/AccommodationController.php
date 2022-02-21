@@ -144,4 +144,8 @@ class AccommodationController extends Controller
 
             return response()->json('Not updated', Response::HTTP_NOT_ACCEPTABLE);
         }
+
+        public function showMyAccommodations($id) {
+            return Accommodation::where('user_id', '=', $id)->get();
+        }
 }
