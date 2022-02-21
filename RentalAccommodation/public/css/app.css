@@ -69,6 +69,16 @@
   width: 50%;
 }
 
+.my-accommodations {
+  display: flex;
+  list-style-type: none;
+}
+
+.my-accommodations li {
+  display: inline-block;
+  border-radius: 1px;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

@@ -67,3 +67,14 @@
 .features-layout {
     width: 50%;
 }
+
+.my-accommodations {
+    display: flex;
+    list-style-type: none;
+}
+
+.my-accommodations li {
+    display: inline-block;
+    border-radius: 1px;
+    
+}
