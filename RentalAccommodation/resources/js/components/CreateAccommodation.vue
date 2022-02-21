@@ -78,7 +78,6 @@
     </div>
 </template>
 <script>
-import AccommodationsVue from './Accommodations.vue'
     export default {
         data() {
             return {
@@ -105,14 +104,14 @@ import AccommodationsVue from './Accommodations.vue'
                     {value: 'Apartment', text: 'Apartment'},
                     {value: 'House', text: 'House'},
                     {value: 'Unique space', text: 'Unique space'},
-                    {value: 'Bootique Hotel', text: 'Bootique Hotel'}
+                    {value: 'Boutique Hotel', text: 'Boutique Hotel'}
                 ]
             }
         },
 
         methods: {
             createAccommodation() {
-                Accommodation.createAccommodation();
+                Accommodation.createAccommodation(this.form);
             }
         }
     }

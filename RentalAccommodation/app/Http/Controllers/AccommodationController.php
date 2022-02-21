@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accommodation;
+use App\Models\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -30,9 +31,20 @@ class AccommodationController extends Controller
                 'House',
                 'Unique space',
                 'Boutique Hotel'
-            ])]
+            ])],
+            'pool' => ['integer', 'in:1'],
+            'bbq' => ['integer', 'in:1'],
+            'wifi' => ['integer', 'in:1'],
+            'tv' => ['integer', 'in:1'],
+            'kitchen' => ['integer', 'in:1'],
+            'parking' => ['integer', 'in:1'],
+            'air_conditioning' => ['integer', 'in:1'],
+            'washer' => ['integer', 'in:1'],
+            'fire_extinguisher' => ['integer', 'in:1'],
+            'smoke_alarm' => ['integer', 'in:1'],
+            'hot_tub' => ['integer', 'in:1']
         ]);
-
+        
         if(!$validated->fails()) {
             $accommodation= Accommodation::create([
                 'name' => $request->name,
@@ -42,13 +54,28 @@ class AccommodationController extends Controller
                 'accommodation_type' => $request->accommodation_type,
                 'user_id' => Auth::user()->id
             ]);
+            
+            $features= Feature::create([
+                'pool' => $request->pool,
+                'bbq' => $request->bbq,
+                'wifi' => $request->wifi,
+                'tv' => $request->tv,
+                'kitchen' => $request->kitchen,
+                'parking' => $request->parking,
+                'air_conditioning' => $request->air_conditioning,
+                'washer' => $request->washer,
+                'fire_extinguisher' => $request->fire_extinguisher,
+                'smoke_alarm' => $request->smoke_alarm,
+                'hot_tub' => $request->hot_tub,
+                'accommodation_id' => $accommodation->id
+            ]);
 
-            if($accommodation) {
+            if($accommodation && $features) {
                 return response()->json('Accommodation Created!', Response::HTTP_CREATED);
             }
-            
-            return response()->json('Accommodation not created!', Response::HTTP_FORBIDDEN);
         }
+        return response()->json('Accommodation not created!', Response::HTTP_FORBIDDEN);
+
     }
 
         public function delete($id) {
@@ -73,7 +100,18 @@ class AccommodationController extends Controller
                     'House',
                     'Unique space',
                     'Boutique Hotel'
-                ])]
+                ])],
+                'pool' => ['integer', 'in:1'],
+                'bbq' => ['integer', 'in:1'],
+                'wifi' => ['integer', 'in:1'],
+                'tv' => ['integer', 'in:1'],
+                'kitchen' => ['integer', 'in:1'],
+                'parking' => ['integer', 'in:1'],
+                'air_conditioning' => ['integer', 'in:1'],
+                'washer' => ['integer', 'in:1'],
+                'fire_extinguisher' => ['integer', 'in:1'],
+                'smoke_alarm' => ['integer', 'in:1'],
+                'hot_tub' => ['integer', 'in:1']
             ]);
 
             if(!$validated->fails()) {
@@ -84,6 +122,21 @@ class AccommodationController extends Controller
                     'town' => $request->town,
                     'accommodation_type' => $request->accommodation_type
                 ]);
+
+                $features= Feature::find($accommodation->id)->update([
+                    'pool' => $request->pool,
+                    'bbq' => $request->bbq,
+                    'wifi' => $request->wifi,
+                    'tv' => $request->tv,
+                    'kitchen' => $request->kitchen,
+                    'parking' => $request->parking,
+                    'air_conditioning' => $request->air_conditioning,
+                    'washer' => $request->washer,
+                    'fire_extinguisher' => $request->fire_extinguisher,
+                    'smoke_alarm' => $request->smoke_alarm,
+                    'hot_tub' => $request->hot_tub
+                ]);
+                
                 if($accommodation) {
                     return response()->json('Updated!', Response::HTTP_ACCEPTED);
                 }
