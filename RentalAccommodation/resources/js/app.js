@@ -48,6 +48,7 @@ export const store= new Vuex.Store({
         },
         logoutUser(state) {
             state.isLoggedIn= false;
+            AppStorage.clear();
         }
     }
 });
@@ -64,7 +65,7 @@ Vue.component('search', require('./components/Search.vue'));
 Vue.component('security', require('./components/AccountSecurity.vue'));
 Vue.component('delete', require('./components/DeleteAccount.vue'));
 Vue.component('createAccommodation', require('./components/CreateAccommodation.vue'));
-Vue.component('accommodation', require('./components/accommodation.vue'));
+Vue.component('accommodation', require('./components/AccommodationPage.vue'));
 
 const app = new Vue({
     el: '#app',

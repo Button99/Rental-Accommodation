@@ -10,6 +10,7 @@ import Search from './components/Search.vue';
 import AccountSecurity from './components/AccountSecurity.vue';
 import DeleteAccount from './components/DeleteAccount.vue';
 import CreateAccommodation from './components/CreateAccommodation.vue';
+import AccommodationPage from './components/AccommodationPage.vue';
 
 const routes= [
     {
@@ -92,6 +93,11 @@ const routes= [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: '/accommodation/:id',
+        name: 'accommodation',
+        component: AccommodationPage
     }
 ];
 
