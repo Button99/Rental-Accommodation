@@ -1,12 +1,10 @@
 <template>
     <div class="container">
         <h1>My Accommodations Page</h1>
-        <!-- here should i implement a if -->
-        <section class="my-accommodations">
+        <section class="my-accommodations" v-if="accommodations > 0">
             <h1> {{test}} </h1>
             <ul class="justify-content-center">
                 <div class="col-md-7">
-                <!-- here i should implement a for !-->
                     <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
                         <div class="card">
                             <img src="pictures/pexels-alex-azabache-3879160.jpg" style=" height: 30vh;" class="card-img-top" />
@@ -22,6 +20,11 @@
                     </li>
                 </div>
             </ul>
+        </section>
+        <section class="my-accommodations-layout"  v-else>
+            <h4>You do not have create any accommodation </h4>
+            <router-link to="/createAccommodation" class="btn btn-primary">Create accommodation</router-link>
+            <br />
         </section>
     </div>
 </template>
