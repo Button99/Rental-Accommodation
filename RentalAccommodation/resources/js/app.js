@@ -64,6 +64,7 @@ Vue.component('search', require('./components/Search.vue'));
 Vue.component('security', require('./components/AccountSecurity.vue'));
 Vue.component('delete', require('./components/DeleteAccount.vue'));
 Vue.component('createAccommodation', require('./components/CreateAccommodation.vue'));
+Vue.component('accommodation', require('./components/accommodation.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -1,8 +1,7 @@
 <template>
     <div class="container">
         <h1>My Accommodations Page</h1>
-        <section class="my-accommodations" v-if="accommodations > 0">
-            <h1> {{test}} </h1>
+        <section class="my-accommodations" v-if="accommodations.length > 0">
             <ul class="justify-content-center">
                 <div class="col-md-7">
                     <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
