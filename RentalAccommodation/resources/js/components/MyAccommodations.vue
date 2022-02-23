@@ -5,17 +5,19 @@
             <ul class="justify-content-center">
                 <div class="col-md-7">
                     <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
-                        <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}"><div class="card">
-                            <img src="pictures/pexels-alex-azabache-3879160.jpg" style=" height: 30vh;" class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">{{accommodation.name}}</h5>
-                                <p class="card-text">
-                                    Rooms: {{accommodation.rooms}} <br />
-                                    Town: {{accommodation.town}} <br />
-                                    Description: {{accommodation.description}} <br />
-                                </p>
+                        <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
+                            <div class="card">
+                                <img src="pictures/pexels-alex-azabache-3879160.jpg" style=" height: 30vh;" class="card-img-top" />
+                                <div class="card-body">
+                                    <h5 class="card-title">{{accommodation.name}}</h5>
+                                    <p class="card-text">
+                                        Rooms: {{accommodation.rooms}} <br />
+                                        Town: {{accommodation.town}} <br />
+                                        Description: {{accommodation.description}} <br />
+                                    </p>
+                                </div>
                             </div>
-                        </div></router-link>
+                        </router-link>
                     </li>
                 </div>
             </ul>
