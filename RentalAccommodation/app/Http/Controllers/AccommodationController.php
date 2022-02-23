@@ -17,7 +17,7 @@ class AccommodationController extends Controller
     }
 
     public function show($id) {
-        return Accommodation::find($id)->get();
+        return Accommodation::find($id);
     }
 
     public function create(Request $request) {
@@ -32,17 +32,17 @@ class AccommodationController extends Controller
                 'Unique space',
                 'Boutique Hotel'
             ])],
-            'pool' => ['integer', 'in:1'],
-            'bbq' => ['integer', 'in:1'],
-            'wifi' => ['integer', 'in:1'],
-            'tv' => ['integer', 'in:1'],
-            'kitchen' => ['integer', 'in:1'],
-            'parking' => ['integer', 'in:1'],
-            'air_conditioning' => ['integer', 'in:1'],
-            'washer' => ['integer', 'in:1'],
-            'fire_extinguisher' => ['integer', 'in:1'],
-            'smoke_alarm' => ['integer', 'in:1'],
-            'hot_tub' => ['integer', 'in:1']
+            'pool' => ['integer', 'in:0,1'],
+            'bbq' => ['integer', 'in:0,1'],
+            'wifi' => ['integer', 'in:0,1'],
+            'tv' => ['integer', 'in:0,1'],
+            'kitchen' => ['integer', 'in:0,1'],
+            'parking' => ['integer', 'in:0,1'],
+            'air_conditioning' => ['integer', 'in:0,1'],
+            'washer' => ['integer', 'in:0,1'],
+            'fire_extinguisher' => ['integer', 'in:0,1'],
+            'smoke_alarm' => ['integer', 'in:0,1'],
+            'hot_tub' => ['integer', 'in:0,1']
         ]);
         
         if(!$validated->fails()) {
