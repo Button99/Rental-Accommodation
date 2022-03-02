@@ -9,11 +9,11 @@
                     Rooms: {{accommodation.rooms}} <br />
                     Town: {{accommodation.town}} <br />
                     Description: {{accommodation.description}} <br />
-                    <b v-if="stars == null ">
-                        Stars: Not available
+                    <b v-if="accommodation.stars == null ">
+                        Rate: Not available
                     </b>
                     <b v-else>
-                        Stars: {{accommodation.stars}}
+                        Rate: {{accommodation.stars}}
                     </b>
                 </p>
             </div>
@@ -35,9 +35,11 @@
 
         methods: {
             fetchData() {
-                axios.get('api/accommodation/'+ this.$route.params.id)
+                axios.get('api/accommodations/'+ this.$route.params.id)
                     .then((res) => {
                         this.accommodation= res.data;
+                    }).catch((err) => {
+                        alert(err);
                     })
             }
         }

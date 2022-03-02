@@ -3,7 +3,7 @@
         <section class="float-left m-3">
             <b-card header="Create Accommodation">
                 <b-card-body class="m-3">
-                    <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" method="POST">
+                    <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
                             <b-form-input id="name" v-model="form.name" type="text" />
                         </b-form-group>
@@ -73,6 +73,9 @@
                 </b-form>
             </div>
             <br />
+            <b-form-file v-model="files" id="file" multiple placeholder="Add Pictures" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
+            <br />
+            <br />
             <b-button type="submit" form="create-accommodation" class="btn">Create</b-button>
         </section>
     </div>
@@ -100,6 +103,7 @@
                     smoke_alarm: '0',
                     hot_tub: '0',
                 },
+                files: [],
                 options: [
                     {value: 'Apartment', text: 'Apartment'},
                     {value: 'House', text: 'House'},
@@ -111,7 +115,16 @@
 
         methods: {
             createAccommodation() {
-                Accommodation.createAccommodation(this.form);
+                let formData= new FormData();
+                $.each(this.files, function(key, img) {
+                    formData.append(`images[${key}]`, img);
+                });
+
+                for(const i in this.form) {
+                    formData.append(i, this.form[i]);
+                }
+
+                Accommodation.createAccommodation(formData);
             }
         }
     }

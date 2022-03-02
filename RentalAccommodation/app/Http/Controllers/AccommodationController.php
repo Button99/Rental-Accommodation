@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accommodation;
 use App\Models\Feature;
+use App\Models\Picture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -20,7 +21,7 @@ class AccommodationController extends Controller
         return Accommodation::find($id);
     }
 
-    public function create(Request $request) {
+    public function store(Request $request) {
         $validated= Validator::make($request->all(), [
             'name' => ['required'],
             'rooms' => ['required', 'integer'],
@@ -42,7 +43,9 @@ class AccommodationController extends Controller
             'washer' => ['integer', 'in:0,1'],
             'fire_extinguisher' => ['integer', 'in:0,1'],
             'smoke_alarm' => ['integer', 'in:0,1'],
-            'hot_tub' => ['integer', 'in:0,1']
+            'hot_tub' => ['integer', 'in:0,1'],
+            'images' => ['required'],
+            'images.*' => ['file', 'max:2048', 'mimes:jpeg,png,jpg']
         ]);
         
         if(!$validated->fails()) {
@@ -58,6 +61,7 @@ class AccommodationController extends Controller
             $features= Feature::create([
                 'pool' => $request->pool,
                 'bbq' => $request->bbq,
+                'pool_table' => $request->pool_table,
                 'wifi' => $request->wifi,
                 'tv' => $request->tv,
                 'kitchen' => $request->kitchen,
@@ -70,7 +74,20 @@ class AccommodationController extends Controller
                 'accommodation_id' => $accommodation->id
             ]);
 
-            if($accommodation && $features) {
+            foreach($request->images as $img) {
+                $generatedName= time(). '.' . $img->getClientOriginalExtension();
+                $path= public_path('upload') . '\\' . $generatedName;
+                $picture= Picture::create([
+                    'path' => $path,
+                    'ext' => $img->getClientOriginalExtension(),
+                    'description' => Auth::user()->id,
+                    'user_id' => Auth::user()->id,
+                    'accommodation_id' => $accommodation->id
+                ]);
+                $img->move($path, $generatedName);
+            }
+
+            if($accommodation && $features && $picture) {
                 return response()->json('Accommodation Created!', Response::HTTP_CREATED);
             }
         }

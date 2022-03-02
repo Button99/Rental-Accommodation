@@ -9,11 +9,11 @@ class Accommodation {
             method: 'post',
             url: 'api/accommodation/create',
             headers: {
-                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken()),
+                'Content-Type': 'multipart/form-data'
             },
             data
         }).then((res) => {
-            console.log('Accommodation created!');
             router.push({name: 'myAccommodations'});
         }).catch((err) => {
             alert(err);
