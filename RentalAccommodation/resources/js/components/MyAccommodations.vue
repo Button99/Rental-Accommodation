@@ -6,8 +6,8 @@
                 <div class="col-md-7">
                     <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
-                            <div class="card">
-                                <img src="pictures/pexels-alex-azabache-3879160.jpg" style=" height: 30vh;" class="card-img-top" />
+                            <div class="card" v-for="picture in pictures">
+                                <img :src="picture[0].path" style=" height: 30vh;" class="card-img-top" />
                                 <div class="card-body">
                                     <h5 class="card-title">{{accommodation.name}}</h5>
                                     <p class="card-text">
@@ -36,7 +36,8 @@ import AppStorage from '../helpers/AppStorage';
     export default {
         data() {
             return {
-                accommodations: []
+                accommodations: [],
+                pictures: []
             }
         },
     
@@ -56,7 +57,9 @@ import AppStorage from '../helpers/AppStorage';
                             Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
                         }
                     }).then((res) => {
-                        this.accommodations= res.data;
+                        this.accommodations= res.data.accommodations;
+                        this.pictures= res.data.pictures;
+                        console.log(this.pictures[0][0].path);
                     }).catch((err) => {
                         alert(err);
                     })

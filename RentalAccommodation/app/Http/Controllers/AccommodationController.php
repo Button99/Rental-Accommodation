@@ -76,7 +76,7 @@ class AccommodationController extends Controller
 
             foreach($request->images as $img) {
                 $generatedName= time(). '.' . $img->getClientOriginalExtension();
-                $path= public_path('upload') . '\\' . $generatedName;
+                $path= 'upload' . '/' . $generatedName;
                 $picture= Picture::create([
                     'path' => $path,
                     'ext' => $img->getClientOriginalExtension(),
@@ -84,7 +84,7 @@ class AccommodationController extends Controller
                     'user_id' => Auth::user()->id,
                     'accommodation_id' => $accommodation->id
                 ]);
-                $img->move($path, $generatedName);
+                $img->move(public_path('upload/'), $generatedName);
             }
 
             if($accommodation && $features && $picture) {
@@ -163,6 +163,10 @@ class AccommodationController extends Controller
         }
 
         public function showMyAccommodations($id) {
-            return Accommodation::where('user_id', '=', $id)->get();
+            $accommodations= Accommodation::where('user_id', '=', $id)->get();
+            foreach($accommodations as $accommodation) {
+                $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
+            }
+            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
         }
 }
