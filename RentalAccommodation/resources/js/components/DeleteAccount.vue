@@ -32,13 +32,12 @@
             return {
                 form: {
                     first_name: ''
-                }
+                },
             }
         },
 
         methods: {
             deleteAccount() {
-
                 User.deleteAcc(this.form);
             }
         }
