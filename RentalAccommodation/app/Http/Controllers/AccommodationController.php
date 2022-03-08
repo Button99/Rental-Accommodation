@@ -18,7 +18,9 @@ class AccommodationController extends Controller
     }
 
     public function show($id) {
-        return Accommodation::find($id);
+        $accommodation= Accommodation::find($id);
+        $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
+        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures]);
     }
 
     public function store(Request $request) {

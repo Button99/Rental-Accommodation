@@ -1,21 +1,24 @@
 <template>
     <section class="container-fluid">
-        <div class="card">
-            <img src="pictures/pexels-alex-azabache-3879160.jpg" style=" height: 30vh;" class="card-img-top float-left" />
-            <div class="card-body">
-                <h5 class="card-title">Name: {{accommodation.name}} </h5>
-                <p class="card-text">
-                    Type: {{accommodation.accommodation_type}} <br />
-                    Rooms: {{accommodation.rooms}} <br />
-                    Town: {{accommodation.town}} <br />
-                    Description: {{accommodation.description}} <br />
-                    <b v-if="accommodation.stars == null ">
-                        Rate: Not available
-                    </b>
-                    <b v-else>
-                        Rate: {{accommodation.stars}}
-                    </b>
-                </p>
+        <div class="card" style="height: 70vh;">
+            <div id="card-horizontal">
+                <img :src="'/' + pictures[0][0].path" class="card-img-top"  id="fixed-img"/>
+
+                <div class="card-body" id="float-right">
+                    <h5 class="card-title">Name: {{accommodation.name}} </h5>
+                    <p class="card-text">
+                        Type: {{accommodation.accommodation_type}} <br />
+                        Rooms: {{accommodation.rooms}} <br />
+                        Town: {{accommodation.town}} <br />
+                        Description: {{accommodation.description}} <br />
+                        <b v-if="accommodation.stars == null ">
+                            Rate: Not available
+                        </b>
+                        <b v-else>
+                            Rate: {{accommodation.stars}}
+                        </b>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -25,7 +28,8 @@
     export default {
         data() {
             return {
-                accommodation: []
+                accommodation: [],
+                pictures: 'null',
             }
         },
 
@@ -37,7 +41,9 @@
             fetchData() {
                 axios.get('api/accommodations/'+ this.$route.params.id)
                     .then((res) => {
-                        this.accommodation= res.data;
+                        this.accommodation= res.data.accommodation;
+                        this.pictures= res.data.pictures;
+                        console.log(this.pictures[0][0].path);
                     }).catch((err) => {
                         alert(err);
                     })
