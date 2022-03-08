@@ -83,6 +83,16 @@
   height: 70vh;
 }
 
+#fixed-img {
+  width: 40%;
+  height: 40vh;
+  float: left;
+}
+
+#card-horizontal {
+  display: flex;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
