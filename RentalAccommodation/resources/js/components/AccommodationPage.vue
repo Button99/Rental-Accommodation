@@ -1,10 +1,11 @@
 <template>
     <section class="container-fluid">
         <div class="card" style="height: 70vh;">
-            <div id="card-horizontal">
-                <img :src="'/' + pictures[0][0].path" class="card-img-top"  id="fixed-img"/>
-
-                <div class="card-body" id="float-right">
+            <div id="card-norm">
+                <b-carousel controls fade indicators :interval="4000">
+                   <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="item" :index="index"></b-carousel-slide>
+                </b-carousel>
+                <div class="card-body">
                     <h5 class="card-title">Name: {{accommodation.name}} </h5>
                     <p class="card-text">
                         Type: {{accommodation.accommodation_type}} <br />
@@ -18,9 +19,12 @@
                             Rate: {{accommodation.stars}}
                         </b>
                     </p>
+                    <!-- Add delete or update button -->
+
                 </div>
             </div>
         </div>
+        <br />
     </section>
 </template>
 
@@ -29,6 +33,7 @@
         data() {
             return {
                 accommodation: [],
+                usr_id: '',
                 pictures: 'null',
             }
         },
@@ -43,10 +48,11 @@
                     .then((res) => {
                         this.accommodation= res.data.accommodation;
                         this.pictures= res.data.pictures;
-                        console.log(this.pictures[0][0].path);
                     }).catch((err) => {
                         alert(err);
-                    })
+                    });
+
+
             }
         }
     }

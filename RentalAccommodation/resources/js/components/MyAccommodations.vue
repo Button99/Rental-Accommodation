@@ -59,7 +59,6 @@ import AppStorage from '../helpers/AppStorage';
                     }).then((res) => {
                         this.accommodations= res.data.accommodations;
                         this.pictures= res.data.pictures;
-                        console.log(this.pictures[0][0].path);
                     }).catch((err) => {
                         alert(err);
                     })
