@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import BootstrapVue from 'bootstrap-vue';
-import CoolLightBox from 'vue-cool-lightbox';
 import routes from './routes';
 import User from './helpers/User';
 import Accommodation from './helpers/Accommodation';
@@ -19,7 +18,6 @@ window.Validate= Validate;
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(BootstrapVue);
-Vue.use(CoolLightBox);
 
 export const router= new VueRouter({
     mode: 'history',
