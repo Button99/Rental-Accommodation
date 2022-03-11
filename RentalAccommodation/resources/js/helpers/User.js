@@ -15,6 +15,7 @@ class User {
                     const usr_name= res.data.first_name;
                     const usr_last= res.data.last_name;
                     AppStorage.store([usr_name, usr_last], JSON.stringify(accessToken));
+                    this.setId();
                     router.push({name: 'dashboard'});
                 }
             }).catch((err) => {
@@ -60,6 +61,22 @@ class User {
     getLastName() {
         var usr= JSON.parse(AppStorage.getUser());
         return usr[1];
+    }
+
+    setId() {
+        axios.get('api/user', {
+            headers: {
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken()) 
+            }
+        }).then((res) => {
+            AppStorage.storeId(res.data.id);
+        }).catch((err) => {
+            alert(err);
+        });
+    }
+
+    getId() {
+        return AppStorage.getId();
     }
 
     deleteAcc(data) {
