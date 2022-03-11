@@ -20,6 +20,14 @@
                         </b>
                     </p>
                     <!-- Add delete or update button -->
+                    <p v-if=" accommodation.user_id == usr_id">
+                        <b-form @submit.prevent="updateAccommodation()" method="PATCH" action="#">
+                            <b-button variant="warning" type="submit"> Update </b-button>
+                        </b-form>
+                        <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
+                            <b-button variant="danger" type="submit"> Delete</b-button> 
+                        </b-form>
+                    </p>
 
                 </div>
             </div>
@@ -29,7 +37,10 @@
 </template>
 
 <script>
-    export default {
+import Accommodation from '../helpers/Accommodation';
+import AppStorage from '../helpers/AppStorage';
+
+export default {
         data() {
             return {
                 accommodation: [],
@@ -51,8 +62,16 @@
                     }).catch((err) => {
                         alert(err);
                     });
+                
+                this.usr_id= AppStorage.getId();
+            },
 
+            deleteAccommodation() {
+                Accommodation.deleteAccommodation(this.accommodation.id);
+            },
 
+            updateAccommodation() {
+                alert('Works!');
             }
         }
     }

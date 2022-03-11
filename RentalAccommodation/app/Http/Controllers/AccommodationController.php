@@ -99,8 +99,8 @@ class AccommodationController extends Controller
 
         public function delete($id) {
             $accommodation= Accommodation::find($id);
-            
-            if($accommodation->delete()) {
+            $features= Feature::where('accommodation_id', '=', $id);
+            if($features->delete() && $accommodation->delete()) {
                 return response()->json('Accommodation deleted successfully', Response::HTTP_ACCEPTED);
             }
 
@@ -169,6 +169,9 @@ class AccommodationController extends Controller
             foreach($accommodations as $accommodation) {
                 $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
             }
-            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+            if(!empty($pictures)) {
+                return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+            }
+            return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
         }
 }

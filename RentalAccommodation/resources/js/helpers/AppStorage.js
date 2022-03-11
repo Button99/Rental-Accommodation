@@ -8,12 +8,20 @@ class AppStorage {
         localStorage.setItem('user', JSON.stringify(usr_data));
     }
 
+    storeId(usr_id) {
+        localStorage.setItem('user_id', JSON.stringify(usr_id));
+    }
+
     getToken() {
         return localStorage.getItem('token')
     }
 
     getUser() {
         return localStorage.getItem('user');
+    }
+
+    getId() {
+        return localStorage.getItem('user_id');
     }
 
     tokenExists() {
@@ -31,6 +39,7 @@ class AppStorage {
     clear() {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('user');
+        window.localStorage.removeItem('user_id');
     }
 }
 

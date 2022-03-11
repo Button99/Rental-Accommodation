@@ -19,6 +19,18 @@ class Accommodation {
             alert(err);
         });
     }
+
+    deleteAccommodation(id) {
+        axios.delete('api/accommodations/' + id + '/delete', {
+            headers: {
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
+            }
+        }).then((res) => {
+            router.push({name: 'myAccommodations'});
+        }).catch((err) => {
+            alert(err);
+        });
+    }
 }
 
 export default Accommodation= new Accommodation();
