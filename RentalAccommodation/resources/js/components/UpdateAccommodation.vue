@@ -1,0 +1,164 @@
+<template>
+    <div class="update-accommodation-layout container-fluid">
+        <section class="float-left m-3">
+            <b-card header="Update Accommodation">
+                <b-card-body class="m-3">
+                    <b-form action="#" id="update-accommodation" @submit.prevent="updateAccommodation()" enctype="multipart/form-data" method="POST">
+                        <b-form-group label="Name: " label-for="name">
+                            <b-form-input id="name" v-model="form.name" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Rooms: " label-for="rooms">
+                            <b-form-input id="rooms" v-model="form.rooms" type="number" />
+                        </b-form-group>
+                        <b-form-group label="Description: " label-for="description">
+                            <b-form-input id="description" v-model="form.description" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Accommodation type: " label-for="accommodation_type">
+                            <b-form-select v-model="form.accommodation_type" id="accommodation_type" :options="options"></b-form-select>
+                        </b-form-group>
+                        <b-form-group label="Town: " label-for="town">
+                            <b-form-input id="town" v-model="form.town" type="text" />
+                        </b-form-group>
+                    </b-form>
+                </b-card-body>
+            </b-card>
+        </section>
+        <section class="float-right m-4 features-layout">
+            <div class="container border p-4">
+                <b-form form="update-accommodation">
+                    <b-row>
+                        <b-col class="m-3">
+                            <b-checkbox id="pool" v-model="form.pool" value="1">Pool</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="bbq" v-model="form.bbq" value="1"> BBQ</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="pool_table" v-model="form.pool_table" value="1"> Pool table</b-checkbox>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col class="m-3">
+                            <b-checkbox id="wifi" v-model="form.wifi" value="1">Wifi</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="tv" v-model="form.tv" value="1">TV</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="kitchen" v-model="form.kitchen" value="1">kitchen</b-checkbox>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col class="m-3">
+                            <b-checkbox id="parking" v-model="form.parking" value="1">Parking</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="air_conditioning" v-model="form.air_conditioning" value="1">Air Conditioning</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="washer" v-model="form.washer" value="1">Washer</b-checkbox>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col class="m-3">
+                            <b-checkbox id="fire_extinguisher" v-model="form.fire_extinguisher" value="1">Fire extinguiser</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="smoke_alarm" v-model="form.smoke_alarm" value="1">Smoke alarm</b-checkbox>
+                        </b-col>
+                        <b-col class="m-3">
+                            <b-checkbox id="hot_tub" v-model="form.hot_tub" value="1">Hot tub</b-checkbox>
+                        </b-col>
+                    </b-row>
+                </b-form>
+            </div>
+            <br />
+            <b-form-file v-model="files" id="file" multiple placeholder="Add Pictures" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
+            <br />
+            <br />
+            <div class="form-group">
+                <b-button type="submit" form="create-accommodation" class="btn">Update</b-button>
+            </div>
+        </section>
+    </div>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                form: {
+                    id: '',
+                    name: '',
+                    rooms: '',
+                    description: '',
+                    town: '',
+                    accommodation_type: '',
+                    pool: '0',
+                    bbq: '0',
+                    pool_table: '0',
+                    wifi: '0',
+                    tv: '0',
+                    kitchen: '0',
+                    parking: '0',
+                    air_conditioning: '0',
+                    washer: '0',
+                    fire_extinguisher: '0',
+                    smoke_alarm: '0',
+                    hot_tub: '0',
+                },
+                files: [],
+                options: [
+                    {value: 'Apartment', text: 'Apartment'},
+                    {value: 'House', text: 'House'},
+                    {value: 'Unique space', text: 'Unique space'},
+                    {value: 'Boutique Hotel', text: 'Boutique Hotel'}
+                ]
+            }
+        },
+
+        created() {
+            this.fetchData(this.$route.params.id);
+        },
+
+        methods: {
+            updateAccommodation() {
+                let formData= new FormData();
+                $.each(this.files, function(key, img) {
+                    formData.append(`images[${key}]`, img);
+                });
+
+                for(const i in this.form) {
+                    formData.append(i, this.form[i]);
+                }
+            },
+
+            fetchData(id) {
+                axios.get('api/accommodations/'+ this.$route.params.id)
+                    .then((res) => {
+                        this.form.name= res.data.accommodation.name;
+                        this.form.rooms= res.data.accommodation.rooms;
+                        this.form.description= res.data.accommodation.description;
+                        this.form.town= res.data.accommodation.town;
+                        this.form.accommodation_type= res.data.accommodation.accommodation_type;
+                        this.form.pool= res.data.features[0].pool;
+                        this.form.bbq= res.data.features[0].bbq;
+                        this.form.pool_table= res.data.features[0].pool_table;
+                        this.form.wifi= res.data.features[0].wifi;
+                        this.form.tv= res.data.features[0].tv;
+                        this.form.kitchen= res.data.features[0].kitchen;
+                        this.form.parking= res.data.features[0].parking;
+                        this.form.air_conditioning= res.data.features[0].air_conditioning;
+                        this.form.washer= res.data.features[0].washer;
+                        this.form.fire_extinguisher= res.data.features[0].fire_extinguisher;
+                        this.form.smoke_alarm= res.data.features[0].smoke_alarm;
+                        this.form.hot_tub= res.data.features[0].hot_tub;
+                        this.files= res.data.pictures[0][0].path;
+
+                    }).catch((err) => {
+                        alert(err);
+                    });
+            }
+        }
+    }
+
+</script>

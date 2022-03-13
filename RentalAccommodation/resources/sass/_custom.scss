@@ -93,14 +93,19 @@
     display: flex;
 }
 
-#card-norm {
-    
-}
-
 #card-norm img {
     height: 40vh;
 }
 
 #card-horizontal img {
     height: 30vh;
+}
+
+.update-accommodation-layout {
+    min-height: 110vh;
+    min-width: 100%;
+}
+
+.update-accommodation-layout .btn {
+    width: 100%;
 }

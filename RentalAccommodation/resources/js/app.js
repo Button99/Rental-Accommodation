@@ -66,6 +66,7 @@ Vue.component('security', require('./components/AccountSecurity.vue'));
 Vue.component('delete', require('./components/DeleteAccount.vue'));
 Vue.component('createAccommodation', require('./components/CreateAccommodation.vue'));
 Vue.component('accommodation', require('./components/AccommodationPage.vue'));
+Vue.component('updateAccommodation', require('./components/UpdateAccommodation.vue'));
 
 const app = new Vue({
     el: '#app',

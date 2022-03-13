@@ -11,6 +11,7 @@ import AccountSecurity from './components/AccountSecurity.vue';
 import DeleteAccount from './components/DeleteAccount.vue';
 import CreateAccommodation from './components/CreateAccommodation.vue';
 import AccommodationPage from './components/AccommodationPage.vue';
+import UpdateAccommodation from './components/UpdateAccommodation';
 
 const routes= [
     {
@@ -98,6 +99,14 @@ const routes= [
         path: '/accommodation/:id',
         name: 'accommodation',
         component: AccommodationPage
+    },
+    {
+        path: '/updateAccommodation/:id',
+        name: 'updateAccommodation',
+        component: UpdateAccommodation,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 
