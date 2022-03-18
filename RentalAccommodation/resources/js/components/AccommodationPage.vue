@@ -19,15 +19,16 @@
                             Rate: {{accommodation.stars}}
                         </b>
                     </p>
-                    <!-- Add delete or update button -->
-                    <p v-if=" accommodation.user_id == usr_id">
-                        <b-form @submit.prevent="updateAccommodation()" method="PATCH" action="#">
-                            <b-button variant="warning" type="submit"> Update </b-button>
-                        </b-form>
-                        <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
-                            <b-button variant="danger" type="submit"> Delete</b-button> 
-                        </b-form>
-                    </p>
+                    <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md">
+                        <b-list-group-item>
+                            <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
+                        </b-list-group-item>
+                        <b-list-group-item>
+                            <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
+                                <b-button variant="danger" type="submit"> Delete</b-button> 
+                            </b-form>
+                        </b-list-group-item>
+                    </b-list-group>
 
                 </div>
             </div>
@@ -68,10 +69,6 @@ export default {
 
             deleteAccommodation() {
                 Accommodation.deleteAccommodation(this.accommodation.id);
-            },
-
-            updateAccommodation() {
-                alert('Works!');
             }
         }
     }

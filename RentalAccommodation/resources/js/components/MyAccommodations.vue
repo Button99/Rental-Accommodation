@@ -22,7 +22,7 @@
                 </div>
             </ul>
         </section>
-        <section class="my-accommodations-layout"  v-else>
+        <section class="my-accommodations-layout"  v-else-if="show == true">
             <h4>You do not have create any accommodation </h4>
             <router-link to="/createAccommodation" class="btn btn-primary">Create accommodation</router-link>
             <br />
@@ -37,7 +37,8 @@ import AppStorage from '../helpers/AppStorage';
         data() {
             return {
                 accommodations: [],
-                pictures: []
+                pictures: [],
+                show: false
             }
         },
     
@@ -59,6 +60,7 @@ import AppStorage from '../helpers/AppStorage';
                     }).then((res) => {
                         this.accommodations= res.data.accommodations;
                         this.pictures= res.data.pictures;
+                        this.show= true;
                     }).catch((err) => {
                         alert(err);
                     })
