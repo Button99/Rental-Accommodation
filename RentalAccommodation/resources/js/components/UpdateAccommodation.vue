@@ -3,7 +3,7 @@
         <section class="float-left m-3">
             <b-card header="Update Accommodation">
                 <b-card-body class="m-3">
-                    <b-form action="#" id="update-accommodation" @submit.prevent="updateAccommodation()" enctype="multipart/form-data" method="POST">
+                    <b-form action="#" id="update-accommodation" @submit.prevent="updateAccommodation()" enctype="multipart/form-data" method="PUT">
                         <b-form-group label="Name: " label-for="name">
                             <b-form-input id="name" v-model="form.name" type="text" />
                         </b-form-group>
@@ -73,11 +73,11 @@
                 </b-form>
             </div>
             <br />
-            <b-form-file v-model="files" id="file" multiple placeholder="Add Pictures" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
+            <b-form-file v-model="files" id="file" multiple :placeholder="files" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
             <br />
             <br />
             <div class="form-group">
-                <b-button type="submit" form="create-accommodation" class="btn">Update</b-button>
+                <b-button type="submit" form="update-accommodation" class="btn">Update</b-button>
             </div>
         </section>
     </div>
@@ -87,7 +87,7 @@
         data() {
             return {
                 form: {
-                    id: '',
+                    id: this.$route.params.id,
                     name: '',
                     rooms: '',
                     description: '',
@@ -130,6 +130,13 @@
                 for(const i in this.form) {
                     formData.append(i, this.form[i]);
                 }
+                /* Symfony error (also PHP problem) Cant handle PUT method with multipart/form-data
+                /* Possible solutions-> 2
+                /* A) Use POST and pass _method inside the file
+                /* B) Use server-side packages that handle the problem (illuminatech/multipart-middleware || pecll/apfd) 
+                */
+                formData.append('_method', 'PUT');
+                Accommodation.updateAccommodation(formData, this.$route.params.id);
             },
 
             fetchData(id) {

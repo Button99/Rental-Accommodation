@@ -20,6 +20,22 @@ class Accommodation {
         });
     }
 
+    updateAccommodation(data, id) {
+        axios({
+            method: 'post',
+            url: 'api/accommodations/' + id + '/update',
+            headers: {
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken()),
+                'Content-Type': 'multipart/form-data'
+            },
+            data
+            }).then((res) => {
+                router.push({name: 'myAccommodations'});
+            }).catch((err) => {
+                 alert(err);
+        });
+    }
+
     deleteAccommodation(id) {
         axios.delete('api/accommodations/' + id + '/delete', {
             headers: {

@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PictureController;
 use App\Http\Controllers\UserController;
 use App\Models\Accommodation;
-use App\Models\Picture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,9 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::delete('/accommodations/{id}/delete', [AccommodationController::class, 'delete']);
 
-    Route::patch('/accommodations/{id}/update', [AccommodationController::class, 'update']);
-
-    Route::post('/accommodation/{id}/uploadPicture', [PictureController::class, 'store']);
+    Route::put('/accommodations/{id}/update', [AccommodationController::class, 'update']);
 });
 
 Route::get('/', [AuthController::class, 'index']);
