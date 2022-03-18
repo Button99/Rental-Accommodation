@@ -3,7 +3,6 @@ import AppStorage from "./AppStorage";
 
 class Accommodation {
 
-
     createAccommodation(data) {
         axios({
             method: 'post',

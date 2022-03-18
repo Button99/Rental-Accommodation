@@ -19,8 +19,9 @@ class AccommodationController extends Controller
 
     public function show($id) {
         $accommodation= Accommodation::find($id);
-        $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
-        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures]);
+        $pictures[]= Picture::where('accommodation_id', '=', $id)->get();
+        $features= Feature::where('accommodation_id', '=', $id)->get();
+        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features]);
     }
 
     public function store(Request $request) {
@@ -107,8 +108,7 @@ class AccommodationController extends Controller
             return response()->json('Error while doing that!', Response::HTTP_FORBIDDEN);
         }
 
-        public function update($id, Request $request) {
-
+        public function update(Request $request, $id) {
             $validated= Validator::make($request->all(), [
                 'name' => ['required'],
                 'rooms' => ['required', 'integer'],
@@ -120,17 +120,19 @@ class AccommodationController extends Controller
                     'Unique space',
                     'Boutique Hotel'
                 ])],
-                'pool' => ['integer', 'in:1'],
-                'bbq' => ['integer', 'in:1'],
-                'wifi' => ['integer', 'in:1'],
-                'tv' => ['integer', 'in:1'],
-                'kitchen' => ['integer', 'in:1'],
-                'parking' => ['integer', 'in:1'],
-                'air_conditioning' => ['integer', 'in:1'],
-                'washer' => ['integer', 'in:1'],
-                'fire_extinguisher' => ['integer', 'in:1'],
-                'smoke_alarm' => ['integer', 'in:1'],
-                'hot_tub' => ['integer', 'in:1']
+                'pool' => ['integer', 'in:0,1'],
+                'bbq' => ['integer', 'in:0,1'],
+                'wifi' => ['integer', 'in:0,1'],
+                'tv' => ['integer', 'in:0,1'],
+                'kitchen' => ['integer', 'in:0,1'],
+                'parking' => ['integer', 'in:0,1'],
+                'air_conditioning' => ['integer', 'in:0,1'],
+                'washer' => ['integer', 'in:0,1'],
+                'fire_extinguisher' => ['integer', 'in:0,1'],
+                'smoke_alarm' => ['integer', 'in:0,1'],
+                'hot_tub' => ['integer', 'in:0,1'],
+                'images' => ['required'],
+                'images.*' => ['file', 'max:2048', 'mimes:jpeg,png,jpg']
             ]);
 
             if(!$validated->fails()) {
@@ -142,7 +144,7 @@ class AccommodationController extends Controller
                     'accommodation_type' => $request->accommodation_type
                 ]);
 
-                $features= Feature::find($accommodation->id)->update([
+                $features= Feature::find($id)->update([
                     'pool' => $request->pool,
                     'bbq' => $request->bbq,
                     'wifi' => $request->wifi,
@@ -155,8 +157,20 @@ class AccommodationController extends Controller
                     'smoke_alarm' => $request->smoke_alarm,
                     'hot_tub' => $request->hot_tub
                 ]);
+                foreach($request->images as $img) {
+                    $generatedName= time(). '.' . $img->getClientOriginalExtension();
+                    $path= 'upload' . '/' . $generatedName;
+                    $picture= Picture::create([
+                        'path' => $path,
+                        'ext' => $img->getClientOriginalExtension(),
+                        'description' => Auth::user()->id,
+                        'user_id' => Auth::user()->id,
+                        'accommodation_id' => $id
+                    ]);
+                    $img->move(public_path('upload/'), $generatedName);
+                }
                 
-                if($accommodation) {
+                if($accommodation && $features &&   $picture) {
                     return response()->json('Updated!', Response::HTTP_ACCEPTED);
                 }
             }
