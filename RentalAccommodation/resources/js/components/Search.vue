@@ -14,9 +14,6 @@
                             <b-form-group label="Check out: " label-for="checkOut" class="md-4">
                                 <b-form-input id="checkOut" v-model="form.checkOut" type="date" />
                             </b-form-group>
-                            <b-form-group label="Guests: " label-for="guests" class="md-4">
-                                <b-form-input id="guests" v-model="form.guests" type="number" />
-                            </b-form-group>
                             <b-form-group label="Rooms: " label-for="rooms" class="md-4">
                                 <b-form-input id="rooms" v-model="form.rooms" type="number" />
                             </b-form-group>
@@ -33,6 +30,7 @@
 </template>
 
 <script>
+import Accommodation from '../helpers/Accommodation'
     export default {
         data() {
             return {
@@ -40,10 +38,15 @@
                     location: '',
                     checkIn: '',
                     checkOut: '',
-                    guests: '',
                     rooms: ''
                 },
                 errors: []
+            }
+        },
+
+        methods: {
+            search() {
+                Accommodation.searchAccommodation(this.form);
             }
         }
     }
