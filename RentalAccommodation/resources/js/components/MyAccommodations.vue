@@ -6,8 +6,8 @@
                 <div class="col-md-7">
                     <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
-                            <div class="card" v-for="picture in pictures">
-                                <img :src="picture[0].path" style=" height: 30vh;" class="card-img-top" />
+                            <div class="card">
+                                <img :src="picture[0].path" v-for="picture in pictures" v-if="accommodation.id == picture[0].accommodation_id" style=" height: 30vh;" class="card-img-top" />
                                 <div class="card-body">
                                     <h5 class="card-title">{{accommodation.name}}</h5>
                                     <p class="card-text">

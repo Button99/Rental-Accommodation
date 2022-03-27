@@ -3,8 +3,9 @@
         <div class="card" style="height: 70vh;">
             <div id="card-norm">
                 <b-carousel controls fade indicators :interval="4000">
-                   <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="item" :index="index"></b-carousel-slide>
+                    <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="index" :index="index"></b-carousel-slide>
                 </b-carousel>
+
                 <div class="card-body">
                     <h5 class="card-title">Name: {{accommodation.name}} </h5>
                     <p class="card-text">
@@ -60,6 +61,7 @@ export default {
                     .then((res) => {
                         this.accommodation= res.data.accommodation;
                         this.pictures= res.data.pictures;
+                        console.log(this.pictures[0]);
                     }).catch((err) => {
                         alert(err);
                     });
