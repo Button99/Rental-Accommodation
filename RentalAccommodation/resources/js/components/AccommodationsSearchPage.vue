@@ -31,7 +31,6 @@
 </template>
 
 <script>
-
     export default {
         data() {
             return {
@@ -41,13 +40,26 @@
             }
         },
     
-    created() {
-        this.fetchData();
-    },
+        created() {
+           this.fetchData();
+        },
 
-    methods: {
-        fetchData() {
-            
+        methods: {
+            fetchData() {
+                let formData= new FormData();
+                const data= JSON.parse(this.$route.query.search);
+                formData.append('location', data.location);
+                formData.append('checkIn', data.checkIn);
+                formData.append('checkOut', data.checkOut);
+                formData.append('rooms', data.rooms);
+                console.log(formData);
+                axios.get('api/search/accommodations',  {params: {keywords: this.formData } })
+                    .then((res) => {
+                        console.log(res);
+                        this.accommodations= res.data;
+                }).catch((err) => {
+                    alert(err);
+                });
             }
         }
     }

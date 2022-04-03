@@ -3,7 +3,7 @@
         <section class="float-left m-3">
             <b-card header="Create Accommodation">
                 <b-card-body class="m-3">
-                    <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" enctype="multipart/form-data" method="POST">
+                    <b-form action="#" id="create-accommodation" @submit.prevent="edit ? updateAccommodation(accommodation.id) : createAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
                             <b-form-input id="name" v-model="form.name" type="text" />
                         </b-form-group>
@@ -76,7 +76,10 @@
             <b-form-file v-model="files" id="file" multiple placeholder="Add Pictures" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
             <br />
             <br />
-            <b-button type="submit" form="create-accommodation" class="btn">Create</b-button>
+            <div class="form-group">
+                <b-button v-show="!edit" type="submit" form="create-accommodation" class="btn">Create</b-button>
+                <b-button v-show="edit" type="submit" form="create-accommodation" class="btn">Update</b-button>
+            </div>
         </section>
     </div>
 </template>
@@ -85,6 +88,7 @@
         data() {
             return {
                 form: {
+                    id: '',
                     name: '',
                     rooms: '',
                     description: '',
@@ -102,6 +106,7 @@
                     fire_extinguisher: '0',
                     smoke_alarm: '0',
                     hot_tub: '0',
+                    edit: false
                 },
                 files: [],
                 options: [
@@ -123,8 +128,19 @@
                 for(const i in this.form) {
                     formData.append(i, this.form[i]);
                 }
-
+                console.log(formData);
                 Accommodation.createAccommodation(formData);
+            },
+
+            updateAccommodation(id) {
+                let formData= new FormData();
+                $.each(this.files, function(key, img) {
+                    formData.append(`images[${key}]`, img);
+                });
+
+                for(const i in this.form) {
+                    formData.append(i, this.form[i]);
+                }
             }
         }
     }

@@ -46,7 +46,13 @@ import Accommodation from '../helpers/Accommodation'
 
         methods: {
             search() {
-                Accommodation.searchAccommodation(this.form);
+                axios.get('api/search/accommodations',  {params: {keywords: this.form } })
+                    .then((res) => {
+                        console.log(res);
+                        this.accommodations= res.data;
+                }).catch((err) => {
+                    alert(err);
+                });
             }
         }
     }
