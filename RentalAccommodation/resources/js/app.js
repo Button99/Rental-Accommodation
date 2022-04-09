@@ -21,7 +21,7 @@ Vue.use(BootstrapVue);
 
 export const router= new VueRouter({
     mode: 'history',
-    routes
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
@@ -68,6 +68,7 @@ Vue.component('createAccommodation', require('./components/CreateAccommodation.v
 Vue.component('accommodation', require('./components/AccommodationPage.vue'));
 Vue.component('updateAccommodation', require('./components/UpdateAccommodation.vue'));
 Vue.component('accommodationsSearchPage', require('./components/AccommodationsSearchPage.vue'));
+Vue.component('resultsPage', require('./components/ResultsPage.vue'));
 
 const app = new Vue({
     el: '#app',

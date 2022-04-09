@@ -13,6 +13,7 @@ import CreateAccommodation from './components/CreateAccommodation.vue';
 import AccommodationPage from './components/AccommodationPage.vue';
 import UpdateAccommodation from './components/UpdateAccommodation.vue';
 import AccommodationsSearchPage from './components/AccommodationsSearchPage.vue';
+import ResultsPage from './components/ResultsPage.vue';
 
 const routes= [
     {
@@ -113,6 +114,11 @@ const routes= [
         path: '/AccommodationsSearchPage',
         name: 'accommodationsSearchPage',
         component: AccommodationsSearchPage
+    },
+    {
+        path: '/ResultsPage',
+        name: 'resultsPage',
+        component: ResultsPage
     }
 ];
 
