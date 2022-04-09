@@ -48,8 +48,8 @@ import Accommodation from '../helpers/Accommodation'
             search() {
                 axios.get('api/search/accommodations',  {params: {keywords: this.form } })
                     .then((res) => {
-                        console.log(res);
-                        this.accommodations= res.data;
+                        console.log(res.data);
+                        this.$router.push({name: 'resultsPage', params: {keywords: this.form}});
                 }).catch((err) => {
                     alert(err);
                 });

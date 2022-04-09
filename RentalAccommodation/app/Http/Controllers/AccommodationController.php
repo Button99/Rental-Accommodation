@@ -200,24 +200,26 @@ class AccommodationController extends Controller
         ]);
         
         if(!$validated->fails()) {
-            $accommodations= Accommodation::where('location', '=', $request->location)
-                ->where('rooms', '>', $request->rooms)->get();
+            $accommodations= Accommodation::where('town', '=', $data['location'])
+                ->where('rooms', '>', $data['rooms'])->get();
 
-            $bookings= Booking::where('accommodation_id', '=', $accommodations->id)->where('start_date', '!=', $request->checkIn)
-                ->where('end_date', '!=', $request->checkOut)->count();
-            
+            foreach($accommodations as $accommodation) {
+                $bookings= Booking::where('accommodation_id', '=', $accommodation->id)->where('start_date', '!=', $data['checkIn'])
+                    ->where('end_date', '!=', $data['checkOut'])->count();
+            }
+
+            if($bookings == 0) {
+                return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
+            }
 
             $accom= Accommodation::where('location', '=', $request->location)
                 ->where('rooms', '>', $request->rooms)->where(function ($query, $request) {
                     $query->select('*')->from('bookings')->where('accommodation.id', '=', 'bookings.accommodation.id')
                         ->where('bookings.start_date', '!=', $request->checkIn)->where('bookings.end_date', '!=', $request->checkOut);
                 }, 'Ac')->get();
-            /* RAW SQL
-            *   
-            *   SELECT * FROM `accommodations`, `bookings` WHERE accommodation.id= bookings.accommodation_id AND bookings.start_date != ... AND bookings.end_date !=... ;
-            *
-            */
-            return response()->json(['Accommodations'=> $accom], Response::HTTP_ACCEPTED);
+
+            
+                return response()->json(['Accommodations'=> $accom], Response::HTTP_ACCEPTED);
         }
 
         return response()->json(['err'=> 'It fails!'], Response::HTTP_FORBIDDEN);
