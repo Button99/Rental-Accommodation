@@ -12,6 +12,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.User= User;
+window.Search= Search;
 window.Accommodation= Accommodation;
 window.Validate= Validate;
 

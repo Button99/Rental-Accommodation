@@ -206,10 +206,13 @@ class AccommodationController extends Controller
             foreach($accommodations as $accommodation) {
                 $bookings= Booking::where('accommodation_id', '=', $accommodation->id)->where('start_date', '!=', $data['checkIn'])
                     ->where('end_date', '!=', $data['checkOut'])->count();
+
+                $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
+
             }
 
             if($bookings == 0) {
-                return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
+                return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
             }
 
             $accom= Accommodation::where('location', '=', $request->location)

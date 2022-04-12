@@ -118,7 +118,7 @@ const routes= [
     {
         path: '/ResultsPage',
         name: 'resultsPage',
-        component: ResultsPage
+        component: ResultsPage,
     }
 ];
 

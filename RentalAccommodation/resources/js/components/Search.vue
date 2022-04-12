@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import Accommodation from '../helpers/Accommodation'
     export default {
         data() {
             return {
@@ -46,12 +45,7 @@ import Accommodation from '../helpers/Accommodation'
 
         methods: {
             search() {
-                axios.get('api/search/accommodations',  {params: {keywords: this.form } })
-                    .then((res) => {
-                        this.$router.replace({name: 'resultsPage', query: {keywords: JSON.stringify(this.form)}, params: {data: '123'}}).catch(err => {});
-                }).catch((err) => {
-                    alert(err);
-                });
+                this.$router.push({name: 'resultsPage', params: {data: this.form}, query: {keywords: JSON.stringify(this.form)}});
             }
         }
     }
