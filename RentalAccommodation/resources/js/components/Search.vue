@@ -5,8 +5,11 @@
                 <b-card header="Search" class="m-4 shadow-3-strong">
                     <b-card-body class="text-left h-75 m-5">
                         <b-form action="#" @submit.prevent="search()" method="GET">
-                            <b-form-group label="Location: " label-for="location" class="md-4">
-                                <b-form-input id="location" v-model="form.location" type="text" />
+                            <b-form-group label="Location: "  label-for="location" class="md-4">
+                                <b-form-input id="location" v-model="form.location" type="text" @input="onChange"/>
+                                <b-list-group v-if="form.location.length" v-show="isOpen">
+                                    <b-list-group-item v-for="place in places" :key="place.town" @click="setResult(place.town)" button> {{place.town}} </b-list-group-item>
+                                </b-list-group>
                             </b-form-group>
                             <b-form-group label="Check in:" label-for="checkIn" class="md-4">
                                 <b-form-input id="checkIn" v-model="form.checkIn" type="date" />
@@ -25,7 +28,6 @@
                 </b-card>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -39,14 +41,40 @@
                     checkOut: '',
                     rooms: ''
                 },
-                errors: []
+                places: [],
+                errors: [],
+                isOpen: false
+            }
+        },
+
+        watch: {
+            'form.location': function(after, before) {
+                this.getLocation();
             }
         },
 
         methods: {
             search() {
                 this.$router.push({name: 'resultsPage', params: {data: this.form}, query: {keywords: JSON.stringify(this.form)}});
+            },
+
+            getLocation() {
+                axios.get('api/location', { params: {keyword: this.keyword}})
+                    .then((res) => {
+                        console.log(res.data);
+                        console.log(res.data.Location[0].town);
+                        this.places= res.data.Location;
+                    }).catch((err) => {});
+            },
+
+            onChange() {
+                this.isOpen= true;
+            },
+
+            setResult(town) {
+                this.form.location= town;
+                this.isOpen= false;
             }
-        }
+        }   
     }
 </script>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Models\Accommodation;
 use Illuminate\Http\Request;
@@ -55,5 +56,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
 
 Route::get('/accommodations', [AccommodationController::class, 'index']);
+
+Route::get('/location', [LocationController::class, 'getLocation']);
 
 Route::get('/accommodations/{id}', [AccommodationController::class, 'show']);
