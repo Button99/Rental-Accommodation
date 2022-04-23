@@ -200,12 +200,12 @@ class AccommodationController extends Controller
         ]);
         
         if(!$validated->fails()) {
-            $accommodations= Accommodation::where('town', '=', $data['location'])
-                ->where('rooms', '>', $data['rooms'])->get();
+            $accommodations= Accommodation::where('town', 'LIKE', '%'. $data['location'] . '%')
+                ->where('rooms', '>=', $data['rooms'])->get();
 
             foreach($accommodations as $accommodation) {
-                $bookings= Booking::where('accommodation_id', '=', $accommodation->id)->where('start_date', '!=', $data['checkIn'])
-                    ->where('end_date', '!=', $data['checkOut'])->count();
+                $bookings= Booking::where('accommodation_id', '=', $accommodation->id)->where('start_date', '<', $data['checkIn'])
+                    ->where('end_date', '>', $data['checkOut'])->count();
 
                 $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
 
@@ -215,10 +215,10 @@ class AccommodationController extends Controller
                 return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
             }
 
-            $accom= Accommodation::where('location', '=', $request->location)
+            $accom= Accommodation::where('location', 'LIKE', '%'. $request->location .'%')
                 ->where('rooms', '>', $request->rooms)->where(function ($query, $request) {
                     $query->select('*')->from('bookings')->where('accommodation.id', '=', 'bookings.accommodation.id')
-                        ->where('bookings.start_date', '!=', $request->checkIn)->where('bookings.end_date', '!=', $request->checkOut);
+                        ->where('bookings.start_date', '<', $request->checkIn)->where('bookings.end_date', '>', $request->checkOut);
                 }, 'Ac')->get();
 
             
