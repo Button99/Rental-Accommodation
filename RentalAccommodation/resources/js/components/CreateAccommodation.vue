@@ -3,7 +3,7 @@
         <section class="float-left m-3">
             <b-card header="Create Accommodation">
                 <b-card-body class="m-3">
-                    <b-form action="#" id="create-accommodation" @submit.prevent="edit ? updateAccommodation(accommodation.id) : createAccommodation()" enctype="multipart/form-data" method="POST">
+                    <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
                             <b-form-input id="name" v-model="form.name" type="text" />
                         </b-form-group>
@@ -18,6 +18,18 @@
                         </b-form-group>
                         <b-form-group label="Town: " label-for="town">
                             <b-form-input id="town" v-model="form.town" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Latitude: ( Up to 6 digits )" label-for="latitude">
+                        <b-form-input id="latitude" v-model="form.latitude" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Longitude: ( Up to 6 digits )" label-for="longitude">
+                            <b-form-input id="longitude" v-model="form.longitude" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Address1 : ( Required)" label-for="address1">
+                            <b-form-input id="address1" v-model="form.address1" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Address2: ( Optional )" label-for="address2">
+                            <b-form-input id="address2" v-model="form.address2" type="text" />
                         </b-form-group>
                     </b-form>
                 </b-card-body>
@@ -77,8 +89,7 @@
             <br />
             <br />
             <div class="form-group">
-                <b-button v-show="!edit" type="submit" form="create-accommodation" class="btn">Create</b-button>
-                <b-button v-show="edit" type="submit" form="create-accommodation" class="btn">Update</b-button>
+                <b-button type="submit" form="create-accommodation" class="btn">Create</b-button>
             </div>
         </section>
     </div>
@@ -94,6 +105,10 @@
                     description: '',
                     town: '',
                     accommodation_type: '',
+                    latitude: '',
+                    longitude: '',
+                    address1: '',
+                    address2: '',
                     pool: '0',
                     bbq: '0',
                     pool_table: '0',
@@ -106,7 +121,6 @@
                     fire_extinguisher: '0',
                     smoke_alarm: '0',
                     hot_tub: '0',
-                    edit: false
                 },
                 files: [],
                 options: [

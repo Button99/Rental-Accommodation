@@ -20,6 +20,10 @@ class Accommodation extends Model
         'description',
         'town',
         'accommodation_type',
+        'latitude',
+        'longitude',
+        'address1',
+        'address2',
         'user_id'
     ];
 

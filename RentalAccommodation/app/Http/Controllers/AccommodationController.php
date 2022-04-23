@@ -37,6 +37,9 @@ class AccommodationController extends Controller
                 'Unique space',
                 'Boutique Hotel'
             ])],
+            'latitude' => ['required'],
+            'longitude' => ['required'],
+            'address1' => ['required'],
             'pool' => ['integer', 'in:0,1'],
             'bbq' => ['integer', 'in:0,1'],
             'wifi' => ['integer', 'in:0,1'],
@@ -59,6 +62,10 @@ class AccommodationController extends Controller
                 'description' => $request->description,
                 'town' => $request->town,
                 'accommodation_type' => $request->accommodation_type,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'address1' => $request->address1,
+                'address2' => $request->address2,
                 'user_id' => Auth::user()->id
             ]);
             

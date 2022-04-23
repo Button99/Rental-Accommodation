@@ -20,6 +20,10 @@ class Accommodations extends Migration
             $table->text('description');
             $table->string('town');
             $table->enum('accommodation_type', ['Apartment', 'House', 'Unique space', 'Boutique Hotel']);
+            $table->string('latitude', 10); // up to 6 digits
+            $table->string('longitude', 10); // up to 6 digits
+            $table->string('address1');
+            $table->string('address2')->nullable();
             $table->integer('stars')->nullable();
             $table->timestamps();
         
