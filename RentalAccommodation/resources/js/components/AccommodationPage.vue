@@ -49,10 +49,8 @@
 import Accommodation from '../helpers/Accommodation';
 import AppStorage from '../helpers/AppStorage';
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+import {Icon} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
- 
 
 export default {
         components: {
@@ -66,9 +64,9 @@ export default {
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution:
                     '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                center: [51.505, -0.159],
+                center: [0.00, 0.00],
                 zoom: 15,
-                markerLatLng: [51.504, -0.159],
+                markerLatLng: [0.00, 0.00],
                 accommodation: [],
                 usr_id: '',
                 pictures: 'null',
@@ -84,9 +82,9 @@ export default {
                 axios.get('api/accommodations/'+ this.$route.params.id)
                     .then((res) => {
                         this.accommodation= res.data.accommodation;
-                        console.log(res.data.accommodation);
                         this.pictures= res.data.pictures;
-                        console.log(this.pictures[0]);
+                        this.markerLatLng= [this.accommodation.latitude, this.accommodation.longitude];
+                        this.center= this.markerLatLng;
                     }).catch((err) => {
                         alert(err);
                     });
