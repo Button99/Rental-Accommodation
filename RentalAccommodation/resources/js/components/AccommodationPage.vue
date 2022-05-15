@@ -36,8 +36,9 @@
             </div>
         </div>
         <br />
-        <div style="">
-            <l-map style="height: 80vh; width: 50%" :zoom="zoom" :center="center">
+        <div>
+            <h4>Location: </h4>
+            <l-map style="height: 50vh; width: 30%" :zoom="zoom" :center="center">
                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                 <l-marker :lat-lng="markerLatLng"></l-marker>
             </l-map>  
