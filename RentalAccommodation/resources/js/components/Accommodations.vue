@@ -8,11 +8,17 @@
                 <br />
                 <h3> Budget (per night)</h3>
                 <b-form-group>
-                    <b-form-checkbox-group>
-                        <b-form-checkbox :options="budget_options"></b-form-checkbox>
+                    <b-form-checkbox-group v-model="selected_budget" :options="budget_options" stacked>
+                    </b-form-checkbox-group>
+                    <br />
+                    <h3>Features</h3>
+                    <b-form-checkbox-group v-model="selected_features" :options="features_opt" stacked>
+                    </b-form-checkbox-group>
+                    <br />
+                    <h3>Stars</h3>
+                    <b-form-checkbox-group v-model="selected_stars" :options="stars_opt" stacked>
                     </b-form-checkbox-group>
                 </b-form-group>
-
             </b-list-group>
         </section>
     
@@ -59,7 +65,23 @@
                     {text: '100-150', value: '150'},
                     {text: '150-200', value: '200'},
                     {text: '200+', value: '250'}
-                ]
+                ],
+                stars_opt: [
+                    {text: '2 Stars', value: '2'},
+                    {text: '3 Stars', value: '3'},
+                    {text: '4 Stars', value: '4'},
+                    {text: '5 Stars', value: '5'}
+                ], 
+                features_opt: [
+                    {text: 'BBQ', value: 'bbq'},
+                    {text: 'Wifi', value: 'wifi'},
+                    {text: 'Air Conditioning', value: 'air_conditioning'},
+                    {text: 'TV', value: 'tv'},
+                    {text: 'Parking', value: 'parking'}
+                ],
+                selected_budget: [],
+                selected_stars: [],
+                selected_features: [],
             }
         },
 
