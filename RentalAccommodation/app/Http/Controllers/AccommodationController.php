@@ -15,7 +15,14 @@ use Illuminate\Support\Facades\Auth;
 class AccommodationController extends Controller
 {
     public function index() {
-        return Accommodation::orderBy('rooms', 'desc')->get();
+        $accommodations= Accommodation::orderBy('rooms', 'desc')->get();
+        foreach($accommodations as $accommodation) {
+            $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
+        }
+        if(!empty($pictures)) {
+            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+        }
+        return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
     }
 
     public function show($id) {
