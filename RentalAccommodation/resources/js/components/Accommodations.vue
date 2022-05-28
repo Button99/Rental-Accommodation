@@ -8,15 +8,15 @@
                 <br />
                 <h3> Budget (per night)</h3>
                 <b-form-group>
-                    <b-form-checkbox-group v-model="selected_budget" :options="budget_options" stacked>
+                    <b-form-checkbox-group v-model="selected_budget" :options="budget_options" stacked @change="bugdetRecompute">
                     </b-form-checkbox-group>
                     <br />
                     <h3>Features</h3>
-                    <b-form-checkbox-group v-model="selected_features" :options="features_opt" stacked>
+                    <b-form-checkbox-group v-model="selected_features" :options="features_opt" stacked @change="bugdetRecompute">
                     </b-form-checkbox-group>
                     <br />
                     <h3>Stars</h3>
-                    <b-form-checkbox-group v-model="selected_stars" :options="stars_opt" stacked>
+                    <b-form-checkbox-group v-model="selected_stars" :options="stars_opt" stacked @change="bugdetRecompute">
                     </b-form-checkbox-group>
                 </b-form-group>
             </b-list-group>
@@ -26,7 +26,7 @@
         <section class="my-accommodations" v-if="accommodations.length > 0">
             <ul class="justify-content-center">
                 <div class="col-md-7">
-                    <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
+                    <li v-for="accommodation in filteredAccommodations" class="p-3 col-md-4 mt-5">
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
                             <div class="card">
                                 <img :src="picture[0].path" v-for="picture in pictures" v-if="accommodation.id == picture[0].accommodation_id" style=" height: 30vh;" class="card-img-top" />
@@ -89,6 +89,43 @@
             this.fetchData();
         },
 
+        computed: {
+            filteredAccommodations() {
+                var filtered_accommodations= this.accommodations;
+                if(this.selected_budget.length== 0 && this.selected_stars.length== 0  && this.selected_features.length== 0 ) {
+                    return this.accommodations;
+                }
+
+                if(this.selected_budget.length > 0) {
+                    var b= this.selected_budget;
+                    filtered_accommodations= this.accommodations.filter(function(a) {
+                        if( b >= a.price) {
+                            return a;
+                        }
+                    });
+                }
+
+                if(this.selected_stars.length > 0) {
+                    var b= this.selected_stars;
+                    filtered_accommodations= this.accommodations.filter(function(a) {
+                        if(b === a.stars) {
+                            return a;
+                        }
+                    });
+                }
+
+                if(this.selected_features.length > 0) {
+                    var b= this.selected_features;
+                    filtered_accommodations= this.accommodations.filter(function(a) {
+                        return this.selected_features.includes(a.features);
+                    });
+                }
+
+                return filtered_accommodations;
+
+            }
+        },
+
         methods: {
             fetchData() {
                 axios.get('api/accommodations')
@@ -98,7 +135,13 @@
                     }).catch((err) => {
                         alert(err);
                     })
+            },
+
+            bugdetRecompute() {
+                console.log(this.selected_budget);
+                this.filteredAccommodations;
             }
+
         }
     }
 </script>
