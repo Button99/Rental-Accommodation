@@ -114,6 +114,17 @@
   background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
 }
 
+#accommodation-page {
+  height: 110vh;
+  padding: 2rem;
+}
+
+.map {
+  float: right;
+  width: 50%;
+  margin: 2rem;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

@@ -113,3 +113,14 @@
 .leaflet-default-icon-path {
     background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
 }
+
+#accommodation-page {
+    height: 110vh;
+    padding: 2rem;
+}
+
+.map {
+    float: right;
+    width: 50%;
+    margin: 2rem;
+}

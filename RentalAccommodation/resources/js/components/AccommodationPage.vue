@@ -1,48 +1,53 @@
 <template>
     <section class="container-fluid">
-        <div class="card" style="height: 70vh;">
+        <div class="card" id="accommodation-page">
             <div id="card-norm">
                 <b-carousel controls fade indicators :interval="4000">
                     <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="index" :index="index"></b-carousel-slide>
                 </b-carousel>
 
                 <div class="card-body">
-                    <h5 class="card-title">Name: {{accommodation.name}} </h5>
-                    <p class="card-text">
-                        Type: {{accommodation.accommodation_type}} <br />
-                        Rooms: {{accommodation.rooms}} <br />
-                        Town: {{accommodation.town}} <br />
-                        Address: {{accommodation.address1}}, {{accommodation.address2}} <br />
-                        Description: {{accommodation.description}} <br />
-                        <b v-if="accommodation.stars == null ">
-                            Rate: Not available
-                        </b>
-                        <b v-else>
-                            Rate: {{accommodation.stars}}
-                        </b>
-                    </p>                  
-                    <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md">
-                        <b-list-group-item>
-                            <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
-                        </b-list-group-item>
-                        <b-list-group-item>
-                            <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
-                                <b-button variant="danger" type="submit"> Delete</b-button> 
-                            </b-form>
-                        </b-list-group-item>
-                    </b-list-group>
+                    <div class="float-left" style="width: 40%;">
+                        <h5 class="card-title">Name: {{accommodation.name}} </h5>
+                        <p class="card-text">
+                            Type: {{accommodation.accommodation_type}} <br />
+                            Rooms: {{accommodation.rooms}} <br />
+                            Town: {{accommodation.town}} <br />
+                            Address: {{accommodation.address1}}, {{accommodation.address2}} <br />
+                            Description: {{accommodation.description}} <br />
+                            <b v-if="accommodation.stars == null ">
+                                Rate: Not available
+                            </b>
+                            <b v-else>
+                                Rate: {{accommodation.stars}}
+                            </b>
+                            <br />
+                            Price: <b> {{accommodation.price}} </b> 
+                        </p>                  
+                        <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md" id="button-list">
+                            <b-list-group-item>
+                                <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
+                            </b-list-group-item>
+                            <b-list-group-item>
+                                <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
+                                    <b-button variant="danger" type="submit"> Delete</b-button> 
+                                </b-form>
+                            </b-list-group-item>
+                        </b-list-group> <br />
+                        </div>
+                        <div class="map">
+                            <h4>Location: </h4>
+                            <l-map style="height: 50vh;" :zoom="zoom" :center="center">
+                                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                                <l-marker :lat-lng="markerLatLng"></l-marker>
+                            </l-map>  
+                        </div>
+                        </div>
 
                 </div>
             </div>
         </div>
         <br />
-        <div>
-            <h4>Location: </h4>
-            <l-map style="height: 50vh; width: 30%" :zoom="zoom" :center="center">
-                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                <l-marker :lat-lng="markerLatLng"></l-marker>
-            </l-map>  
-        </div>
     </section>
 </template>
 
@@ -50,7 +55,6 @@
 import Accommodation from '../helpers/Accommodation';
 import AppStorage from '../helpers/AppStorage';
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
-import {Icon} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 export default {
