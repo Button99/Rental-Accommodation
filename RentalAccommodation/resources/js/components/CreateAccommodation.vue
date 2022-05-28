@@ -31,6 +31,9 @@
                         <b-form-group label="Address2: ( Optional )" label-for="address2">
                             <b-form-input id="address2" v-model="form.address2" type="text" />
                         </b-form-group>
+                        <b-form-group label="Price (per night)" label-for="price">
+                            <b-form-input id="price" v-model="form.price" type="text" />
+                        </b-form-group>
                     </b-form>
                 </b-card-body>
             </b-card>
@@ -109,6 +112,7 @@
                     longitude: '',
                     address1: '',
                     address2: '',
+                    price: '',
                     pool: '0',
                     bbq: '0',
                     pool_table: '0',

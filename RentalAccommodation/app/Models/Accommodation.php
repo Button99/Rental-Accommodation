@@ -24,7 +24,8 @@ class Accommodation extends Model
         'longitude',
         'address1',
         'address2',
-        'user_id'
+        'user_id',
+        'price'
     ];
 
     public function user() {
