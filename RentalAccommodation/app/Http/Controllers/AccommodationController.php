@@ -18,9 +18,10 @@ class AccommodationController extends Controller
         $accommodations= Accommodation::orderBy('rooms', 'desc')->get();
         foreach($accommodations as $accommodation) {
             $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
+            $features[]= Feature::where('accommodation_id', '=', $accommodation->id)->get();
         }
-        if(!empty($pictures)) {
-            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+        if(!empty($pictures) && !empty($features)) {
+            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures, 'features' => $features], Response::HTTP_ACCEPTED);
         }
         return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
     }

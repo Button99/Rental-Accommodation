@@ -8,15 +8,15 @@
                 <br />
                 <h3> Budget (per night)</h3>
                 <b-form-group>
-                    <b-form-checkbox-group v-model="selected_budget" :options="budget_options" stacked @change="bugdetRecompute">
+                    <b-form-checkbox-group v-model="selected_budget" :options="budget_options" stacked @change="recompute">
                     </b-form-checkbox-group>
                     <br />
                     <h3>Features</h3>
-                    <b-form-checkbox-group v-model="selected_features" :options="features_opt" stacked @change="bugdetRecompute">
+                    <b-form-checkbox-group v-model="selected_features" :options="features_opt" stacked @change="recompute">
                     </b-form-checkbox-group>
                     <br />
                     <h3>Stars</h3>
-                    <b-form-checkbox-group v-model="selected_stars" :options="stars_opt" stacked @change="bugdetRecompute">
+                    <b-form-checkbox-group v-model="selected_stars" :options="stars_opt" stacked @change="recompute">
                     </b-form-checkbox-group>
                 </b-form-group>
             </b-list-group>
@@ -36,6 +36,7 @@
                                         Rooms: {{accommodation.rooms}} <br />
                                         Town: {{accommodation.town}} <br />
                                         Description: {{accommodation.description}} <br />
+                                        <b>Price: {{accommodation.price}}</b> <br />
                                     </p>
                                 </div>
                             </div>
@@ -59,6 +60,7 @@
             return {
                 accommodations: [],
                 pictures: [],
+                features: [],
                 budget_options: [
                     {text: '0-50', value:'50'},
                     {text: '50-100', value: '100'},
@@ -99,8 +101,10 @@
                 if(this.selected_budget.length > 0) {
                     var b= this.selected_budget;
                     filtered_accommodations= this.accommodations.filter(function(a) {
-                        if( b >= a.price) {
-                            return a;
+                        for(var i=0; i< b.length; i++ ) {
+                            if(b[i] >= a.price) {
+                                return a;
+                            }
                         }
                     });
                 }
@@ -116,8 +120,20 @@
 
                 if(this.selected_features.length > 0) {
                     var b= this.selected_features;
+                    var f= this.features;
+
                     filtered_accommodations= this.accommodations.filter(function(a) {
-                        return this.selected_features.includes(a.features);
+                        for(var i=0; i<b.length; i++) {
+                            for(var j=0; j<f[i].length; j++) {
+
+                                if(f[i][j][b[i]] == '0') {
+                                }
+                                if(a.id === f[i][j].accommodation_id && f[i][j].hasOwnProperty(b[i]) && f[i][j][b[i]] == '1') {
+                                    console.log('works');
+                                    return a;
+                                }
+                            }
+                        }
                     });
                 }
 
@@ -131,14 +147,14 @@
                 axios.get('api/accommodations')
                     .then((res) => {
                         this.accommodations= res.data.accommodations;
+                        this.features= res.data.features;
                         this.pictures= res.data.pictures;
                     }).catch((err) => {
                         alert(err);
                     })
             },
 
-            bugdetRecompute() {
-                console.log(this.selected_budget);
+            recompute() {
                 this.filteredAccommodations;
             }
 
