@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -35,7 +36,8 @@ class AuthController extends Controller
                 $res= ['first_name' => $user->first_name,
                     'last_name' => $user->last_name,
                     'token' => $token];
-                return response()->json($res, Response::HTTP_ACCEPTED);
+    
+                    return response()->json($res, Response::HTTP_ACCEPTED);
             }
         }
 
@@ -71,6 +73,19 @@ class AuthController extends Controller
                 'phone' => $request->phone
             ]);
             if($user) {
+                // Mail::send(['text' => 'hello'], ['data' => 'Test!'], function($message) {
+                //     $message->to('ok@ok.com', 'Works')->subject('This should work');
+                //     $message->from('xzq@ws.com', 'Working');
+                // });
+
+                Mail::raw('Text', function($message) {
+                    $message->from('works@works.com', 'From ok');
+                    $message->to('test@test.com', 'To is ok');
+                    $message->subject('OK', 'Subject is ok');
+                    $message->setBody( 'Helloo');
+                    $message->addPart('ITS OK', 'text/plain');
+                });
+
                 return response()->json('User created Successfully', Response::HTTP_CREATED);
             }
 

@@ -12,7 +12,7 @@ use App\Models\Accommodation;
 use App\Models\Booking;
 use App\Models\Picture;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
