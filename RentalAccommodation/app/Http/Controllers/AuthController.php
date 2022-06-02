@@ -73,17 +73,15 @@ class AuthController extends Controller
                 'phone' => $request->phone
             ]);
             if($user) {
-                // Mail::send(['text' => 'hello'], ['data' => 'Test!'], function($message) {
-                //     $message->to('ok@ok.com', 'Works')->subject('This should work');
-                //     $message->from('xzq@ws.com', 'Working');
-                // });
-
-                Mail::raw('Text', function($message) {
-                    $message->from('works@works.com', 'From ok');
-                    $message->to('test@test.com', 'To is ok');
-                    $message->subject('OK', 'Subject is ok');
+                $email= $request->email;
+                Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email) {
+                    $vkey= md5(time().$email);
+                    // Need to add this mechanism -> $vkey is added to the db and after that when the user presses the link the query searches and changes the is verified to true!
+                    $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
+                    $message->to($email);
+                    $message->subject('Welcome to RentalAccommodation');
                     $message->setBody( 'Helloo');
-                    $message->addPart('ITS OK', 'text/plain');
+                    $message->addPart('to activate your account please press the link http://127.0.0.1:8000/verifyEmail?vkey='. $vkey, 'text/plain');
                 });
 
                 return response()->json('User created Successfully', Response::HTTP_CREATED);

@@ -69,7 +69,7 @@ Vue.component('accommodation', require('./components/AccommodationPage.vue'));
 Vue.component('updateAccommodation', require('./components/UpdateAccommodation.vue'));
 Vue.component('accommodationsSearchPage', require('./components/AccommodationsSearchPage.vue'));
 Vue.component('resultsPage', require('./components/ResultsPage.vue'));
-
+Vue.component('verifyEmail', require('./components/VerifyEmail.vue'));
 const app = new Vue({
     el: '#app',
     router,

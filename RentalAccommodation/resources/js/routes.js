@@ -14,6 +14,7 @@ import AccommodationPage from './components/AccommodationPage.vue';
 import UpdateAccommodation from './components/UpdateAccommodation.vue';
 import AccommodationsSearchPage from './components/AccommodationsSearchPage.vue';
 import ResultsPage from './components/ResultsPage.vue';
+import VerifyEmail from './components/VerifyEmail.vue';
 
 const routes= [
     {
@@ -119,6 +120,11 @@ const routes= [
         path: '/ResultsPage',
         name: 'resultsPage',
         component: ResultsPage,
+    },
+    {
+        path: '/verifyEmail',
+        name: 'verifyEmail',
+        component: VerifyEmail
     }
 ];
 
