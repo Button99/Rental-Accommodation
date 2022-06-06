@@ -6,5 +6,11 @@ use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
-    // Mailtrap 
+    public function verify() {
+        dd('ok');
+    }
+
+    public function show() {
+        dd('ok');
+    }
 }

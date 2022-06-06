@@ -63,6 +63,8 @@ class AuthController extends Controller
         
         // Create user
         if(!$validated->fails()) {
+            $vkey= md5(time().$request->email);
+
             $user= User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -70,12 +72,13 @@ class AuthController extends Controller
                 'password' =>  Hash::make($request->password),
                 'email' => $request->email,
                 'gender' => $request->gender,
-                'phone' => $request->phone
+                'phone' => $request->phone,
+                'vkey' =>  $vkey
             ]);
+
             if($user) {
                 $email= $request->email;
-                Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email) {
-                    $vkey= md5(time().$email);
+                Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email, $vkey) {
                     // Need to add this mechanism -> $vkey is added to the db and after that when the user presses the link the query searches and changes the is verified to true!
                     $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
                     $message->to($email);

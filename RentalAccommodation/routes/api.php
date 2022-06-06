@@ -4,6 +4,7 @@ use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerificationController;
 use App\Models\Accommodation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 });
 
 Route::get('/', [AuthController::class, 'index']);
+
+Route::post('/verifyEmail?vkey=', [VerificationController::class, 'show']);
 
 Route::get('/search/accommodations', [AccommodationController::class, 'search']);
 
