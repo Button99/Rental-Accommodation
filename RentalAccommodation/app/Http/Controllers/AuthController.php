@@ -32,12 +32,15 @@ class AuthController extends Controller
         if(!$validated->fails()) {
             if(Auth::attempt($credentials)) {
                 $user= Auth::user();
-                $token= $user->createToken('userToken')->plainTextToken;
-                $res= ['first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
-                    'token' => $token];
-    
-                    return response()->json($res, Response::HTTP_ACCEPTED);
+                if ($user->is_valid == 1) {
+                    $token= $user->createToken('userToken')->plainTextToken;
+                    $res= ['first_name' => $user->first_name,
+                        'last_name' => $user->last_name,
+                        'token' => $token];
+        
+                        return response()->json($res, Response::HTTP_ACCEPTED);
+                }
+                return response()->json('Please verify your email', Response::HTTP_FORBIDDEN);
             }
         }
 
