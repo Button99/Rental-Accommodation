@@ -31,7 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'vkey',
         'last_ip',
-        'last_login'
+        'last_login',
+        'is_valid'
     ];
 
 

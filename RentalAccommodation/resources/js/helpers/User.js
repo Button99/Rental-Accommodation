@@ -130,6 +130,16 @@ class User {
             alert(err);
         });
     }
+
+    verifyUser(vkey) {
+        axios.get('api/verifyEmail/vkey/' + vkey)
+            .then((res) => {
+                console.log('ok');
+                console.log(res);
+            }).catch((err) => {
+                alert(err);
+        });
+    } 
 }
 
 export default User= new User();

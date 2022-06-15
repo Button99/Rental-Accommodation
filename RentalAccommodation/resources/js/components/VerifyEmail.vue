@@ -4,15 +4,11 @@
 
 <script>
 export default {
-    created() {
-        axios.post('/verifyEmail?vkey=', this.$route.query.vkey)
-            .then((res) => {
-                console.log(res);
-                console.log('user is verified');
-            }).catch((err) => {
-                console.log(err);
-            })
-    }
 
+    created() {
+        // , this.$route.query.vkey
+        console.log(this.$route.query.vkey)
+        User.verifyUser(this.$route.query.vkey);
+    },
 }
 </script>

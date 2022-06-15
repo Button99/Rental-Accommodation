@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
 Route::get('/', [AuthController::class, 'index']);
 
-Route::post('/verifyEmail?vkey=', [VerificationController::class, 'show']);
+Route::get('/verifyEmail/vkey/{vkey}', [VerificationController::class, 'index']);
 
 Route::get('/search/accommodations', [AccommodationController::class, 'search']);
 
