@@ -48,7 +48,11 @@
 </template>
 
 <script>
+    import {required, minLength, email, maxLength} from 'vuelidate/lib/validators';
 
+    var today= new Date();
+    var bef18Years=(today - 18);
+    // const minDate= window.vuel
     export default {
         data() {
             return {
@@ -67,6 +71,26 @@
                 errors: []
             }
         },
+
+        validations: {
+            form: {
+                first_name: {
+                    required,
+                    minLength: minLength(2),
+                    maxLength: maxLength(40)
+                },
+                last_name: {
+                    required,
+                    minLength: minLength(2),
+                    maxLength: maxLength(40)
+                },
+                date_of_birth: {
+                    required,
+                    minDate,
+                }
+            }
+        },
+
 
         methods: {
             signup() {
