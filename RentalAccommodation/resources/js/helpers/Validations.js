@@ -17,6 +17,10 @@ class Validate{
         }
         return false;
     }
+
+    loginVal(data) {
+    
+    }
 }
 
 export default Validate= new Validate();
