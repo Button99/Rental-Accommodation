@@ -61,7 +61,8 @@ class AuthController extends Controller
                 'Female',
                 'Non binary'
             ])],
-            'phone' => ['required', 'max:20', 'between:7,15']
+            'phone' => ['required', 'max:20', 'between:7,15'],
+            'accept' => ['required']
             ]);
         
         // Create user

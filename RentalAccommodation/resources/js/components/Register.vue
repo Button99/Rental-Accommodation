@@ -6,18 +6,33 @@
                     <b-card-body class="text-center m-5">
                         <b-form action="#" @submit.prevent="signup()" method="POST">
                             <b-form-group label="First name: " label-for="first_name" class="md-4">
+                                <div v-if="!$v.form.first_name.required" class="text-danger">First name is required</div>
+                                <div v-if="!$v.form.first_name.minLength" class="text-danger">Needs to be over than 2characters</div>
+                                <div v-if="!$v.form.first_name.maxLength" class="text-danger">Needs to be lower than 40</div>
+                                <div v-if="!$v.form.first_name.alpha" class="text-danger">Only alphabetic characters</div>
                                 <b-form-input id="first_name" v-model="form.first_name" type="text" placeholder="First name" required />
                             </b-form-group>
                             <b-form-group label="Last name: " label-for="last_name" class="md-4">
+                                <div v-if="!$v.form.last_name.required" class="text-danger">Last name is required</div>
+                                <div v-if="!$v.form.last_name.minLength" class="text-danger">Needs to be over than 2characters</div>
+                                <div v-if="!$v.form.last_name.maxLength" class="text-danger">Needs to be lower than 40</div>
+                                <div v-if="!$v.form.last_name.alpha" class="text-danger">Only alphabetic characters</div>
                                 <b-form-input id="last_name" v-model="form.last_name" type="text" placeholder="Last name" required />
                             </b-form-group>
                             <b-form-group label="Date of Birth: " label-for="date" class="md-4">
+                                <div v-if="!$v.form.date_of_birth.required" class="text-danger">Date of birth is required</div>
+                                <div v-if="!$v.form.date_of_birth.between" class="text-danger">Invalid date</div>
                                 <b-form-input id="date" v-model="form.date_of_birth" type="date" required />
                             </b-form-group>
                             <b-form-group label="Password: " label-for="password" class="md-4">
+                                <div v-if="!$v.form.password.required" class="text-danger">Password is required</div>
+                                <div v-if="!$v.form.password.minLength" class="text-danger">Needs to be over 8 characters</div>
                                 <b-form-input id="password" v-model="form.password" type="password" placeholder="Password" required />
                             </b-form-group>
                             <b-form-group label="Confirm password: " label-for="confirmPassword" class="md-4">
+                                <div v-if="!$v.form.confirmPassword.required" class="text-danger">Password is required</div>
+                                <div v-if="!$v.form.password.sameAs" class="text-danger">Needs to be the same as the above field</div>
+
                                 <b-form-input id="confirmPassword" v-model="form.confirmPassword" type="password" placeholder="Confirm password" required />
                             </b-form-group>
                             <b-form-group label="Email: " label-for="email" class="md-4">
@@ -48,11 +63,8 @@
 </template>
 
 <script>
-    import {required, minLength, email, maxLength} from 'vuelidate/lib/validators';
+    import {required, minLength, email, maxLength, between, alpha, sameAs, numeric} from 'vuelidate/lib/validators';
 
-    var today= new Date();
-    var bef18Years=(today - 18);
-    // const minDate= window.vuel
     export default {
         data() {
             return {
@@ -65,7 +77,6 @@
                     phone: '',
                     gender: '',
                     email: '',
-                    password: '',
                     accept: '',
                 },
                 errors: []
@@ -77,20 +88,45 @@
                 first_name: {
                     required,
                     minLength: minLength(2),
-                    maxLength: maxLength(40)
+                    maxLength: maxLength(40),
+                    alpha
                 },
                 last_name: {
                     required,
                     minLength: minLength(2),
-                    maxLength: maxLength(40)
+                    maxLength: maxLength(40),
+                    alpha
                 },
                 date_of_birth: {
                     required,
-                    minDate,
+                    between: between('01/01/1950', '01/01/2005')
+                },
+                password: {
+                    required,
+                    minLength: minLength(8)
+                },
+                confirmPassword: {
+                    required,
+                    sameAsPassword: sameAs('password')
+                },
+                phone: {
+                    required,
+                    numeric
+                },
+                gender: {
+                    required,
+                    alpha
+                },
+                email: {
+                    required,
+                    email
+                },
+                accept: {
+                    required,
+                    sameAs: sameAs(() => true)
                 }
             }
         },
-
 
         methods: {
             signup() {
