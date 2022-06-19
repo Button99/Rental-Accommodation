@@ -12,7 +12,8 @@
                             </b-form-group>
 
                             <b-form-group label="Password: " label-for="password" class="mb-4">
-                                <div v-if="!$v.form.password.minLength" class="text-danger"></div>
+                                <div v-if="!$v.form.password.required" class="text-danger">Password is required</div>
+                                <div v-if="!$v.form.password.minLength" class="text-danger">Password must be over 8 characters</div>
                                 <b-form-input id="password" v-model="form.password" type="password" placeholder="Enter password" required></b-form-input>
                             </b-form-group>
 
