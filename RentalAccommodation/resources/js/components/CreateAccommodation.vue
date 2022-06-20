@@ -136,6 +136,10 @@
             }
         },
 
+        validations: {
+            // Create Validations form createAccommodation
+        },
+
         methods: {
             createAccommodation() {
                 let formData= new FormData();
