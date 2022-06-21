@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {router, store} from '../app';
 import AppStorage from './AppStorage';
-import Validations from './Validations';
 
 class User {
     loginUser(data) {
@@ -80,32 +79,27 @@ class User {
     }
 
     deleteAcc(data) {
-        if(Validations.deleteAccountVal(data) === true) {
-            axios.get('/api/user', {
+        axios.get('/api/user', {
+            headers: {
+                Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken()) 
+            }
+        }).then((res) => {
+            axios.delete('api/settings/user/'+ res.data.id + '/delete', {
                 headers: {
-                    Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken()) 
+                    Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken())
                 }
             }).then((res) => {
-                axios.delete('api/settings/user/'+ res.data.id + '/delete', {
-                    headers: {
-                        Authorization: 'Bearer '+ JSON.parse(AppStorage.getToken())
-                    }
-                }).then((res) => {
-                    if(res.status === 201) {
-                        AppStorage.clear();
-                        store.commit('logoutUser');
-                        router.push({name: 'index'});
-                    }
-                }).catch((err) => {
-                    alert(err);
-                })
+                if(res.status === 201) {
+                    AppStorage.clear();
+                    store.commit('logoutUser');
+                    router.push({name: 'index'});
+                }
             }).catch((err) => {
                 alert(err);
-            });
-        }
-        else {
-            alert('Please enter your name correctly!');
-        }
+            })
+        }).catch((err) => {
+            alert(err);
+        });
     }
 
     changePassword(data) {

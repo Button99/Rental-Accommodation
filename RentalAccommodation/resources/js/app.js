@@ -6,7 +6,6 @@ import routes from './routes';
 import User from './helpers/User';
 import Accommodation from './helpers/Accommodation';
 import AppStorage from './helpers/AppStorage';
-import Validate from './helpers/Validations';
 import Vuelidate from 'vuelidate';
 
 require('./bootstrap');
@@ -14,7 +13,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 window.User= User;
 window.Accommodation= Accommodation;
-window.Validate= Validate;
 
 Vue.use(VueRouter);
 Vue.use(Vuex);

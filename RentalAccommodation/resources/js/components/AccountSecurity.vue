@@ -23,12 +23,19 @@
                                 <br />
                                 <b-form @submit.prevent="changePassword()" @reset="onReset()" action="#" method="POST">
                                     <b-form-group label="Old password: " label-for="old-password" class="mb-4">
+                                        <div v-if="!$v.form.old_password.required" class="text-danger">Old password is required</div>
+                                        <div v-if="!$v.form.old_password.minLength" class="text-danger">Invalid password</div>
                                         <b-form-input id="old-password" v-model="form.old_password" type="password" required> </b-form-input>
                                     </b-form-group>
                                     <b-form-group label="New password: " label-for="new-password" class="mb-4">
+                                        <div v-if="!$v.form.new_password.required" class="text-danger">New password is required</div>
+                                        <div v-if="!$v.form.new_password.minLength" class="text-danger">Invalid password</div>                                        
                                         <b-form-input id="new-password" v-model="form.new_password" type="password" required> </b-form-input>
                                     </b-form-group>
                                     <b-form-group label-for="new-password-retype" label="New password (Retype): ">
+                                        <div v-if="!$v.form.new_passwordRetype.required" class="text-danger">New password is required</div>
+                                        <div v-if="!$v.form.new_passwordRetype.minLength" class="text-danger">Invalid password</div>                                                    
+                                        <div v-if="!$v.form.new_passwordRetype.sameAs" class="text-danger">Passwords are not the same</div>                                                                                        
                                         <b-form-input id="new-password-retype" v-model="form.new_passwordRetype" type="password" required> </b-form-input>
                                     </b-form-group>
                                     <b-button type="submit">Change Password</b-button>
@@ -45,8 +52,8 @@
 </template>
 
 <script>
-import AppStorage from '../helpers/AppStorage';
-    import Validate from '../helpers/Validations';
+    import {required, sameAs, minLength} from 'vuelidate/lib/validators';
+    import AppStorage from '../helpers/AppStorage';
     export default {
         data() {
             return {
@@ -67,6 +74,25 @@ import AppStorage from '../helpers/AppStorage';
 
         created() {
             this.getLastIp();
+        },
+
+        validations: {
+            form: {
+                old_password: {
+                    required,
+                    minLength: minLength(8)
+                },
+
+                new_password: {
+                    required,
+                    minLength: minLength(8),
+                },
+                new_passwordRetype: {
+                    required,
+                    minLength: minLength(8),
+                    sameAs: sameAs('new_password')
+                },
+            }
         },
 
         methods: {
