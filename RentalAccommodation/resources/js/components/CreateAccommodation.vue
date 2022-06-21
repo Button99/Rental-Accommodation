@@ -31,13 +31,13 @@
                         </b-form-group>
                         <b-form-group label="Latitude: ( Up to 6 digits )" label-for="latitude">
                             <div v-if="!$v.form.latitude.required" class="text-danger">Field is required</div>
-                            <div v-if="!$v.form.latitude.latitudeValidation" class="text-danger">Needs to be numeric</div>
+                            <div v-if="!$v.form.latitude.latitudeValidation" class="text-danger">Invalid type</div>
                             
                             <b-form-input id="latitude" v-model="form.latitude" type="text" />
                         </b-form-group>
                         <b-form-group label="Longitude: ( Up to 6 digits )" label-for="longitude">
                             <div v-if="!$v.form.longitude.required" class="text-danger">Field is required</div>
-                            <div v-if="!$v.form.longitude.longitudeValidation" class="text-danger">Needs to be numeric</div>
+                            <div v-if="!$v.form.longitude.longitudeValidation" class="text-danger">Invalid type</div>
                             
                             <b-form-input id="longitude" v-model="form.longitude" type="text" />
                         </b-form-group>
@@ -185,7 +185,7 @@
                 latitude: {
                     required,
                     latitudeValidation(latitude) {
-                        var reg= new RegExp("/^((\-?|\+?)?\d+(\.\d+)?)");
+                        var reg= new RegExp(/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{6})?))$/);
                         console.log(reg.test(latitude));
                         if(reg.test(latitude)) {
                             return true;
@@ -196,8 +196,12 @@
                 longitude: {
                     required,
                     longitudeValidation(longitude) {
-                        var reg= new RegExp('/-?([1-8]?[1-9]|[1-9]0)\.{1}\d{7}/');
-                        return reg.test(longitude);
+                        var reg= new RegExp(/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,7})?))$/);
+                        
+                        if(reg.test(longitude)) {
+                            return true;
+                        }
+                        return false;
                     }
                 },
                 address1: {
@@ -212,39 +216,50 @@
                     between: between('0', '5000')
                 },
                 pool: {
-                    required
+                    between: between(0, 1)
                 },
                 bbq: {
+                    between: between(0, 1)
 
                 },
                 pool_table: {
+                    between: between(0, 1)
 
                 },
                 wifi: {
+                    between: between(0, 1)
 
                 },
                 tv: {
+                    between: between(0, 1)
 
                 },
                 kitchen: {
+                    between: between(0, 1)
 
                 },
                 parking: {
+                    between: between(0, 1)
                     
                 },
                 air_conditioning: {
+                    between: between(0, 1)
 
                 },
                 washer: {
+                    between: between(0, 1)
 
                 },
                 fire_extinguisher: {
+                    between: between(0, 1)
 
                 },
                 smoke_alarm: {
+                    between: between(0, 1)
 
                 },
                 hot_tub: {
+                    between: between(0, 1)
 
                 }
             }
