@@ -5,33 +5,54 @@
                 <b-card-body class="m-3">
                     <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
+                            <div v-if="!$v.form.name.required" class="text-danger">Name is required</div>
+                            <div v-if="!$v.form.name.minLength" class="text-danger">Needs to be greater than 3 characters</div> 
                             <b-form-input id="name" v-model="form.name" type="text" />
                         </b-form-group>
                         <b-form-group label="Rooms: " label-for="rooms">
+                            <div v-if="!$v.form.rooms.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.name.numeric" class="text-danger">Needs to be numeric</div>
                             <b-form-input id="rooms" v-model="form.rooms" type="number" />
                         </b-form-group>
+                            <div v-if="!$v.form.description.required" class="text-danger">Description is required</div>
+                            <div v-if="!$v.form.name.alpha" class="text-danger">Needs to be alphabetic</div>
                         <b-form-group label="Description: " label-for="description">
                             <b-form-input id="description" v-model="form.description" type="text" />
                         </b-form-group>
                         <b-form-group label="Accommodation type: " label-for="accommodation_type">
+                            <div v-if="!$v.form.accommodation_type.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.accommodation_type.alpha" class="text-danger">Accepts only alphabetic</div>
                             <b-form-select v-model="form.accommodation_type" id="accommodation_type" :options="options"></b-form-select>
                         </b-form-group>
                         <b-form-group label="Town: " label-for="town">
+                            <div v-if="!$v.form.town.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.town.alpha" class="text-danger">Accepts only alphabetic characters</div>
                             <b-form-input id="town" v-model="form.town" type="text" />
                         </b-form-group>
                         <b-form-group label="Latitude: ( Up to 6 digits )" label-for="latitude">
-                        <b-form-input id="latitude" v-model="form.latitude" type="text" />
+                            <div v-if="!$v.form.latitude.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.latitude.latitudeValidation" class="text-danger">Needs to be numeric</div>
+                            
+                            <b-form-input id="latitude" v-model="form.latitude" type="text" />
                         </b-form-group>
                         <b-form-group label="Longitude: ( Up to 6 digits )" label-for="longitude">
+                            <div v-if="!$v.form.longitude.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.longitude.longitudeValidation" class="text-danger">Needs to be numeric</div>
+                            
                             <b-form-input id="longitude" v-model="form.longitude" type="text" />
                         </b-form-group>
                         <b-form-group label="Address1 : ( Required)" label-for="address1">
+                            <div v-if="!$v.form.address1.required" class="text-danger">Address is required</div>
+                            
                             <b-form-input id="address1" v-model="form.address1" type="text" />
                         </b-form-group>
                         <b-form-group label="Address2: ( Optional )" label-for="address2">
                             <b-form-input id="address2" v-model="form.address2" type="text" />
                         </b-form-group>
                         <b-form-group label="Price (per night)" label-for="price">
+                            <div v-if="!$v.form.price.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.price.numeric" class="text-danger">Needs to be numeric</div>
+                            
                             <b-form-input id="price" v-model="form.price" type="text" />
                         </b-form-group>
                     </b-form>
@@ -98,11 +119,12 @@
     </div>
 </template>
 <script>
+    import {required, minLength, between, maxLength, alpha, numeric} from 'vuelidate/lib/validators';
+
     export default {
         data() {
             return {
                 form: {
-                    id: '',
                     name: '',
                     rooms: '',
                     description: '',
@@ -137,7 +159,95 @@
         },
 
         validations: {
-            // Create Validations form createAccommodation
+            form: {
+                name: {
+                    required,
+                    minLength: minLength(3),
+                    maxLength: maxLength(50)
+                },
+                rooms: {
+                    required,
+                    numeric
+                },
+                description: {
+                    required,
+                    alpha,
+                    maxLength: maxLength(250)
+                },
+                town: {
+                    required,
+                    alpha
+                },
+                accommodation_type: {
+                    required,
+                    alpha
+                },
+                latitude: {
+                    required,
+                    latitudeValidation(latitude) {
+                        var reg= new RegExp("/^((\-?|\+?)?\d+(\.\d+)?)");
+                        console.log(reg.test(latitude));
+                        if(reg.test(latitude)) {
+                            return true;
+                        }
+                        return false;
+                    }
+                },
+                longitude: {
+                    required,
+                    longitudeValidation(longitude) {
+                        var reg= new RegExp('/-?([1-8]?[1-9]|[1-9]0)\.{1}\d{7}/');
+                        return reg.test(longitude);
+                    }
+                },
+                address1: {
+                    required
+                },
+                address2: {
+
+                },
+                price: {
+                    required,
+                    numeric,
+                    between: between('0', '5000')
+                },
+                pool: {
+                    required
+                },
+                bbq: {
+
+                },
+                pool_table: {
+
+                },
+                wifi: {
+
+                },
+                tv: {
+
+                },
+                kitchen: {
+
+                },
+                parking: {
+                    
+                },
+                air_conditioning: {
+
+                },
+                washer: {
+
+                },
+                fire_extinguisher: {
+
+                },
+                smoke_alarm: {
+
+                },
+                hot_tub: {
+
+                }
+            }
         },
 
         methods: {
