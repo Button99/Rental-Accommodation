@@ -15,8 +15,17 @@
                 <br />
                 <b-list-group>
                     <b-list-group-item> Name: <b>{{first_name}}  {{last_name}}</b></b-list-group-item>
-                    <b-list-group-item> Phone: <b>{{phone}}</b></b-list-group-item>
-                    <b-list-group-item> Email: <b>{{email}}</b></b-list-group-item> <!-- Needs to go to security tab -->
+                    <b-list-group-item> Phone: <b>{{phone}}</b><b-collapse id="collapse-changePhone" @hide="isVisible = false" @show="isVisible = true" v-model="visible">
+                            <b-card title="Change Phone">
+                                <br />
+                                <b-form @submit.prevent="#" @reset="onReset()" action="#" method="POST">
+                                    <b-form-group label="New password: " label-for="new-password" class="mb-4">
+                                        <b-form-input id="old-password" v-model="form.phone" type="text" required> </b-form-input>
+                                    </b-form-group>
+                            </b-card>
+                        </b-collapse>
+                    </b-list-group-item>
+                    <b-list-group-item> Email: <b>{{email}}</b></b-list-group-item>
                     <b-list-group-item> Gender: <b>{{gender}}</b></b-list-group-item>
                 </b-list-group>
                 <br />
@@ -35,7 +44,8 @@
                 phone: '',
                 email: '',
                 gender: '',
-                load: '0'
+                load: '0',
+                isVisible: false 
             }
         },
 

@@ -10,13 +10,12 @@
         </b-list-group>
     </section>
 
-    <!-- To implement this page I need to make a validation:<template>
-        User needs to type their first_name so they can confirm the action -->
     <section class="delete-account">
         <div class="container mx-auto mt-4">
             <h3> To delete the account you need to write your First name</h3>
             <br />
             <b-form @submit.prevent="deleteAccount()"  @reset="onReset()" action="#" method="POST">
+                <div v-if="!$v.form.first_name.required" class="text-danger">Field is required</div>
                 <b-form-input type="text" v-model="form.first_name" placeholder="Enter your first name"></b-form-input>
                 <br />
                 <b-button type="submit" variant="danger">Delete Account </b-button>
@@ -27,6 +26,7 @@
 </template>
 
 <script>
+    import {required, sameAs} from 'vuelidate/lib/validators';
     export default {
         data() {
             return {
@@ -36,6 +36,20 @@
             }
         },
 
+        validations: {            
+            form: {
+                first_name: {
+                    required,
+                    sameAsName(first_name) {
+                        console.log(User.getName());
+                        if(User.getName() === first_name) {
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+            }
+        },
         methods: {
             deleteAccount() {
                 User.deleteAcc(this.form);
