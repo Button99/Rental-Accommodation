@@ -104,8 +104,6 @@
             getLocation() {
                 axios.get('api/location', { params: {keyword: this.keyword}})
                     .then((res) => {
-                        console.log(res.data);
-                        console.log(res.data.Location[0].town);
                         this.places= res.data.Location;
                     }).catch((err) => {});
             },
