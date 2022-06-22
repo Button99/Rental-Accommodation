@@ -41,6 +41,7 @@
 </template>
 <script>
     import AppStorage from '../helpers/AppStorage';
+    import {required, numeric} from 'vuelidate/lib/validators';
 
     export default {
         data() {
@@ -59,6 +60,13 @@
 
         created() {
             this.fetchData();
+        },
+
+        validations: {
+            new_phone: {
+                required,
+                numeric
+            },
         },
 
         methods: {
@@ -92,7 +100,7 @@
                     alert(err);
                 });
         }
-        }
+    }
     }
 </script>
 

@@ -1,23 +1,52 @@
 <template>
-    <div class="update-accommodation-layout container-fluid">
+    <div class="create-accommodation-layout container-fluid">
         <section class="float-left m-3">
-            <b-card header="Update Accommodation">
+            <b-card header="Create Accommodation">
                 <b-card-body class="m-3">
-                    <b-form action="#" id="update-accommodation" @submit.prevent="updateAccommodation()" enctype="multipart/form-data" method="PUT">
+                    <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
+                            <div v-if="!$v.form.name.required" class="text-danger">Name is required</div>
+                            <div v-if="!$v.form.name.minLength" class="text-danger">Needs to be greater than 3 characters</div> 
                             <b-form-input id="name" v-model="form.name" type="text" />
                         </b-form-group>
                         <b-form-group label="Rooms: " label-for="rooms">
+                            <div v-if="!$v.form.rooms.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.rooms.numeric" class="text-danger">Needs to be numeric</div>
                             <b-form-input id="rooms" v-model="form.rooms" type="number" />
                         </b-form-group>
+                            <div v-if="!$v.form.description.required" class="text-danger">Description is required</div>
                         <b-form-group label="Description: " label-for="description">
                             <b-form-input id="description" v-model="form.description" type="text" />
                         </b-form-group>
                         <b-form-group label="Accommodation type: " label-for="accommodation_type">
+                            <div v-if="!$v.form.accommodation_type.required" class="text-danger">Field is required</div>
                             <b-form-select v-model="form.accommodation_type" id="accommodation_type" :options="options"></b-form-select>
                         </b-form-group>
                         <b-form-group label="Town: " label-for="town">
+                            <div v-if="!$v.form.town.required" class="text-danger">Field is required</div>
                             <b-form-input id="town" v-model="form.town" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Latitude: ( Up to 6 digits )" label-for="latitude">
+                            <div v-if="!$v.form.latitude.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.latitude.latitudeValidation" class="text-danger">Invalid type</div>
+                            <b-form-input id="latitude" v-model="form.latitude" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Longitude: ( Up to 6 digits )" label-for="longitude">
+                            <div v-if="!$v.form.longitude.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.longitude.longitudeValidation" class="text-danger">Invalid type</div>
+                            <b-form-input id="longitude" v-model="form.longitude" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Address1 : ( Required)" label-for="address1">
+                            <div v-if="!$v.form.address1.required" class="text-danger">Address is required</div>
+                            <b-form-input id="address1" v-model="form.address1" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Address2: ( Optional )" label-for="address2">
+                            <b-form-input id="address2" v-model="form.address2" type="text" />
+                        </b-form-group>
+                        <b-form-group label="Price (per night)" label-for="price">
+                            <div v-if="!$v.form.price.required" class="text-danger">Field is required</div>
+                            <div v-if="!$v.form.price.numeric" class="text-danger">Needs to be numeric</div>
+                            <b-form-input id="price" v-model="form.price" type="text" />
                         </b-form-group>
                     </b-form>
                 </b-card-body>
@@ -25,7 +54,7 @@
         </section>
         <section class="float-right m-4 features-layout">
             <div class="container border p-4">
-                <b-form form="update-accommodation">
+                <b-form form="create-accommodation">
                     <b-row>
                         <b-col class="m-3">
                             <b-checkbox id="pool" v-model="form.pool" value="1">Pool</b-checkbox>
@@ -73,16 +102,18 @@
                 </b-form>
             </div>
             <br />
-            <b-form-file v-model="files" id="file" multiple :placeholder="files" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
+            <b-form-file v-model="files" id="file" multiple placeholder="Add Pictures" drop-placeholder="Drop your files here" accept=".jpg, .png, .gif"></b-form-file>
             <br />
             <br />
             <div class="form-group">
-                <b-button type="submit" form="update-accommodation" class="btn">Update</b-button>
+                <b-button type="submit" form="create-accommodation" class="btn">Create</b-button>
             </div>
         </section>
     </div>
 </template>
 <script>
+    import {required, minLength, between, maxLength, numeric} from 'vuelidate/lib/validators';
+
     export default {
         data() {
             return {
@@ -93,6 +124,7 @@
                     description: '',
                     town: '',
                     accommodation_type: '',
+                    price: '',
                     pool: '0',
                     bbq: '0',
                     pool_table: '0',
@@ -118,6 +150,109 @@
 
         created() {
             this.fetchData(this.$route.params.id);
+        },
+
+        validations: {
+            form: {
+                name: {
+                    required,
+                    minLength: minLength(3),
+                    maxLength: maxLength(50)
+                },
+                rooms: {
+                    required,
+                    numeric
+                },
+                description: {
+                    required,
+                    maxLength: maxLength(250)
+                },
+                town: {
+                    required,
+                },
+                accommodation_type: {
+                    required,
+                },
+                latitude: {
+                    required,
+                    latitudeValidation(latitude) {
+                        var reg= new RegExp(/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{6})?))$/);
+                        if(reg.test(latitude)) {
+                            return true;
+                        }
+                        return false;
+                    }
+                },
+                longitude: {
+                    required,
+                    longitudeValidation(longitude) {
+                        var reg= new RegExp(/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,7})?))$/);
+                        
+                        if(reg.test(longitude)) {
+                            return true;
+                        }
+                        return false;
+                    }
+                },
+                address1: {
+                    required
+                },
+                address2: {
+
+                },
+                price: {
+                    required,
+                    numeric,
+                    between: between('0', '5000')
+                },
+                pool: {
+                    between: between(0, 1)
+                },
+                bbq: {
+                    between: between(0, 1)
+
+                },
+                pool_table: {
+                    between: between(0, 1)
+
+                },
+                wifi: {
+                    between: between(0, 1)
+
+                },
+                tv: {
+                    between: between(0, 1)
+
+                },
+                kitchen: {
+                    between: between(0, 1)
+
+                },
+                parking: {
+                    between: between(0, 1)
+                    
+                },
+                air_conditioning: {
+                    between: between(0, 1)
+
+                },
+                washer: {
+                    between: between(0, 1)
+
+                },
+                fire_extinguisher: {
+                    between: between(0, 1)
+
+                },
+                smoke_alarm: {
+                    between: between(0, 1)
+
+                },
+                hot_tub: {
+                    between: between(0, 1)
+
+                }
+            }
         },
 
         methods: {
@@ -146,6 +281,11 @@
                         this.form.rooms= res.data.accommodation.rooms;
                         this.form.description= res.data.accommodation.description;
                         this.form.town= res.data.accommodation.town;
+                        this.form.latitude= res.data.accommodation.latitude;
+                        this.form.longitude= res.data.accommodation.longitude;
+                        this.form.address1= res.data.accommodation.address1;
+                        this.form.address2= res.data.accommodation.address2;
+                        this.form.price= res.data.accommodation.price;
                         this.form.accommodation_type= res.data.accommodation.accommodation_type;
                         this.form.pool= res.data.features[0].pool;
                         this.form.bbq= res.data.features[0].bbq;

@@ -11,22 +11,19 @@
                         </b-form-group>
                         <b-form-group label="Rooms: " label-for="rooms">
                             <div v-if="!$v.form.rooms.required" class="text-danger">Field is required</div>
-                            <div v-if="!$v.form.name.numeric" class="text-danger">Needs to be numeric</div>
+                            <div v-if="!$v.form.rooms.numeric" class="text-danger">Needs to be numeric</div>
                             <b-form-input id="rooms" v-model="form.rooms" type="number" />
                         </b-form-group>
                             <div v-if="!$v.form.description.required" class="text-danger">Description is required</div>
-                            <div v-if="!$v.form.name.alpha" class="text-danger">Needs to be alphabetic</div>
                         <b-form-group label="Description: " label-for="description">
                             <b-form-input id="description" v-model="form.description" type="text" />
                         </b-form-group>
                         <b-form-group label="Accommodation type: " label-for="accommodation_type">
                             <div v-if="!$v.form.accommodation_type.required" class="text-danger">Field is required</div>
-                            <div v-if="!$v.form.accommodation_type.alpha" class="text-danger">Accepts only alphabetic</div>
                             <b-form-select v-model="form.accommodation_type" id="accommodation_type" :options="options"></b-form-select>
                         </b-form-group>
                         <b-form-group label="Town: " label-for="town">
                             <div v-if="!$v.form.town.required" class="text-danger">Field is required</div>
-                            <div v-if="!$v.form.town.alpha" class="text-danger">Accepts only alphabetic characters</div>
                             <b-form-input id="town" v-model="form.town" type="text" />
                         </b-form-group>
                         <b-form-group label="Latitude: ( Up to 6 digits )" label-for="latitude">
@@ -119,7 +116,7 @@
     </div>
 </template>
 <script>
-    import {required, minLength, between, maxLength, alpha, numeric} from 'vuelidate/lib/validators';
+    import {required, minLength, between, maxLength, numeric} from 'vuelidate/lib/validators';
 
     export default {
         data() {
@@ -171,16 +168,13 @@
                 },
                 description: {
                     required,
-                    alpha,
                     maxLength: maxLength(250)
                 },
                 town: {
-                    required,
-                    alpha
+                    required
                 },
                 accommodation_type: {
-                    required,
-                    alpha
+                    required
                 },
                 latitude: {
                     required,
