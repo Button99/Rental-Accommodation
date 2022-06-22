@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::post('/settings/user/{id}/changeData', [UserController::class, 'changeUserData']);
 
+    Route::post('/settings/user/{id}/changePhone', [UserController::class, 'changePhone']);
+
     // Accommodations 
 
     Route::get('/{id}/myAccommodations', [AccommodationController::class, 'showMyAccommodations']);

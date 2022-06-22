@@ -49,6 +49,24 @@ class UserController extends Controller
             }
     }
 
+    public function changePhone($id, Request $request) {
+        $validated= Validator::make($request->all(), [
+            'phone' => ['required', 'max:20', 'between:7,15']
+        ]);
+
+        if(!$validated->fails()) {
+            $user= User::find($id);
+            $updated= $user->update([
+                'phone' => $request->phone
+            ]);
+
+            if($updated) {
+                return response()->json('Phone updated', Response::HTTP_ACCEPTED);
+            }
+        }
+        return response()->json('Error', Response::HTTP_FORBIDDEN);
+    }
+
     public function changePassword($id, Request $request) {
         $validPsw= Validator::make($request->all(), [
             'old_password' => ['required', 'min:8', 'max:40'],
