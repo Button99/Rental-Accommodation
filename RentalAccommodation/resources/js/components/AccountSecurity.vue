@@ -98,9 +98,7 @@
         methods: {
 
             changePassword() {
-                if(Validate.changePasswordVal(this.form) === true) {
-                    User.changePassword(this.form);
-                }
+                User.changePassword(this.form);
             },
 
             getLastIp() {
