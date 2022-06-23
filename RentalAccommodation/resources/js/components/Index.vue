@@ -8,7 +8,7 @@
         <div class="container mx-auto mt-4">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="card" style="width: 18em;" @click="searchParis()">
+                    <div class="card" style="width: 18em; cursor: pointer;" @click="searchParis()" >
                         <div class="bg-image hover-overlay ripple">
                             <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-alex-azabache-3879160.jpg'" />
                         </div>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="card" style="width: 18em;" @click="searchAthens()">
+                    <div class="card" style="width: 18em; cursor: pointer;" @click="searchAthens()">
                         <div class="bg-image hover-overlay ripple">
                             <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-jimmy-teoh-951539.jpg'" />
                         </div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="card" style="width: 18em;" @click="searchRome()">
+                    <div class="card" style="width: 18em; cursor: pointer;" @click="searchRome()">
                         <div class="bg-image hover-overlay ripple">
                             <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() +'pexels-chait-goli-1797161.jpg'" />
                         </div>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="card" style="width: 18em;" @click="searchLondon()">
+                    <div class="card" style="width: 18em; cursor: pointer;" @click="searchLondon()">
                         <div class="bg-image hover-overlay ripple">
                             <img class="card-img-top img-fluid rounded" style=" height: 30vh;" :src=" getPhoto() + 'pexels-lina-kivaka-3336154.jpg'" />
                         </div>
