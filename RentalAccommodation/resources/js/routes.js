@@ -15,6 +15,7 @@ import UpdateAccommodation from './components/UpdateAccommodation.vue';
 import AccommodationsSearchPage from './components/AccommodationsSearchPage.vue';
 import ResultsPage from './components/ResultsPage.vue';
 import VerifyEmail from './components/VerifyEmail.vue';
+import CreditCardPage from './components/CreditCardPage.vue';
 
 const routes= [
     {
@@ -125,6 +126,14 @@ const routes= [
         path: '/verifyEmail',
         name: 'verifyEmail',
         component: VerifyEmail
+    },
+    {
+        path: '/book',
+        name: 'creditCardPage',
+        component: CreditCardPage,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 

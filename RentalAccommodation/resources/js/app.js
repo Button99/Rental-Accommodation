@@ -70,6 +70,8 @@ Vue.component('updateAccommodation', require('./components/UpdateAccommodation.v
 Vue.component('accommodationsSearchPage', require('./components/AccommodationsSearchPage.vue'));
 Vue.component('resultsPage', require('./components/ResultsPage.vue'));
 Vue.component('verifyEmail', require('./components/VerifyEmail.vue'));
+Vue.component('creditCardPage', require('./components/CreditCardPage.vue'));
+
 const app = new Vue({
     el: '#app',
     router,
