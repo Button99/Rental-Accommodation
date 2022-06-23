@@ -32,8 +32,12 @@
                                 <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
                                     <b-button variant="danger" type="submit"> Delete</b-button> 
                                 </b-form>
+
                             </b-list-group-item>
                         </b-list-group> <br />
+                        <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="book()" method="POST" action="#">
+                            <b-button type="submit" @click="pushToBook()">Book now!</b-button> 
+                        </b-form>
                         </div>
                         <div class="map">
                             <h4>Location: </h4>
@@ -99,6 +103,10 @@ export default {
 
             deleteAccommodation() {
                 Accommodation.deleteAccommodation(this.accommodation.id);
+            },
+            
+            pushToBook() {
+                this.$router.push({'name': 'creditCardPage'});
             }
         }
     }
