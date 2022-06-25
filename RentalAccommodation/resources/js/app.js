@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import BootstrapVue from 'bootstrap-vue';
+import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue';
 import routes from './routes';
 import User from './helpers/User';
 import Accommodation from './helpers/Accommodation';
@@ -17,6 +17,7 @@ window.Accommodation= Accommodation;
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 Vue.use(Vuelidate);
 
 export const router= new VueRouter({
