@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::delete('/accommodations/{id}/delete', [AccommodationController::class, 'delete']);
 
     Route::put('/accommodations/{id}/update', [AccommodationController::class, 'update']);
+
+    Route::post('/book/hotelId={hotelID}/user={userID}', [BookController::class, 'book']);
 });
 
 Route::get('/', [AuthController::class, 'index']);

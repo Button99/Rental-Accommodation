@@ -15,5 +15,6 @@
         </div>
     </body>
     <script src="../js/app.js" type="application/javascript"></script>        
+    <script src="https://js.stripe.com/v3/"></script>
 
 </html>

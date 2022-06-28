@@ -37,13 +37,14 @@
                         </b-form>
                     </b-card-body>
                 </b-card>
-            </div>
+         </div>
         </div>
     </div>
 </template>
 
 <script>
     import {between, minLength, numeric, maxLength} from 'vuelidate/lib/validators';
+
     export default {
         data() {
             return {
