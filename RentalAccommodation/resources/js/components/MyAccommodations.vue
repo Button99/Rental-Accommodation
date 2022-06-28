@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" style="height: 85vh;">
         <h1>My Accommodations Page</h1>
         <section class="my-accommodations" v-if="accommodations.length > 0">
             <ul class="justify-content-center">
@@ -22,7 +22,7 @@
                 </div>
             </ul>
         </section>
-        <section class="my-accommodations-layout"  v-else-if="show == true">
+        <section class="my-accommodations-layout"  v-else-if="show == true" style="height: 70vh;">
             <h4>You do not have create any accommodation </h4>
             <router-link to="/createAccommodation" class="btn btn-primary">Create accommodation</router-link>
             <br />

@@ -1,5 +1,5 @@
 <template>
-    <div class="security-and-login-layout">
+    <div class="security-and-login-layout" style="height: 100vh;">
         <section class="settings-menu">
             <b-list-group >
                 <h2>Settings</h2>
@@ -18,16 +18,16 @@
                         <strong v-if="isVisible == true" aria-hidden="true" class="ml-auto">-</strong>
                         <strong v-else aria-hidden="true" class="ml-auto">+</strong>
                         </b-button>
-                        <b-collapse id="collapse-changePassword" @hide="isVisible = false" @show="isVisible = true" v-model="visible">
-                            <b-card title="Change Password">
+                        <b-collapse id="collapse-changePassword" @hide="isVisible = false" @show="isVisible = true" v-model="visible" style="height: 10vh;">
+                            <b-card title="Change Password" style="height: 70vh;">
                                 <br />
                                 <b-form @submit.prevent="changePassword()" @reset="onReset()" action="#" method="POST">
-                                    <b-form-group label="Old password: " label-for="old-password" class="mb-4">
+                                    <b-form-group label="Old password: " label-for="old-password">
                                         <div v-if="!$v.form.old_password.required" class="text-danger">Old password is required</div>
                                         <div v-if="!$v.form.old_password.minLength" class="text-danger">Invalid password</div>
                                         <b-form-input id="old-password" v-model="form.old_password" type="password" required> </b-form-input>
                                     </b-form-group>
-                                    <b-form-group label="New password: " label-for="new-password" class="mb-4">
+                                    <b-form-group label="New password: " label-for="new-password">
                                         <div v-if="!$v.form.new_password.required" class="text-danger">New password is required</div>
                                         <div v-if="!$v.form.new_password.minLength" class="text-danger">Invalid password</div>                                        
                                         <b-form-input id="new-password" v-model="form.new_password" type="password" required> </b-form-input>

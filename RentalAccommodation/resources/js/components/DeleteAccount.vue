@@ -1,5 +1,5 @@
 <template>
-<div class="delete-account-layout">
+<div class="delete-account-layout" style="height: 80vh;">
     <section class="settings-menu">
         <b-list-group >
             <h2>Settings</h2>

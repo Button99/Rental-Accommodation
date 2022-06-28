@@ -45,11 +45,6 @@
                 </div>
             </ul>
         </section>
-        <section class="my-accommodations-layout"  v-else-if="show == true">
-            <h4>You do not have create any accommodation </h4>
-            <router-link to="/createAccommodation" class="btn btn-primary">Create accommodation</router-link>
-            <br />
-        </section>
     </div>
     </div>
 </template>
