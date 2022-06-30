@@ -1,5 +1,5 @@
 <template>
-<div class="delete-account-layout" style="height: 80vh;">
+<div class="delete-account-layout" style="height: 90vh;">
     <section class="settings-menu">
         <b-list-group >
             <h2>Settings</h2>
@@ -10,16 +10,19 @@
         </b-list-group>
     </section>
 
-    <section class="delete-account">
+    <section class="settings-options">
         <div class="container mx-auto mt-4">
             <h3> To delete the account you need to write your First name</h3>
             <br />
-            <b-form @submit.prevent="deleteAccount()"  @reset="onReset()" action="#" method="POST">
-                <div v-if="!$v.form.first_name.required" class="text-danger">Field is required</div>
-                <b-form-input type="text" v-model="form.first_name" placeholder="Enter your first name"></b-form-input>
-                <br />
-                <b-button type="submit" variant="danger">Delete Account </b-button>
-            </b-form>
+            <b-list-group>
+                <b-list-group-item><b-form @submit.prevent="deleteAccount()"  @reset="onReset()" action="#" method="POST">
+                    <div v-if="!$v.form.first_name.required" class="text-danger">Field is required</div>
+                    <b-form-input type="text" v-model="form.first_name" placeholder="Enter your first name"></b-form-input>
+                    <br />
+                    <b-button type="submit" variant="danger">Delete Account </b-button>
+                </b-form></b-list-group-item>
+            </b-list-group>
+
         </div>
     </section>
 </div>
