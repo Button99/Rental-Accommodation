@@ -18,9 +18,9 @@
                             </b-form-group>
 
                             <b-form-group class="mb-4">
-                                <router-link to="#">Forgot password? </router-link>
+                                <router-link to="/forgotPassword">Forgot password? </router-link>
                                 <br />
-                                <router-link to="#">Create account </router-link>
+                                <router-link to="/register">Create account </router-link>
                             </b-form-group>
 
                             <b-button type="submit" variant="submit btn btn-primary text-uppercase fw-bold">Login</b-button>
