@@ -20,7 +20,8 @@
                     <b-form-input type="text" v-model="form.first_name" placeholder="Enter your first name"></b-form-input>
                     <br />
                     <b-button type="submit" variant="danger">Delete Account </b-button>
-                </b-form></b-list-group-item>
+                </b-form>
+            </b-list-group-item>
             </b-list-group>
 
         </div>
