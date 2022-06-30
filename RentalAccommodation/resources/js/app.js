@@ -72,6 +72,7 @@ Vue.component('accommodationsSearchPage', require('./components/AccommodationsSe
 Vue.component('resultsPage', require('./components/ResultsPage.vue'));
 Vue.component('verifyEmail', require('./components/VerifyEmail.vue'));
 Vue.component('creditCardPage', require('./components/CreditCardPage.vue'));
+Vue.component('forgotPassword', require('./components/ForgotPassword.vue'));
 
 const app = new Vue({
     el: '#app',
