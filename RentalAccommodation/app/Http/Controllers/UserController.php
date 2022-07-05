@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -97,6 +98,28 @@ class UserController extends Controller
         }
 
         return response()->json('Cant be deleted!', Response::HTTP_FORBIDDEN);
+    }
 
+    public function forgotPassword(Request $request) {
+        $validated= Validator::make($request->all(), [
+            'email' => ['required', 'email']
+        ]);
+        if(!$validated->fails()) {
+            $user= User::where('email', $request->email)->firstOrFail();
+            $email= $user->email;
+            $vkey= $user->vkey;
+            $phone= $user->phone;
+            Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email, $vkey, $phone) {
+                $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
+                $message->to($email);
+                $message->subject('Reset Password');
+                $message->setBody( 'Helloo');
+                $message->addPart('to reset your password please press the link http://127.0.0.1:8000/forgotPassword?vkey='. $vkey . '&email='. $email . '&phone=' . $phone, 'text/plain');
+            });
+            return response()->json('OK', Response::HTTP_ACCEPTED);
+
+        }
+
+        return response()->json('NOT OK', Response::HTTP_BAD_REQUEST);
     }
 }

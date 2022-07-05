@@ -56,6 +56,8 @@ Route::get('/', [AuthController::class, 'index']);
 
 Route::get('/verifyEmail/vkey/{vkey}', [VerificationController::class, 'index']);
 
+Route::post('/forgotPassword', [UserController::class, 'forgotPassword']);
+
 Route::get('/search/accommodations', [AccommodationController::class, 'search']);
 
 Route::post('/login', [AuthController::class, 'login']);

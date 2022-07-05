@@ -133,7 +133,16 @@ class User {
             }).catch((err) => {
                 alert(err);
         });
-    } 
+    }
+    
+    forgotPassword(data) {
+        axios.post('api/forgotPassword', data)
+            .then((res) => {
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
 }
 
 export default User= new User();
