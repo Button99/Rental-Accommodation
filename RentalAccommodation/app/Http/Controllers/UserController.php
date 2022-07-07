@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use App\Models\User;
+use App\Models\PasswordReset;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -105,21 +106,47 @@ class UserController extends Controller
             'email' => ['required', 'email']
         ]);
         if(!$validated->fails()) {
+            $key= md5(time().$request->email);
             $user= User::where('email', $request->email)->firstOrFail();
+            $psw_reset= PasswordReset::create([
+                'email' => $request->email,
+                'token' => $key
+            ]);
+
             $email= $user->email;
-            $vkey= $user->vkey;
-            $phone= $user->phone;
-            Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email, $vkey, $phone) {
+            Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email, $key) {
                 $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
                 $message->to($email);
                 $message->subject('Reset Password');
                 $message->setBody( 'Helloo');
-                $message->addPart('to reset your password please press the link http://127.0.0.1:8000/forgotPassword?vkey='. $vkey . '&email='. $email . '&phone=' . $phone, 'text/plain');
+                $message->addPart('to reset your password please press the link http://127.0.0.1:8000/forgotPassword?key='. $key, 'text/plain');
             });
             return response()->json('OK', Response::HTTP_ACCEPTED);
 
         }
 
         return response()->json('NOT OK', Response::HTTP_BAD_REQUEST);
+    }
+
+    public function resetPassword(Request $request) {
+        $validPsw= Validator::make($request->all(), [
+            'password' => ['required', 'min:8', 'max:40']
+        ]);
+
+
+        if(!$validPsw->fails() & $request->password === $request->passwordRetype) {
+            $email= PasswordReset::where('token', '=', $request->token)->select('email')->get();
+            $user= User::where('email', $email)->firstOrFail();
+            dd($user);
+            $updated= $user->update([
+                'password' => Hash::make($request->password)
+           ]);
+
+           if($updated) {
+                response()->json('IT WORKS', Response::HTTP_ACCEPTED);
+           }
+
+        }
+
     }
 }
