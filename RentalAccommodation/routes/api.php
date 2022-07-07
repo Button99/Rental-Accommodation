@@ -49,7 +49,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::put('/accommodations/{id}/update', [AccommodationController::class, 'update']);
 
-    Route::post('/book/hotelId={hotelID}/user={userID}', [BookController::class, 'book']);
 });
 
 Route::get('/', [AuthController::class, 'index']);
@@ -63,6 +62,8 @@ Route::get('/search/accommodations', [AccommodationController::class, 'search'])
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/signup', [AuthController::class, 'signup']);
+
+Route::post('/resetPsw', [UserController::class, 'resetPassword']);
 
 Route::get('/accommodations', [AccommodationController::class, 'index']);
 

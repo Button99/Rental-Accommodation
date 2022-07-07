@@ -138,7 +138,15 @@ class User {
     forgotPassword(data) {
         axios.post('api/forgotPassword', data)
             .then((res) => {
-                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
+
+    resetPsw(data) {
+        axios.post('api/resetPsw', data) 
+            .then((res) => {
+                router.push({name: 'login'});
             }).catch((err) => {
                 console.log(err);
             });
