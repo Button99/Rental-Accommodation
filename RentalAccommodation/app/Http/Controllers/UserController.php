@@ -11,6 +11,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -133,20 +135,19 @@ class UserController extends Controller
             'password' => ['required', 'min:8', 'max:40']
         ]);
 
-
         if(!$validPsw->fails() & $request->password === $request->passwordRetype) {
-            $email= PasswordReset::where('token', '=', $request->token)->select('email')->get();
-            $user= User::where('email', $email)->firstOrFail();
-            dd($user);
+            $email= PasswordReset::select('email')->where('token', '=', $request->token)->get()->toArray();
+            $user= User::where('email', '=', $email)->first();
             $updated= $user->update([
                 'password' => Hash::make($request->password)
            ]);
 
            if($updated) {
-                response()->json('IT WORKS', Response::HTTP_ACCEPTED);
+                return response()->json('IT WORKS', Response::HTTP_ACCEPTED);
            }
 
         }
 
+        return response()->json('It Failed', Response::HTTP_BAD_REQUEST);
     }
 }
