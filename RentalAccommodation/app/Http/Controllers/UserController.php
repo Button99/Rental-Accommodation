@@ -143,6 +143,14 @@ class UserController extends Controller
            ]);
 
            if($updated) {
+            print_r($email[0]['email']);
+            Mail::raw('Hello from Rental Accommodation', function($message) use ($email) {
+                $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
+                $message->to($email[0]['email']);
+                $message->subject('Your password has changed!');
+                $message->setBody('Helloo');
+                $message->addPart('Hello User we inform you that your password has changed.');
+            });                
                 return response()->json('IT WORKS', Response::HTTP_ACCEPTED);
            }
 
