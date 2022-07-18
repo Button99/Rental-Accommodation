@@ -1,7 +1,7 @@
 <template>
     <section class="container-fluid">
         <div class="card" id="accommodation-page">
-            <div id="card-norm">
+            <div id="card-norm" class="accommodation-card-layout">
                 <b-carousel controls fade indicators :interval="4000">
                     <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="index" :index="index"></b-carousel-slide>
                 </b-carousel>
@@ -34,9 +34,13 @@
                                 </b-form>
 
                             </b-list-group-item>
-                        </b-list-group> <br />
-                        <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="book()" method="POST" action="#">
-                            <b-button type="submit" @click="pushToBook()">Book now!</b-button> 
+                        </b-list-group>
+                        <br />
+                        <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="createComment()" size="md" method="POST" action="#" style="margin: 2rem;">
+                            <h3>Your opinion values!</h3>
+                            <p>Make a comment</p>
+                            <b-form-textarea id="create-comment" size="sm" v-model="text.comment" rows="3" max-rows="5"/>
+                            <b-button type="submit" size="sm">Submit comment</b-button>
                         </b-form>
                         </div>
                         <div class="map">
@@ -79,6 +83,9 @@ export default {
                 accommodation: [],
                 usr_id: '',
                 pictures: 'null',
+                text: {
+                    comment: ''
+                }
             }
         },
 
@@ -104,9 +111,13 @@ export default {
             deleteAccommodation() {
                 Accommodation.deleteAccommodation(this.accommodation.id);
             },
-            
-            pushToBook() {
-                this.$router.push({'name': 'creditCardPage'});
+
+            createComment() {
+                console.log('It works');
+                // To implement!!
+                // Parameters-> Comment, accommodation_id
+                User.addComment(this.text, this.accommodation.id);
+                // After the validation of the comment, JS function that does the API call!
             }
         }
     }
