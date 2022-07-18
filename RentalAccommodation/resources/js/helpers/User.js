@@ -151,6 +151,22 @@ class User {
                 console.log(err);
             });
     }
+
+    addComment(comment, accommodationId) {
+        axios({
+            method: 'post',
+            url: 'api/createComment',
+            headers: {
+                Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
+            },
+            // Need to see how the data are passing to db
+            data: {comment, accommodationId}
+        }).then((res) => {
+            console.log('ok')
+        }).catch((err) => {
+            alert(err);
+        });
+    }
 }
 
 export default User= new User();
