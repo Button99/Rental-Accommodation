@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\Picture;
-use App\Models\Features;
+use App\Models\Feature;
+use App\Models\Comments;
 
 class Accommodation extends Model
 {
@@ -42,5 +43,9 @@ class Accommodation extends Model
 
     public function features() {
         return $this->hasMany(Feature::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comments::class);
     }
 }
