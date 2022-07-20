@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
@@ -48,6 +49,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::delete('/accommodations/{id}/delete', [AccommodationController::class, 'delete']);
 
     Route::put('/accommodations/{id}/update', [AccommodationController::class, 'update']);
+
+    Route::post('/accommodations/createComment', [CommentsController::class, 'store']);
 
 });
 

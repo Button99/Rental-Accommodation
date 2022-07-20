@@ -155,7 +155,7 @@ class User {
     addComment(comment, accommodationId) {
         axios({
             method: 'post',
-            url: 'api/createComment',
+            url: 'api/accommodations/createComment',
             headers: {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
             },

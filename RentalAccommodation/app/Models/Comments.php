@@ -13,7 +13,8 @@ class Comments extends Model
 
     protected $fillable= [
         'comment',
-        'user_id'
+        'user_id',
+        'accommodation_id'
     ];
 
     public function accommodations() {

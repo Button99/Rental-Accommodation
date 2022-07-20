@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -18,16 +21,6 @@ class CommentsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +28,23 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation= Validator::make($request->all(), [
+            'comment' => ['required'],
+            'accommodationId' => ['required', 'integer'],
+        ]);
+        if(!$validation->fails()) {
+           $comment= Comments::create([
+                'comment' => $request->comment['comment'],
+                'user_id' => Auth::user()->id,
+                'accommodation_id' => $request->accommodationId
+           ]);
+
+           if($comment) {
+                return response()->json('Comment created successfully', Response::HTTP_CREATED);
+           }
+        }
+        return response()->json('Comment can\'t be created!', Response::HTTP_BAD_REQUEST);
+
     }
 
     /**
