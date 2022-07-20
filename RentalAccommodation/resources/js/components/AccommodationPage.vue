@@ -113,11 +113,7 @@ export default {
             },
 
             createComment() {
-                console.log('It works');
-                // To implement!!
-                // Parameters-> Comment, accommodation_id
                 User.addComment(this.text, this.accommodation.id);
-                // After the validation of the comment, JS function that does the API call!
             }
         }
     }
