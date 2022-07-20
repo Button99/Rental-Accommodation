@@ -6,6 +6,7 @@ use App\Models\Accommodation;
 use App\Models\Booking;
 use App\Models\Feature;
 use App\Models\Picture;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -30,7 +31,8 @@ class AccommodationController extends Controller
         $accommodation= Accommodation::find($id);
         $pictures[]= Picture::where('accommodation_id', '=', $id)->get();
         $features= Feature::where('accommodation_id', '=', $id)->get();
-        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features]);
+        $comments= Comments::where('accommodation_id', '=', $id)->get();
+        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'comments' => $comments], Response::HTTP_ACCEPTED);
     }
 
     public function store(Request $request) {
