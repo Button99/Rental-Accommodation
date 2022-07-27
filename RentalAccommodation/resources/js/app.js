@@ -7,6 +7,7 @@ import User from './helpers/User';
 import Accommodation from './helpers/Accommodation';
 import AppStorage from './helpers/AppStorage';
 import Vuelidate from 'vuelidate';
+import LaravelVuePagination from 'laravel-vue-pagination';
 
 require('./bootstrap');
 
@@ -19,6 +20,7 @@ Vue.use(Vuex);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(Vuelidate);
+Vue.use(LaravelVuePagination);
 
 export const router= new VueRouter({
     mode: 'history',
@@ -73,6 +75,7 @@ Vue.component('resultsPage', require('./components/ResultsPage.vue'));
 Vue.component('verifyEmail', require('./components/VerifyEmail.vue'));
 Vue.component('creditCardPage', require('./components/CreditCardPage.vue'));
 Vue.component('forgotPassword', require('./components/ForgotPassword.vue'));
+Vue.component('LaravelVuePagination', LaravelVuePagination);
 
 const app = new Vue({
     el: '#app',
