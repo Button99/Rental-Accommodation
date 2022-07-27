@@ -50,8 +50,12 @@
                                 <l-marker :lat-lng="markerLatLng"></l-marker>
                             </l-map>  
                         </div>
-                        </div>
+                    </div>
+                    <ul>
+                        <li v-for="comment in comments" >{{comment.comment}}</li>
+                    </ul>
 
+                    <LaravelVuePagination :data="comments" @pagination-change-page="getResults"></LaravelVuePagination> 
                 </div>
             </div>
         </div>
@@ -63,13 +67,15 @@
 import Accommodation from '../helpers/Accommodation';
 import AppStorage from '../helpers/AppStorage';
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+import LaravelVuePagination from 'laravel-vue-pagination';
 import 'leaflet/dist/leaflet.css';
 
 export default {
         components: {
             LMap,
             LTileLayer,
-            LMarker
+            LMarker,
+            LaravelVuePagination
         },
         
         data() {
@@ -85,8 +91,13 @@ export default {
                 pictures: 'null',
                 text: {
                     comment: ''
-                }
+                },
+                comments: {}
             }
+        },
+
+        mounted() {
+            this.getResults();
         },
 
         created() {
@@ -114,7 +125,16 @@ export default {
 
             createComment() {
                 User.addComment(this.text, this.accommodation.id);
-            }
+            },
+
+            getResults(page=1) {
+                axios.get('api/showComments?page='+ page)
+                    .then((res) => {
+                        this.comments= res.data;
+                    }).catch((err) => {
+                        alert(err);
+                    });
+            } 
         }
     }
 </script>
