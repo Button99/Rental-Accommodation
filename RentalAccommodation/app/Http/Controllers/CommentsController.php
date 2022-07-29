@@ -33,7 +33,7 @@ class CommentsController extends Controller
     }
 
     public function index() {
-        $comments= Comments::orderBy('updated_at', 'desc')->get();
+        $comments= Comments::orderBy('updated_at', 'desc')->paginate(15);
 
         return response()->json($comments, Response::HTTP_ACCEPTED);
     }

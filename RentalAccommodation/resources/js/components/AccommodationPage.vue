@@ -51,11 +51,8 @@
                             </l-map>  
                         </div>
                     </div>
-                    <ul>
-                        <li v-for="comment in comments" >{{comment.comment}}</li>
-                    </ul>
-
-                    <LaravelVuePagination :data="comments" @pagination-change-page="getResults"></LaravelVuePagination> 
+                    <b-table id="test-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
+                    <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination>
                 </div>
             </div>
         </div>
@@ -67,7 +64,6 @@
 import Accommodation from '../helpers/Accommodation';
 import AppStorage from '../helpers/AppStorage';
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
-import LaravelVuePagination from 'laravel-vue-pagination';
 import 'leaflet/dist/leaflet.css';
 
 export default {
@@ -75,7 +71,6 @@ export default {
             LMap,
             LTileLayer,
             LMarker,
-            LaravelVuePagination
         },
         
         data() {
@@ -92,7 +87,10 @@ export default {
                 text: {
                     comment: ''
                 },
-                comments: {}
+                current_page: '',
+                total_rows: '',
+                per_page: '',
+                comments: []
             }
         },
 
@@ -130,7 +128,11 @@ export default {
             getResults(page=1) {
                 axios.get('api/showComments?page='+ page)
                     .then((res) => {
-                        this.comments= res.data;
+                        console.log(res.data);
+                        this.current_page= res.data.current_page;
+                        this.per_page= res.data.per_page;
+                        this.total_rows= res.data.per_page;
+                        this.comments= res.data.data;
                     }).catch((err) => {
                         alert(err);
                     });
