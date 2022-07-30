@@ -51,12 +51,26 @@
                             </l-map>  
                         </div>
                     </div>
-                    <b-table id="test-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
-                    <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination>
+                    <!-- <b-table id="test-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
+                    <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination> -->
                 </div>
             </div>
         </div>
         <br />
+        <div>
+            <b-card title="Comments">
+                <b-card-text>
+                    <b-col cols="12" sm="4" class="my-1" :key="index" v-for="(comments, index) in comments">
+                        <b-card>
+                            <b-card-body><b-card-text>{{comments}}</b-card-text></b-card-body>
+                        </b-card>
+                    </b-col>
+                    <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination>
+                </b-card-text>
+
+            </b-card>
+        </div>
+
     </section>
 </template>
 
@@ -90,7 +104,8 @@ export default {
                 current_page: '',
                 total_rows: '',
                 per_page: '',
-                comments: []
+                comments: [],
+                fields: ['name', 'comment', 'created']
             }
         },
 
@@ -132,7 +147,7 @@ export default {
                         this.current_page= res.data.current_page;
                         this.per_page= res.data.per_page;
                         this.total_rows= res.data.per_page;
-                        this.comments= res.data.data;
+                        this.comments= Object.keys(res.data);
                     }).catch((err) => {
                         alert(err);
                     });

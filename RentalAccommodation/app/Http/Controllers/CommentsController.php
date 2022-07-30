@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\User;
 use Egulias\EmailValidator\Warning\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -34,8 +35,13 @@ class CommentsController extends Controller
 
     public function index() {
         $comments= Comments::orderBy('updated_at', 'desc')->paginate(15);
-
-        return response()->json($comments, Response::HTTP_ACCEPTED);
+        foreach($comments as $comment) {
+            $userFirstNames=User::select('first_name')->where('id', $comment['user_id'])->get()->toArray();
+            foreach($userFirstNames as $userFirstName) {
+                $message= array('name' => array($userFirstName['first_name']  => array($comment['comment'] => $comment['updated_at'])));
+            }
+        }
+        return response()->json($message, Response::HTTP_ACCEPTED);
     }
 
     public function update(Request $request, Comments $comments)
