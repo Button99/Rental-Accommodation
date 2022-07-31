@@ -62,7 +62,7 @@
                 <b-card-text>
                     <b-col cols="12" sm="4" class="my-1" :key="index" v-for="(comments, index) in comments">
                         <b-card>
-                            <b-card-body><b-card-text>{{comments}}</b-card-text></b-card-body>
+                            <b-card-body><b-card-text>{{commentName}} {{commentText}} {{commentDate}}</b-card-text></b-card-body>
                         </b-card>
                     </b-col>
                     <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination>
@@ -105,7 +105,10 @@ export default {
                 total_rows: '',
                 per_page: '',
                 comments: [],
-                fields: ['name', 'comment', 'created']
+                fields: ['name', 'comment', 'created'],
+                commentName: '',
+                commentTest: '',
+                commentDate: ''
             }
         },
 
@@ -147,7 +150,16 @@ export default {
                         this.current_page= res.data.current_page;
                         this.per_page= res.data.per_page;
                         this.total_rows= res.data.per_page;
-                        this.comments= Object.keys(res.data);
+                        this.comments= res.data.name;
+                        this.commentName= Object.keys(this.comments);
+                        console.log(this.commentName);
+                        this.commentText= Object.keys(this.comments[this.commentName]);
+                        console.log(this.commentText);
+                        this.commentDate= Object.values(this.comments[this.commentName]);
+                        console.log(this.commentDate);
+                        console.log(this.comments);
+                        console.log(this.commentName);
+                        console.log(this.commentText);
                     }).catch((err) => {
                         alert(err);
                     });

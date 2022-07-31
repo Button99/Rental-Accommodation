@@ -38,9 +38,8 @@ class CommentsController extends Controller
         foreach($comments as $comment) {
             $userFirstNames=User::select('first_name')->where('id', $comment['user_id'])->get()->toArray();
             foreach($userFirstNames as $userFirstName) {
-                $message= array('name' => array($userFirstName['first_name']  => array($comment['comment'] => $comment['updated_at'])));
+                $message= array('name' => array($userFirstName['first_name']  => array($comment['comment'] => $comment->updated_at->format('d/m/y'))));            }
             }
-        }
         return response()->json($message, Response::HTTP_ACCEPTED);
     }
 
