@@ -51,8 +51,6 @@
                             </l-map>  
                         </div>
                     </div>
-                    <!-- <b-table id="test-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
-                    <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination> -->
                 </div>
             </div>
         </div>
@@ -60,12 +58,12 @@
         <div>
             <b-card title="Comments">
                 <b-card-text>
-                    <b-col cols="12" sm="4" class="my-1" :key="index" v-for="(comments, index) in comments">
-                        <b-card>
-                            <b-card-body><b-card-text>{{commentName}} {{commentText}} {{commentDate}}</b-card-text></b-card-body>
+                    <b-col sm="4" id="test-comments" class="my-1"  >
+                        <b-card :key="comment.id" v-for="comment in comments.slice((current_page - 1) * per_page, (current_page - 1) * per_page+ per_page)">
+                            <b-card-body><b-card-text>{{comment.name}} {{comment.comment}} {{comment.date}}</b-card-text></b-card-body>
                         </b-card>
                     </b-col>
-                    <b-pagination v-model="current_page" :total_rows="total_rows" :per-page="per_page" aria-controls="test-table"></b-pagination>
+                    <b-pagination v-model="current_page" :total_rows="comments.length" :per-page="per_page" aria-controls="test-comments" first-text="First" prev-text="Prev" next-text="Next" last-text="Last"></b-pagination>
                 </b-card-text>
 
             </b-card>
@@ -101,14 +99,9 @@ export default {
                 text: {
                     comment: ''
                 },
-                current_page: '',
-                total_rows: '',
-                per_page: '',
+                current_page: 1,
+                per_page: 5,
                 comments: [],
-                fields: ['name', 'comment', 'created'],
-                commentName: '',
-                commentTest: '',
-                commentDate: ''
             }
         },
 
@@ -146,20 +139,7 @@ export default {
             getResults(page=1) {
                 axios.get('api/showComments?page='+ page)
                     .then((res) => {
-                        console.log(res.data);
-                        this.current_page= res.data.current_page;
-                        this.per_page= res.data.per_page;
-                        this.total_rows= res.data.per_page;
-                        this.comments= res.data.name;
-                        this.commentName= Object.keys(this.comments);
-                        console.log(this.commentName);
-                        this.commentText= Object.keys(this.comments[this.commentName]);
-                        console.log(this.commentText);
-                        this.commentDate= Object.values(this.comments[this.commentName]);
-                        console.log(this.commentDate);
-                        console.log(this.comments);
-                        console.log(this.commentName);
-                        console.log(this.commentText);
+                        this.comments= res.data;
                     }).catch((err) => {
                         alert(err);
                     });

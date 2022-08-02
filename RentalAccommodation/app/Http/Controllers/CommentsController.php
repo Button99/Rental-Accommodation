@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use App\Models\User;
-use Egulias\EmailValidator\Warning\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
@@ -34,12 +33,14 @@ class CommentsController extends Controller
     }
 
     public function index() {
-        $comments= Comments::orderBy('updated_at', 'desc')->paginate(15);
+        $comments= Comments::orderBy('updated_at', 'desc')->get();
         foreach($comments as $comment) {
             $userFirstNames=User::select('first_name')->where('id', $comment['user_id'])->get()->toArray();
             foreach($userFirstNames as $userFirstName) {
-                $message= array('name' => array($userFirstName['first_name']  => array($comment['comment'] => $comment->updated_at->format('d/m/y'))));            }
+                $message[]= array('id' => $comment['id'], 'name' => $userFirstName['first_name'], 'comment' => $comment['comment'], 'date' => $comment->updated_at->format('d/m/y'));
             }
+        }
+    
         return response()->json($message, Response::HTTP_ACCEPTED);
     }
 
