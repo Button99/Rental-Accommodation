@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::post('/accommodations/createComment', [CommentsController::class, 'store']);
 
+    // Need to create 1 more table for rating
+    Route::post('/accommodations/{id}/rate', [Rate::class, 'addRate']);
+
 });
 
 Route::get('/', [AuthController::class, 'index']);

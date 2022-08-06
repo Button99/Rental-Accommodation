@@ -5,6 +5,7 @@ import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue';
 import routes from './routes';
 import User from './helpers/User';
 import Accommodation from './helpers/Accommodation';
+import Rate from './helpers/Rate';
 import AppStorage from './helpers/AppStorage';
 import Vuelidate from 'vuelidate';
 import LaravelVuePagination from 'laravel-vue-pagination';
@@ -14,6 +15,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 window.User= User;
 window.Accommodation= Accommodation;
+window.Rate= Rate;
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
