@@ -38,9 +38,13 @@
                         <br />
                         <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="createComment()" size="md" method="POST" action="#" style="margin: 2rem;">
                             <h3>Your opinion values!</h3>
-                            <p>Make a comment</p>
-                            <b-form-textarea id="create-comment" size="sm" v-model="text.comment" rows="3" max-rows="5"/>
-                            <b-button type="submit" size="sm">Submit comment</b-button>
+                            <p>Rate the accommodation: (Required)<br/>
+                                <b-form-rating v-model="rate" variant="danger"></b-form-rating>
+                            </p>
+
+                            <p>Share your experience: (Required)</p>
+                            <b-form-textarea id="create-comment" size="sm" v-model="text.comment" rows="3" max-rows="5"/> <br/>
+                            <b-button type="submit" size="sm">Submit</b-button>
                         </b-form>
                         </div>
                         <div class="map">
@@ -58,26 +62,8 @@
         <div>
             <b-card title="Comments">
 
-    <b-pagination
-      v-model="current_page"
-      :total-rows="rows"
-      :per-page="per_page"
-      aria-controls="my-table"
-    ></b-pagination>
-    <b-table
-      id="my-table"
-      :items="comments"
-      :per-page="per_page"
-      :current-page="current_page"
-      small
-    ></b-table>                <!-- <b-card-text>
-                    <b-col sm="4" id="test-comments" class="my-1"  >
-                        <b-card :key="comment.id" v-for="comment in comments.slice((current_page - 1) * per_page, (current_page - 1) * per_page+ per_page)">
-                            <b-card-body><b-card-text>{{comment.name}} {{comment.comment}} {{comment.date}}</b-card-text></b-card-body>
-                        </b-card>
-                    </b-col>
-                    <b-pagination v-model="current_page" :total_rows="comments.length" :per-page="per_page" aria-controls="test-comments" first-text="First" prev-text="Prev" next-text="Next" last-text="Last"></b-pagination>
-                </b-card-text> -->
+            <b-pagination v-model="current_page" :total-rows="rows" :per-page="per_page" aria-controls="my-table" align="fill"></b-pagination>
+            <b-table id="data-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
 
             </b-card>
         </div>
@@ -109,6 +95,7 @@ export default {
                 accommodation: [],
                 usr_id: '',
                 pictures: 'null',
+                rate: '',
                 text: {
                     comment: ''
                 },
