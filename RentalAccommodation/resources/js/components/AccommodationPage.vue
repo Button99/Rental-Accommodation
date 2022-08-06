@@ -38,11 +38,11 @@
                         <br />
                         <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="createComment()" size="md" method="POST" action="#" style="margin: 2rem;">
                             <h3>Your opinion values!</h3>
-                            <p>Rate the accommodation: (Required)<br/>
-                                <b-form-rating v-model="rate" variant="danger"></b-form-rating>
+                            <p>Rate the accommodation:<br/>
+                                <b-form-rating v-model="rate" variant="danger" @click="console.log('hi')"></b-form-rating>
                             </p>
 
-                            <p>Share your experience: (Required)</p>
+                            <p>Share your experience: </p>
                             <b-form-textarea id="create-comment" size="sm" v-model="text.comment" rows="3" max-rows="5"/> <br/>
                             <b-button type="submit" size="sm">Submit</b-button>
                         </b-form>
@@ -149,7 +149,12 @@ export default {
                     }).catch((err) => {
                         alert(err);
                     });
-            } 
+            },
+            
+            addRate(value) {
+                console.log('works');
+                Rate.rate(this.accommodation.id, value);
+            }
         }
     }
 </script>
