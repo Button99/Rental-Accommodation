@@ -57,14 +57,27 @@
         <br />
         <div>
             <b-card title="Comments">
-                <b-card-text>
+
+    <b-pagination
+      v-model="current_page"
+      :total-rows="rows"
+      :per-page="per_page"
+      aria-controls="my-table"
+    ></b-pagination>
+    <b-table
+      id="my-table"
+      :items="comments"
+      :per-page="per_page"
+      :current-page="current_page"
+      small
+    ></b-table>                <!-- <b-card-text>
                     <b-col sm="4" id="test-comments" class="my-1"  >
                         <b-card :key="comment.id" v-for="comment in comments.slice((current_page - 1) * per_page, (current_page - 1) * per_page+ per_page)">
                             <b-card-body><b-card-text>{{comment.name}} {{comment.comment}} {{comment.date}}</b-card-text></b-card-body>
                         </b-card>
                     </b-col>
                     <b-pagination v-model="current_page" :total_rows="comments.length" :per-page="per_page" aria-controls="test-comments" first-text="First" prev-text="Prev" next-text="Next" last-text="Last"></b-pagination>
-                </b-card-text>
+                </b-card-text> -->
 
             </b-card>
         </div>
@@ -111,6 +124,12 @@ export default {
 
         created() {
             this.fetchData();
+        },
+
+        computed: {
+            rows() {
+                return this.comments.length;
+            }
         },
 
         methods: {
