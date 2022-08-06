@@ -47,6 +47,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Picture::class);
     }
 
+    public function rate() {
+        return $this->hasMany(Rate::class);
+    }
+
     
     /**
      * The attributes that should be hidden for serialization.
