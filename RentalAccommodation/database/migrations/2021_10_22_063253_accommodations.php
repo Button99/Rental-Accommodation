@@ -24,7 +24,6 @@ class Accommodations extends Migration
             $table->string('longitude', 9); // up to 6 digits
             $table->string('address1');
             $table->string('address2')->nullable();
-            $table->integer('stars')->nullable();
             $table->float('price');
             $table->timestamps();
         
