@@ -48,4 +48,8 @@ class Accommodation extends Model
     public function comments() {
         return $this->hasMany(Comments::class);
     }
+
+    public function rate() {
+        return $this->hasMany(Rate::class);
+    }
 }
