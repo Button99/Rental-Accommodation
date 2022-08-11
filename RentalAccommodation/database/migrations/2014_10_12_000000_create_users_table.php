@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // Ο Πίνακας των χρηστών πρέπει να επεξεργαστεί διότι δεν μας καλύπτουν οι αρχικές τιμές που έχει.
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');

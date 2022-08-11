@@ -12,7 +12,7 @@ class CreateCommentsTable extends Migration
      * @return void
      */
 
-    // Comment, comment->id, user->id, time
+    
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {

@@ -18,12 +18,12 @@ class Rating extends Migration
             $table->double('rate');
             $table->double('total_rate');
             $table->integer('count');
-            
+            $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')
                 ->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreignId('accommodations_id')->constrained('accommodations')
+            $table->foreignId('accommodation_id')->constrained('accommodations')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }
