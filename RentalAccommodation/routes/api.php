@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     Route::put('/accommodations/{id}/update', [AccommodationController::class, 'update']);
 
-    Route::post('/accommodations/createComment', [CommentsController::class, 'store']);
+    Route::post('/accommodations/createComment', [CommentController::class, 'store']);
 
     // Need to create 1 more table for rating
     Route::post('/accommodations/{id}/rate', [Rate::class, 'addRate']);
@@ -61,7 +61,7 @@ Route::get('/', [AuthController::class, 'index']);
 
 Route::get('/verifyEmail/vkey/{vkey}', [VerificationController::class, 'index']);
 
-Route::get('/showComments', [CommentsController::class, 'index']);
+Route::get('/showComments', [CommentController::class, 'index']);
 
 Route::post('/forgotPassword', [UserController::class, 'forgotPassword']);
 
