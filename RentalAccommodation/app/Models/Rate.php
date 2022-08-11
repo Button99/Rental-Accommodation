@@ -14,7 +14,6 @@ class Rate extends Model
         'rate',
         'total_rate',
         'count',
-        'accommodation_id',
         'user_id'
     ];
 
