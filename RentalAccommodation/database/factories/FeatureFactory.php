@@ -34,6 +34,7 @@ class FeatureFactory extends Factory
             'washer' => $this->faker->boolean(50),
             'fire_extinguisher' => $this->faker->boolean(50),
             'smoke_alarm' => $this->faker->boolean(50),
+            'hot_tub' => $this->faker->boolean(50),
             'accommodation_id' => function() {
                 return Accommodation::all()->random();
             }

@@ -31,8 +31,11 @@ class UserFactory extends Factory
             'last_ip' => $this->faker->ipv4(),
             'last_login' => now(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // hashed password
             'phone' => $this->faker->phoneNumber(),
+            'is_admin' => $this->faker->numberBetween(0, 1),
+            'is_valid' => '1',
+            'vkey' => md5(time().now()),
             'remember_token' => Str::random(10),
         ];
     }
