@@ -51,7 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Rate::class);
     }
 
-    
+
+    public function passwordReset() {
+        return $this->hasOne(PasswordReset::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
