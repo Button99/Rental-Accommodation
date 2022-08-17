@@ -129,6 +129,12 @@
   margin: 2rem;
 }
 
+.features-style {
+  width: 30%;
+  margin: 2rem;
+  float: right;
+}
+
 .forgot-password-layout {
   height: 90vh;
 }
