@@ -24,8 +24,8 @@ class PictureFactory extends Factory
     public function definition()
     {
         return [
-            'path' => $this->faker->imageUrl(),
-            'ext' => $this->faker->fileExtension(),
+            'path' => $this->faker->imageUrl(100, 100, 'accommodation'),
+            'ext' => 'jpg',
             'description' => $this->faker->sentence(),
             'accommodation_id' => function() {
                 return Accommodation::all()->random();
