@@ -24,6 +24,7 @@ Vue.use(BootstrapVueIcons);
 Vue.use(Vuelidate);
 Vue.use(LaravelVuePagination);
 
+
 export const router= new VueRouter({
     mode: 'history',
     routes,
