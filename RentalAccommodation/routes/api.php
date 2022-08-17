@@ -4,9 +4,9 @@ use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
-use App\Models\Accommodation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/accommodations/createComment', [CommentController::class, 'store']);
 
     // Need to create 1 more table for rating
-    Route::post('/accommodations/{id}/rate', [Rate::class, 'addRate']);
+    Route::post('/accommodations/{id}/rate', [RateController::class, 'addRate']);
 
 });
 
