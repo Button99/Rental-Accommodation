@@ -54,6 +54,53 @@
                                 <l-marker :lat-lng="markerLatLng"></l-marker>
                             </l-map>  
                         </div>
+                        <div class="features-style" stacked right>
+                            <h4>Accommodation Features</h4>
+                            <b-row>
+                                <b-col class="m-1">
+                                    <b-checkbox id="pool" v-model="features[0].pool" value="1" disabled>Pool</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="bbq" v-model="features[0].bbq" value="1" disabled> BBQ</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="pool_table" v-model="features[0].pool_table" value="1" disabled> Pool table</b-checkbox>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col class="m-1">
+                                    <b-checkbox id="wifi" v-model="features[0].wifi" value="1" disabled>Wifi</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="tv" v-model="features[0].tv" value="1" disabled>TV</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="kitchen" v-model="features[0].kitchen" value="1" disabled>kitchen</b-checkbox>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col class="m-1">
+                                    <b-checkbox id="parking" v-model="features[0].parking" value="1" disabled>Parking</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="air_conditioning" v-model="features[0].air_conditioning" value="1" disabled>AC</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="washer" v-model="features[0].washer" value="1" disabled>Washer</b-checkbox>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col class="m-1">
+                                    <b-checkbox id="fire_extinguisher" v-model="features[0].fire_extinguisher" value="1" disabled>Fire extinguisher</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="smoke_alarm" v-model="features[0].smoke_alarm" value="1" disabled>Smoke alarm</b-checkbox>
+                                </b-col>
+                                <b-col class="m-1">
+                                    <b-checkbox id="hot_tub" v-model="features[0].hot_tub" value="1" disabled>Hot tub</b-checkbox>
+                                </b-col>
+                            </b-row>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,8 +109,8 @@
         <div>
             <b-card title="Comments">
 
-            <b-pagination v-model="current_page" :total-rows="rows" :per-page="per_page" aria-controls="my-table" align="fill"></b-pagination>
-            <b-table id="data-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
+                <b-pagination v-model="current_page" :total-rows="rows" :per-page="per_page" aria-controls="my-table" align="fill"></b-pagination>
+                <b-table id="data-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
 
             </b-card>
         </div>
@@ -102,6 +149,8 @@ export default {
                 current_page: 1,
                 per_page: 5,
                 comments: [],
+                features: [],
+                test: ''
             }
         },
 
@@ -125,6 +174,7 @@ export default {
                     .then((res) => {
                         this.accommodation= res.data.accommodation;
                         this.pictures= res.data.pictures;
+                        this.features= res.data.features;
                         this.markerLatLng= [this.accommodation.latitude, this.accommodation.longitude];
                         this.center= this.markerLatLng;
                     }).catch((err) => {
@@ -152,7 +202,6 @@ export default {
             },
             
             addRate(value) {
-                console.log('works');
                 Rate.rate(this.accommodation.id, value);
             }
         }
