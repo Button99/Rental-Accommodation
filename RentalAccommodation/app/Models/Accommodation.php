@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Booking;
 use App\Models\Picture;
 use App\Models\Feature;
-use App\Models\Comments;
+use App\Models\Comment;
 
 class Accommodation extends Model
 {
@@ -45,8 +45,8 @@ class Accommodation extends Model
         return $this->hasMany(Feature::class);
     }
 
-    public function comments() {
-        return $this->hasMany(Comments::class);
+    public function Comment() {
+        return $this->hasMany(Comment::class);
     }
 
     public function rate() {
