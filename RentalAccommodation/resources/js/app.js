@@ -76,7 +76,6 @@ Vue.component('updateAccommodation', require('./components/UpdateAccommodation.v
 Vue.component('accommodationsSearchPage', require('./components/AccommodationsSearchPage.vue'));
 Vue.component('resultsPage', require('./components/ResultsPage.vue'));
 Vue.component('verifyEmail', require('./components/VerifyEmail.vue'));
-Vue.component('creditCardPage', require('./components/CreditCardPage.vue'));
 Vue.component('forgotPassword', require('./components/ForgotPassword.vue'));
 Vue.component('LaravelVuePagination', LaravelVuePagination);
 
