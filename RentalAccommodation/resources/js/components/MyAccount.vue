@@ -26,7 +26,6 @@
                                         <b-form-input id="new-phone" v-model="new_phone" type="text" required> </b-form-input>
                                     </b-form-group>
                                     <b-button type="submit">Change Phone number </b-button>
-
                                 </b-form>
                             </b-card>
                         </b-collapse>
