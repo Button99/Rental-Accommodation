@@ -83,7 +83,6 @@ class AuthController extends Controller
             if($user) {
                 $email= $request->email;
                 Mail::raw('Welcome to Rental Accommodation...', function($message) use ($email, $vkey) {
-                    // Need to add this mechanism -> $vkey is added to the db and after that when the user presses the link the query searches and changes the is verified to true!
                     $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
                     $message->to($email);
                     $message->subject('Welcome to RentalAccommodation');
