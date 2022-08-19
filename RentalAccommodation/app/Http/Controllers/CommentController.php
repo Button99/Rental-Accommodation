@@ -32,8 +32,9 @@ class CommentController extends Controller
 
     }
 
-    public function index() {
-        $Comment= Comment::orderBy('updated_at', 'desc')->get();
+    
+    public function index($id) {
+        $Comment= Comment::where('accommodation_id', $id)->orderBy('updated_at', 'desc')->get();
         foreach($Comment as $comment) {
             $userFirstNames=User::select('first_name')->where('id', $comment['user_id'])->get()->toArray();
             foreach($userFirstNames as $userFirstName) {
