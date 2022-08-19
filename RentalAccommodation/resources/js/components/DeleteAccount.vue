@@ -45,7 +45,6 @@
                 first_name: {
                     required,
                     sameAsName(first_name) {
-                        console.log(User.getName());
                         if(User.getName() === first_name) {
                             return true;
                         }

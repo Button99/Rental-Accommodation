@@ -107,8 +107,6 @@
                         Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
                     }
                 }).then((res) => {
-                    console.log(res);
-                    console.log(res.data.last_ip);
                     this.data.ip= res.data.last_ip;
                 });
             }

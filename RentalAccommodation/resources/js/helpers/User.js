@@ -130,8 +130,6 @@ class User {
     verifyUser(vkey) {
         axios.get('api/verifyEmail/vkey/' + vkey)
             .then((res) => {
-                console.log('ok');
-                console.log(res);
             }).catch((err) => {
                 alert(err);
         });
