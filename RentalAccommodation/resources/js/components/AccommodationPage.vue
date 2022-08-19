@@ -15,11 +15,12 @@
                             Town: {{accommodation.town}} <br />
                             Address: {{accommodation.address1}}, {{accommodation.address2}} <br />
                             Description: {{accommodation.description}} <br />
-                            <b v-if="accommodation.stars == null ">
+                            <b v-if="accommodationRate == null ">
                                 Rate: Not available
                             </b>
-                            <b v-else>
-                                Rate: {{accommodation.stars}}
+                            <b v-else class="inline" inline>
+                                Rate:
+                                <b-form-rating v-model="accommodationRate" size="sm" class="w-25 m-1 inline" precision="2" inline disabled></b-form-rating>
                             </b>
                             <br />
                             Price: <b> {{accommodation.price}} </b> 
@@ -32,7 +33,6 @@
                                 <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
                                     <b-button variant="danger" type="submit"> Delete</b-button> 
                                 </b-form>
-
                             </b-list-group-item>
                         </b-list-group>
                         <br />
@@ -40,7 +40,7 @@
                             <h3>Your opinion values!</h3>
                             <p>Rate the accommodation:<br/>
                             <b-input-group>
-                                <b-form-rating v-model="rate" variant="danger" @click="addRate(rate)"></b-form-rating>
+                                <b-form-rating v-model="rate" variant="danger" ></b-form-rating>
                                 <b-input-group-append>
                                     <b-button @click="addRate(rate)">Add Rate</b-button>
                                 </b-input-group-append>
@@ -154,7 +154,7 @@ export default {
                 per_page: 5,
                 comments: [],
                 features: [],
-                test: ''
+                accommodationRate: ''
             }
         },
 
@@ -186,6 +186,13 @@ export default {
                     });
                 
                 this.usr_id= AppStorage.getId();
+                
+                axios.get('api/accommodations/' + this.$route.params.id + '/getRate')
+                    .then((res) => {
+                        this.accommodationRate= res.data;
+                    }).catch((err) => {
+                        alert(err);
+                    })
             },
 
             deleteAccommodation() {
@@ -206,9 +213,9 @@ export default {
             },
             
             addRate(value) {
-                console.log(value);
                 Rate.rate(this.accommodation.id, value);
-            }
+            },
+        
         }
     }
 </script>
