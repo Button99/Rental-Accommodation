@@ -60,7 +60,7 @@ Route::get('/', [AuthController::class, 'index']);
 
 Route::get('/verifyEmail/vkey/{vkey}', [VerificationController::class, 'index']);
 
-Route::get('/showComments', [CommentController::class, 'index']);
+Route::get('/{id}/showComments', [CommentController::class, 'index']);
 
 Route::post('/forgotPassword', [UserController::class, 'forgotPassword']);
 
