@@ -89,6 +89,7 @@ class UserController extends Controller
         }
         return response()->json('Error', Response::HTTP_NOT_ACCEPTABLE);
     }
+    
     public function delete($id) {
         $user= Auth::user();
         
