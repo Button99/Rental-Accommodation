@@ -17,11 +17,11 @@ class AccommodationController extends Controller
     public function index() {
         $accommodations= Accommodation::orderBy('rooms', 'desc')->get();
         foreach($accommodations as $accommodation) {
-            $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
-            $features[]= Feature::where('accommodation_id', '=', $accommodation->id)->get();
+            $pictures[]= Picture::where('accommodation_id', $accommodation->id)->get();
+            $features[]= Feature::where('accommodation_id', $accommodation->id)->get();
         }
         if(!empty($pictures) && !empty($features)) {
-            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures, 'features' => $features], Response::HTTP_ACCEPTED);
+            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
         }
         return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
     }
@@ -31,6 +31,7 @@ class AccommodationController extends Controller
         $pictures[]= Picture::where('accommodation_id', '=', $id)->get();
         $features= Feature::where('accommodation_id', '=', $id)->get();
         $Comment= Comment::where('accommodation_id', '=', $id)->get();
+        
         return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'Comment' => $Comment], Response::HTTP_ACCEPTED);
     }
 
