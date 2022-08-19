@@ -81,18 +81,15 @@
                 selected_features: [],
             }
         },
-
         created() {
             this.fetchData();
         },
-
         computed: {
             filteredAccommodations() {
                 var filtered_accommodations= this.accommodations;
                 if(this.selected_budget.length== 0 && this.selected_stars.length== 0  && this.selected_features.length== 0 ) {
                     return this.accommodations;
                 }
-
                 if(this.selected_budget.length > 0) {
                     var b= this.selected_budget;
                     filtered_accommodations= this.accommodations.filter(function(a) {
@@ -103,7 +100,6 @@
                         }
                     });
                 }
-
                 if(this.selected_stars.length > 0) {
                     var b= this.selected_stars;
                     filtered_accommodations= this.accommodations.filter(function(a) {
@@ -112,47 +108,41 @@
                         }
                     });
                 }
-
                 if(this.selected_features.length > 0) {
                     var b= this.selected_features;
                     var f= this.features;
-
                     filtered_accommodations= this.accommodations.filter(function(a) {
                         for(var i=0; i<b.length; i++) {
                             for(var j=0; j<f[i].length; j++) {
-
                                 if(f[i][j][b[i]] == '0') {
                                 }
                                 if(a.id === f[i][j].accommodation_id && f[i][j].hasOwnProperty(b[i]) && f[i][j][b[i]] == '1') {
-                                    console.log('works');
                                     return a;
                                 }
                             }
                         }
                     });
                 }
-
                 return filtered_accommodations;
-
             }
         },
-
         methods: {
             fetchData() {
                 axios.get('api/accommodations')
                     .then((res) => {
                         this.accommodations= res.data.accommodations;
+                        console.log(this.accommodations);
                         this.features= res.data.features;
+                        console.log(this.features);
                         this.pictures= res.data.pictures;
+                        console.log(this.pictures);
                     }).catch((err) => {
                         alert(err);
                     })
             },
-
             recompute() {
                 this.filteredAccommodations;
             }
-
         }
     }
 </script>
