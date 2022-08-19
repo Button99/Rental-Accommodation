@@ -43,12 +43,13 @@
     width: 15%;
     border-right: 1px solid black;
     float: left;
-    height: auto;
+    height: 110vh;
 }
 
 .settings-options {
-    width: 100%;
+    width: 80%;
     min-height: 85vh;
+    float: right;
 }
 
 .delete-account-layout {
