@@ -39,7 +39,13 @@
                         <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="createComment()" size="md" method="POST" action="#" style="margin: 2rem;">
                             <h3>Your opinion values!</h3>
                             <p>Rate the accommodation:<br/>
-                                <b-form-rating v-model="rate" variant="danger" @click="console.log('hi')"></b-form-rating>
+                            <b-input-group>
+                                <b-form-rating v-model="rate" variant="danger" @click="addRate(rate)"></b-form-rating>
+                                <b-input-group-append>
+                                    <b-button @click="addRate(rate)">Add Rate</b-button>
+                                </b-input-group-append>
+                            </b-input-group>
+
                             </p>
 
                             <p>Share your experience: </p>
@@ -108,10 +114,8 @@
         <br />
         <div>
             <b-card title="Comments">
-
                 <b-pagination v-model="current_page" :total-rows="rows" :per-page="per_page" aria-controls="my-table" align="fill"></b-pagination>
                 <b-table id="data-table" :items="comments" :per-page="per_page" :current-page="current_page" small></b-table>
-
             </b-card>
         </div>
 
@@ -202,6 +206,7 @@ export default {
             },
             
             addRate(value) {
+                console.log(value);
                 Rate.rate(this.accommodation.id, value);
             }
         }

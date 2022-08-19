@@ -1,3 +1,7 @@
+import axios from 'axios';
+import AppStorage from './AppStorage';
+
+
 class Rate {
     rate(id, value) {
         axios({
@@ -6,7 +10,7 @@ class Rate {
             headers: {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
             },
-            value
+            data: {rate: value}
             }).then((res) => {
                 alert('works');
             }).catch((err) => {

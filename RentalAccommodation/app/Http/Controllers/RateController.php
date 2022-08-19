@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\Accommodation;
+use App\Models\Rate;
 use Illuminate\Http\Response;
 
 
@@ -16,9 +16,13 @@ class RateController extends Controller
         ]);
 
         if(!$validated->fails()) {
-            $accommodation= Accommodation::find($id);
+            $rate= Rate::where('accommodation_id', $id);
 
-            $update= $accommodation->update([
+            $rate->count+=1;
+            
+            $newRate= $rate / $rate->count; // ?? Check this tomorrow 19/8 need find the average and add the new rate
+
+            $update= $rate->update([
                 'rate' => $request->rate
             ]);
 
