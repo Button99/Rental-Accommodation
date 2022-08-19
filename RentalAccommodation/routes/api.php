@@ -77,3 +77,5 @@ Route::get('/accommodations', [AccommodationController::class, 'index']);
 Route::get('/location', [LocationController::class, 'getLocation']);
 
 Route::get('/accommodations/{id}', [AccommodationController::class, 'show']);
+
+Route::get('/accommodations/{id}/getRate', [RateController::class, 'show']);

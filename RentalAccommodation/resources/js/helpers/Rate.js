@@ -11,12 +11,13 @@ class Rate {
                 Authorization: 'Bearer ' + JSON.parse(AppStorage.getToken())
             },
             data: {rate: value}
-            }).then((res) => {
+            }).then(() => {
                 alert('works');
             }).catch((err) => {
                 alert(err);
         });
     }
+
 }
 
 export default Rate= new Rate();

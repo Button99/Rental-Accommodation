@@ -16,14 +16,14 @@ class RateController extends Controller
         ]);
 
         if(!$validated->fails()) {
-            $rate= Rate::where('accommodation_id', $id);
-
-            $rate->count+=1;
+            $rate= Rate::where('accommodation_id', $id)->first();
             
-            $newRate= $rate / $rate->count; // ?? Check this tomorrow 19/8 need find the average and add the new rate
+            $rate->counter+=1;
+            
+            $newTotalRate= $rate->total_rate_value / $rate->counter;
 
             $update= $rate->update([
-                'rate' => $request->rate
+                'rate' => $newTotalRate
             ]);
 
             if($update) {
@@ -33,4 +33,14 @@ class RateController extends Controller
 
         return response()->json('Failed', Response::HTTP_FORBIDDEN);
     }
+
+    public function show($id) {
+        $rate= Rate::where('accommodation_id', $id)->first();
+
+        if($rate) {
+            return response()->json($rate->rate, Response::HTTP_ACCEPTED);
+        }
+
+        return response()->json('Error', Response::HTTP_NO_CONTENT);
+    }    
 }
