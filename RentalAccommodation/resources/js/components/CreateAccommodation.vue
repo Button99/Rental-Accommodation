@@ -269,20 +269,8 @@
                 for(const i in this.form) {
                     formData.append(i, this.form[i]);
                 }
-                console.log(formData);
                 Accommodation.createAccommodation(formData);
             },
-
-            updateAccommodation(id) {
-                let formData= new FormData();
-                $.each(this.files, function(key, img) {
-                    formData.append(`images[${key}]`, img);
-                });
-
-                for(const i in this.form) {
-                    formData.append(i, this.form[i]);
-                }
-            }
         }
     }
 
