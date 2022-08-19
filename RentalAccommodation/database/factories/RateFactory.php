@@ -24,9 +24,9 @@ class RateFactory extends Factory
     public function definition()
     {
         return [
+            'total_rate_value' => '50',
             'rate' => '5',
-            'total_rate' => '5',
-            'count' => '10',
+            'counter' => '10',
             'user_id' => function() {
                 return User::all()->random();
             },
