@@ -85,7 +85,6 @@
             },
 
             changePhone() {
-
                 axios({
                     method: 'post',
                     url: 'api/settings/user/'+ this.id + '/changePhone',
