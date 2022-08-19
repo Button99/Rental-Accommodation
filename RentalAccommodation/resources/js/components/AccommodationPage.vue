@@ -204,7 +204,7 @@ export default {
             },
 
             getResults(page=1) {
-                axios.get('api/showComments?page='+ page)
+                axios.get('api/{id}/showComments?page='+ page)
                     .then((res) => {
                         this.comments= res.data;
                     }).catch((err) => {
