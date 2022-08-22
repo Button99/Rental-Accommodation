@@ -26,17 +26,6 @@
                                 Price: <b> {{accommodation.price}} </b> 
                             </p>
                     </div>      
-                        <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md" id="button-list">
-                            <b-list-group-item>
-                                <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
-                            </b-list-group-item>
-                            <b-list-group-item>
-                                <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
-                                    <b-button variant="danger" type="submit"> Delete</b-button> 
-                                </b-form>
-                            </b-list-group-item>
-                        </b-list-group>
-                        <br />
                         <div class="float-left" style="padding-left: 2rem; width: 55%;">
                         <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="createComment()" size="md" method="POST" action="#" style="margin: 2rem;">
                             <h3>Your opinion values!</h3>
@@ -107,8 +96,19 @@
                                 </b-col>
                             </b-row>
                         </div>
+                        <br />
                     </div>
-                </div>
+                </div>                                    
+                <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md" id="button-list" style="width: 18%;">
+                    <b-list-group-item>
+                        <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
+                    </b-list-group-item>
+                    <b-list-group-item>
+                        <b-form @submit.prevent="deleteAccommodation()" method="DELETE" action="#">
+                            <b-button variant="danger" type="submit">Delete</b-button> 
+                        </b-form>
+                    </b-list-group-item>
+                </b-list-group>
             </div>
         </div>
         <br />
