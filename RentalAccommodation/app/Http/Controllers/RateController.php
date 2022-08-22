@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Rate;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Auth;
 
 class RateController extends Controller
 {
@@ -16,18 +16,28 @@ class RateController extends Controller
         ]);
 
         if(!$validated->fails()) {
-            $rate= Rate::where('accommodation_id', $id)->first();
+            $rate= Rate::where('accommodation_id', $id)->where('user_id', Auth::user()->id)->first();
             
-            $rate->counter+=1;
+            if($rate) {
+                $update= $rate->update([
+                    'rate' => $request->rate,
+                ]);
+                
+                if($update) {
+                    return response()->json('Rate has been updated!', Response::HTTP_ACCEPTED);
+                }
+            }
             
-            $newTotalRate= $rate->total_rate_value / $rate->counter;
+            else {
+                $create= Rate::create([
+                    'rate' => $request->rate,
+                    'user_id' => Auth::user()->id,
+                    'accommodation_id' => $id
+                ]);
 
-            $update= $rate->update([
-                'rate' => $newTotalRate
-            ]);
-
-            if($update) {
-                return response()->json('Rate has been updated!', Response::HTTP_ACCEPTED);
+                if($create) {
+                    return response()->json('Rate has been created', Response::HTTP_ACCEPTED);
+                }
             }
         }
 
@@ -35,10 +45,10 @@ class RateController extends Controller
     }
 
     public function show($id) {
-        $rate= Rate::where('accommodation_id', $id)->first();
+        $rate= Rate::where('accommodation_id', $id)->avg('rate');
 
         if($rate) {
-            return response()->json($rate->rate, Response::HTTP_ACCEPTED);
+            return response()->json($rate, Response::HTTP_ACCEPTED);
         }
 
         return response()->json('Error', Response::HTTP_NO_CONTENT);

@@ -10,11 +10,9 @@ class Rate extends Model
     use HasFactory;
 
     protected $fillable= [
-        'accommodation_id',
         'rate',
-        'total_rate',
-        'count',
-        'user_id'
+        'user_id', 
+        'accommodation_id'
     ];
 
     public function user() {
