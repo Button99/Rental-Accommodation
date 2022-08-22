@@ -21,7 +21,7 @@ class AccommodationController extends Controller
             $features[]= Feature::where('accommodation_id', $accommodation->id)->get();
         }
         if(!empty($pictures) && !empty($features)) {
-            return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+            return response()->json(['accommodations' => $accommodations, 'features' => $features, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
         }
         return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
     }
@@ -178,7 +178,7 @@ class AccommodationController extends Controller
                 'hot_tub' => $request->hot_tub
             ]);
             foreach($request->images as $img) {
-                $generatedName= time(). '.' . $img->getClientOriginalExtension();
+                $generatedName= $img->getClientOriginalName() . time(). '.' . $img->getClientOriginalExtension();
                 $path= 'upload' . '/' . $generatedName;
                 $picture= Picture::create([
                     'path' => $path,
