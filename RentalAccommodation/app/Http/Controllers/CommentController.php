@@ -17,36 +17,51 @@ class CommentController extends Controller
             'comment' => ['required'],
             'accommodationId' => ['required', 'integer'],
         ]);
+        
         if(!$validation->fails()) {
-           $comment= Comment::create([
-                'comment' => $request->comment['comment'],
-                'user_id' => Auth::user()->id,
-                'accommodation_id' => $request->accommodationId
-           ]);
+            $hasCommented= Comment::where('user_id', Auth::user()->id)->where('accommodation_id', $request->accommodationId)->first();
+            
+            if($hasCommented) {
+                $comment= $hasCommented->update([
+                    'comment' => $request->comment['comment'],
+                    'user_id' => Auth::user()->id,
+                    'accommodation_id' => $request->accommodationId
+                ]);
 
-           if($comment) {
-                return response()->json('Comment created successfully', Response::HTTP_CREATED);
-           }
-        }
+                if($comment) {
+                        return response()->json('Comment updated successfully', Response::HTTP_OK);
+                }
+            }
+
+            else {
+                $comment= Comment::create([
+                    'comment' => $request->comment['comment'],
+                    'user_id' => Auth::user()->id,
+                    'accommodation_id' => $request->accommodationId
+                ]);
+                if($comment) {
+                    return response()->json('Comment created successfully', Response::HTTP_CREATED);
+                }
+            }
+
         return response()->json('Comment can\'t be created!', Response::HTTP_BAD_REQUEST);
-
+        }
     }
-
     
     public function index($id) {
-        $Comment= Comment::where('accommodation_id', $id)->orderBy('updated_at', 'desc')->get();
-        foreach($Comment as $comment) {
+         
+        // Comments should show based on the accommodation id
+        $comments= Comment::where('accommodation_id', $id)->orderBy('updated_at', 'desc')->get();
+        foreach($comments as $comment) {
             $userFirstNames=User::select('first_name')->where('id', $comment['user_id'])->get()->toArray();
             foreach($userFirstNames as $userFirstName) {
                 $message[]= array('id' => $comment['id'], 'name' => $userFirstName['first_name'], 'comment' => $comment['comment'], 'date' => $comment->updated_at->format('d/m/y'));
             }
         }
-    
-        return response()->json($message, Response::HTTP_ACCEPTED);
-    }
+        if($message) {
+            return response()->json($message, Response::HTTP_ACCEPTED);
+        }
 
-    public function update(Request $request, Comment $Comment)
-    {
-        //
+        return response()->json('', Response::HTTP_NO_CONTENT);
     }
 }
