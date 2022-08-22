@@ -17,7 +17,7 @@ class Rating extends Migration
             $table->id();
             $table->double('total_rate_value');
             $table->double('rate');
-            $table->integer('counter');
+            $table->integer('counter')->default(0);
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')
