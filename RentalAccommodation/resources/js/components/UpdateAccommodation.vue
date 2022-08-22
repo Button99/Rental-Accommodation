@@ -3,7 +3,7 @@
         <section class="float-left m-3">
             <b-card header="Create Accommodation">
                 <b-card-body class="m-3">
-                    <b-form action="#" id="create-accommodation" @submit.prevent="createAccommodation()" enctype="multipart/form-data" method="POST">
+                    <b-form action="#" id="create-accommodation" @submit.prevent="updateAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
                             <div v-if="!$v.form.name.required" class="text-danger">Name is required</div>
                             <div v-if="!$v.form.name.minLength" class="text-danger">Needs to be greater than 3 characters</div> 
@@ -124,6 +124,10 @@
                     description: '',
                     town: '',
                     accommodation_type: '',
+                    latitude: '',
+                    longitude: '',
+                    address1: '',
+                    address2: '',
                     price: '',
                     pool: '0',
                     bbq: '0',
