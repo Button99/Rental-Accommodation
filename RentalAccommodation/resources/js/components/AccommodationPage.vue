@@ -1,30 +1,31 @@
 <template>
     <section class="container-fluid">
         <div class="card" id="accommodation-page">
-            <div id="card-norm" class="accommodation-card-layout" >
-                <b-carousel controls fade indicators :interval="4000" id="carousel-layout">
+            <div id="card-norm" class="accommodation-card-layout">
+                <b-carousel controls fade indicators :interval="4000" style="width: 50%; float: left;">
                     <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="index" :index="index"></b-carousel-slide>
                 </b-carousel>
-
+      
                 <div class="card-body">
-                    <div class="float-left" style="width: 40%;">
+                    <div class="float-right" style="width: 50%; padding-left: 3rem;">    
                         <h5 class="card-title">Name: {{accommodation.name}} </h5>
-                        <p class="card-text">
-                            Type: {{accommodation.accommodation_type}} <br />
-                            Rooms: {{accommodation.rooms}} <br />
-                            Town: {{accommodation.town}} <br />
-                            Address: {{accommodation.address1}}, {{accommodation.address2}} <br />
-                            Description: {{accommodation.description}} <br />
-                            <b v-if="accommodationRate == null ">
-                                Rate: Not available
-                            </b>
-                            <b v-else class="inline" inline>
-                                Rate:
-                                <b-form-rating v-model="accommodationRate" size="sm" class="w-25 m-1 inline" precision="2" inline disabled></b-form-rating>
-                            </b>
-                            <br />
-                            Price: <b> {{accommodation.price}} </b> 
-                        </p>                  
+                            <p class="card-text">
+                                Type: {{accommodation.accommodation_type}} <br />
+                                Rooms: {{accommodation.rooms}} <br />
+                                Town: {{accommodation.town}} <br />
+                                Address: {{accommodation.address1}}, {{accommodation.address2}} <br />
+                                Description: {{accommodation.description}} <br />
+                                <b v-if="accommodationRate == null ">
+                                    Rate: Not available
+                                </b>
+                                <b v-else class="inline" inline>
+                                    Rate:
+                                    <b-form-rating v-model="accommodationRate" size="sm" class="w-25 m-1 inline" precision="2" inline disabled></b-form-rating>
+                                </b>
+                                <br />
+                                Price: <b> {{accommodation.price}} </b> 
+                            </p>
+                    </div>      
                         <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md" id="button-list">
                             <b-list-group-item>
                                 <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
@@ -36,18 +37,17 @@
                             </b-list-group-item>
                         </b-list-group>
                         <br />
+                        <div class="float-left" style="padding-left: 2rem; width: 55%;">
                         <b-form v-if="accommodation.user_id != usr_id" @submit.prevent="createComment()" size="md" method="POST" action="#" style="margin: 2rem;">
                             <h3>Your opinion values!</h3>
                             <p>Rate the accommodation:<br/>
-                            <b-input-group>
-                                <b-form-rating v-model="rate" variant="danger" ></b-form-rating>
-                                <b-input-group-append>
-                                    <b-button @click="addRate(rate)">Add Rate</b-button>
-                                </b-input-group-append>
-                            </b-input-group>
-
+                                <b-input-group>
+                                    <b-form-rating v-model="rate" variant="danger" ></b-form-rating>
+                                    <b-input-group-append>
+                                        <b-button @click="addRate(rate)">Add Rate</b-button>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </p>
-
                             <p>Share your experience: </p>
                             <b-form-textarea id="create-comment" size="sm" v-model="text.comment" rows="3" max-rows="5"/> <br/>
                             <b-button type="submit" size="sm">Submit</b-button>
@@ -60,7 +60,7 @@
                                 <l-marker :lat-lng="markerLatLng"></l-marker>
                             </l-map>  
                         </div>
-                        <div class="features-style" stacked right>
+                        <div class="features-style" stacked left>
                             <h4>Accommodation Features</h4>
                             <b-row>
                                 <b-col class="m-1">
@@ -190,6 +190,8 @@ export default {
                 axios.get('api/accommodations/' + this.$route.params.id + '/getRate')
                     .then((res) => {
                         this.accommodationRate= res.data;
+                        console.log(res.data);
+                        console.log(this.accommodationRate);
                     }).catch((err) => {
                         alert(err);
                     })
