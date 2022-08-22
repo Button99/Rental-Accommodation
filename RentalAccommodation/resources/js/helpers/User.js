@@ -162,7 +162,7 @@ class User {
             // Need to see how the data are passing to db
             data: {comment, accommodationId}
         }).then((res) => {
-            console.log('ok')
+            router.go();
         }).catch((err) => {
             alert(err);
         });
