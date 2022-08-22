@@ -1,8 +1,8 @@
 <template>
     <section class="container-fluid">
         <div class="card" id="accommodation-page">
-            <div id="card-norm" class="accommodation-card-layout">
-                <b-carousel controls fade indicators :interval="4000">
+            <div id="card-norm" class="accommodation-card-layout" >
+                <b-carousel controls fade indicators :interval="4000" id="carousel-layout">
                     <b-carousel-slide v-for="(item, index) in pictures[0]" :img-src="'/' + item.path"   :key="index" :index="index"></b-carousel-slide>
                 </b-carousel>
 
@@ -204,16 +204,16 @@ export default {
             },
 
             getResults(page=1) {
-                axios.get('api/{id}/showComments?page='+ page)
+                axios.get('api/' + this.$route.params.id + '/showComments?page='+ page)
                     .then((res) => {
                         this.comments= res.data;
                     }).catch((err) => {
-                        alert(err);
+                        // If accommodation has no comments -> do nothing
                     });
             },
             
             addRate(value) {
-                Rate.rate(this.accommodation.id, value);
+                Rate.addRate(this.accommodation.id, value);
             },
         
         }

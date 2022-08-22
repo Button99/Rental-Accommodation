@@ -101,6 +101,9 @@
     height: 40vh;
 }
 
+#accommodation-page #card-norm #carousel-layout {
+    width: 40%;
+}
 #card-horizontal img {
     height: 30vh;
 }
@@ -124,6 +127,7 @@
 }
 
 .map {
+    padding-bottom: 30%;
     float: right;
     width: 50%;
     margin: 2rem;
