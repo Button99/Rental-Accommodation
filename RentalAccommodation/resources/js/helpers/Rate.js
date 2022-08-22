@@ -3,7 +3,7 @@ import AppStorage from './AppStorage';
 
 
 class Rate {
-    rate(id, value) {
+    addRate(id, value) {
         axios({
             method: 'post',
             url: 'api/accommodations/' + id + '/rate',
@@ -12,7 +12,7 @@ class Rate {
             },
             data: {rate: value}
             }).then(() => {
-                alert('works');
+                router.go();
             }).catch((err) => {
                 alert(err);
         });
