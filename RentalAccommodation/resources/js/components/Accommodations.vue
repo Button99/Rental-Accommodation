@@ -112,6 +112,7 @@
                     var b= this.selected_features;
                     var f= this.features;
                     filtered_accommodations= this.accommodations.filter(function(a) {
+                        console.log(f);
                         for(var i=0; i<b.length; i++) {
                             for(var j=0; j<f[i].length; j++) {
                                 if(f[i][j][b[i]] == '0') {
@@ -131,11 +132,8 @@
                 axios.get('api/accommodations')
                     .then((res) => {
                         this.accommodations= res.data.accommodations;
-                        console.log(this.accommodations);
                         this.features= res.data.features;
-                        console.log(this.features);
                         this.pictures= res.data.pictures;
-                        console.log(this.pictures);
                     }).catch((err) => {
                         alert(err);
                     })
