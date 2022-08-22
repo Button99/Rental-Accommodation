@@ -15,9 +15,7 @@ class Rating extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
-            $table->double('total_rate_value');
-            $table->double('rate');
-            $table->integer('counter')->default(0);
+            $table->double('rate')->default(0);
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users')
