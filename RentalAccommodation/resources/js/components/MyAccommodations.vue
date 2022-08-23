@@ -2,7 +2,7 @@
     <div class="container" style="height: 85vh;">
         <h1>My Accommodations Page</h1>
         <section class="my-accommodations" v-if="accommodations.length > 0">
-            <ul class="justify-content-center">
+            <ul class="justify-content-center" id="accommodationList">
                 <div class="col-md-7">
                     <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
@@ -38,7 +38,9 @@ import AppStorage from '../helpers/AppStorage';
             return {
                 accommodations: [],
                 pictures: [],
-                show: false
+                show: false,
+                currentPage: 1,
+                perPage: 3,
             }
         },
     
