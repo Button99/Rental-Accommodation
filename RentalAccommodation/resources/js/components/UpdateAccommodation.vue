@@ -1,7 +1,7 @@
 <template>
     <div class="create-accommodation-layout container-fluid">
         <section class="float-left m-3">
-            <b-card header="Create Accommodation">
+            <b-card header="Update Accommodation">
                 <b-card-body class="m-3">
                     <b-form action="#" id="create-accommodation" @submit.prevent="updateAccommodation()" enctype="multipart/form-data" method="POST">
                         <b-form-group label="Name: " label-for="name">
