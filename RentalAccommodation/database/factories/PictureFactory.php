@@ -24,7 +24,7 @@ class PictureFactory extends Factory
     public function definition()
     {
         return [
-            'path' => $this->faker->imageUrl(100, 100, 'accommodation'),
+            'path' => 'upload/PHOTO2.jpg1661164338.jpg',
             'ext' => 'jpg',
             'description' => $this->faker->sentence(),
             'accommodation_id' => function() {

@@ -24,9 +24,7 @@ class RateFactory extends Factory
     public function definition()
     {
         return [
-            'total_rate_value' => '50',
-            'rate' => '5',
-            'counter' => '10',
+            'rate' => $this->faker->numberBetween(1, 5),
             'user_id' => function() {
                 return User::all()->random();
             },
