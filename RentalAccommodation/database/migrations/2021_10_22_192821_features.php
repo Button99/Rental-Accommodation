@@ -30,7 +30,7 @@ class Features extends Migration
             $table->timestamps();
             
             $table->foreignId('accommodation_id')->constrained('accommodations')
-                ->onDelete('restrict')->onUpdate('restrict');
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
