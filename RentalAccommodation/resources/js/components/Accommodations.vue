@@ -24,6 +24,8 @@
     
     <div class="container">
         <section class="my-accommodations" v-if="accommodations.length > 0">
+            <b-pagination v-model="currentPage" :total-rows="accommodations.length" :per-page="perPage" aria-controls="accommodationList" align="center"></b-pagination>
+
             <ul class="justify-content-center">
                 <div class="col-md-7">
                     <li v-for="accommodation in filteredAccommodations" class="p-3 col-md-4 mt-5">
@@ -138,8 +140,14 @@
                         alert(err);
                     })
             },
+            
             recompute() {
                 this.filteredAccommodations;
+            },
+            
+            accommodationItemList() {
+                return this.accommodation.slice((this.currentPage -1) * this.perPage,
+                    this.currentPage * this.perPage);
             }
         }
     }
