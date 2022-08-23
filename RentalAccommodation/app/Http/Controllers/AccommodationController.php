@@ -28,9 +28,9 @@ class AccommodationController extends Controller
 
     public function show($id) {
         $accommodation= Accommodation::find($id);
-        $pictures[]= Picture::where('accommodation_id', '=', $id)->get();
-        $features= Feature::where('accommodation_id', '=', $id)->get();
-        $Comment= Comment::where('accommodation_id', '=', $id)->get();
+        $pictures[]= Picture::where('accommodation_id', $id)->get();
+        $features= Feature::where('accommodation_id', $id)->get();
+        $Comment= Comment::where('accommodation_id', $id)->get();
         
         return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'Comment' => $Comment], Response::HTTP_ACCEPTED);
     }
@@ -98,7 +98,7 @@ class AccommodationController extends Controller
             ]);
 
             foreach($request->images as $img) {
-                $generatedName= time(). '.' . $img->getClientOriginalExtension();
+                $generatedName= $img->getClientOriginalName() . time(). '.' . $img->getClientOriginalExtension();
                 $path= 'upload' . '/' . $generatedName;
                 $picture= Picture::create([
                     'path' => $path,
@@ -120,8 +120,9 @@ class AccommodationController extends Controller
 
     public function delete($id) {
         $accommodation= Accommodation::find($id);
-        $features= Feature::where('accommodation_id', '=', $id);
-        if($features->delete() && $accommodation->delete()) {
+        $features= Feature::where('accommodation_id', $id);
+        $pictures= Picture::where('accommodation_id', $id);
+        if($features->delete() && $accommodation->delete() && $pictures->delete()) {
             return response()->json('Accommodation deleted successfully', Response::HTTP_ACCEPTED);
         }
 
