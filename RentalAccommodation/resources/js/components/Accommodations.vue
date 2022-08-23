@@ -24,11 +24,12 @@
     
     <div class="container">
         <section class="my-accommodations" v-if="accommodations.length > 0">
-            <b-pagination v-model="currentPage" :total-rows="accommodations.length" :per-page="perPage" aria-controls="accommodationList" align="center"></b-pagination>
+            <b-pagination v-model="currentPage" :total-rows="filteredAccommodations.length" :per-page="perPage" aria-controls="accommodationList" align="center"></b-pagination>
 
             <ul class="justify-content-center">
                 <div class="col-md-7">
-                    <li v-for="accommodation in filteredAccommodations" class="p-3 col-md-4 mt-5">
+                    <li v-for="accommodation in filteredAccommodations.slice((currentPage -1) * perPage, perPage * currentPage)" class="p-3 col-md-4 mt-5" id="accommodationList" :per-page="perPage" :current-page="currentPage">
+
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
                             <div class="card">
                                 <img :src="picture[0].path" v-for="picture in pictures" v-if="accommodation.id == picture[0].accommodation_id" style=" height: 30vh;" class="card-img-top" />
@@ -81,6 +82,8 @@
                 selected_budget: [],
                 selected_stars: [],
                 selected_features: [],
+                perPage: 5,
+                currentPage: 0,
             }
         },
         created() {
@@ -144,11 +147,6 @@
             recompute() {
                 this.filteredAccommodations;
             },
-            
-            accommodationItemList() {
-                return this.accommodation.slice((this.currentPage -1) * this.perPage,
-                    this.currentPage * this.perPage);
-            }
-        }
+        },
     }
 </script>
