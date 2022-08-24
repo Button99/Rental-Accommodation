@@ -38,7 +38,7 @@
                                     <p class="card-text">
                                         Rooms: {{accommodation.rooms}} <br />
                                         Town: {{accommodation.town}} <br />
-                                        Description: {{accommodation.description}} <br />
+                                        Description: {{accommodation.description.slice(0, 100)}} Read more... <br />
                                         <b>Price: {{accommodation.price}}</b> <br />
                                     </p>
                                 </div>
@@ -95,16 +95,24 @@
                 if(this.selected_budget.length== 0 && this.selected_stars.length== 0  && this.selected_features.length== 0 ) {
                     return this.accommodations;
                 }
+
                 if(this.selected_budget.length > 0) {
                     var b= this.selected_budget;
                     filtered_accommodations= this.accommodations.filter(function(a) {
                         for(var i=0; i< b.length; i++ ) {
-                            if(b[i] >= a.price) {
+
+                            if(b[i] === '250') {
+                                if(b[i] < a.price || (b[i] - 50) <= a.price) {
+                                    return a; 
+                                }
+                            } 
+                            if(b[i] >= a.price && (b[i] - 50) <= a.price) {
                                 return a;
                             }
                         }
                     });
                 }
+
                 if(this.selected_stars.length > 0) {
                     var b= this.selected_stars;
                     filtered_accommodations= this.accommodations.filter(function(a) {
