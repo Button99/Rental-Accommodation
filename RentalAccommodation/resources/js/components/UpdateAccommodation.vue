@@ -52,8 +52,8 @@
                 </b-card-body>
             </b-card>
         </section>
-        <section class="float-right m-4 features-layout">
-            <div class="container border p-4">
+        <section class="features-layout">
+            <div class="container border">
                 <b-form form="create-accommodation">
                     <b-row>
                         <b-col class="m-3">
@@ -106,7 +106,7 @@
             <br />
             <br />
             <div class="form-group">
-                <b-button type="submit" form="create-accommodation" class="btn">Create</b-button>
+                <b-button type="submit" form="create-accommodation" class="btn">Update</b-button>
             </div>
         </section>
     </div>
