@@ -42,26 +42,26 @@
                             <b-button type="submit" size="sm">Submit</b-button>
                         </b-form>
                     </div>
-                        <div class="map">
-                            <h4>Location: </h4>
-                            <l-map :zoom="zoom" :center="center">
-                                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                                <l-marker :lat-lng="markerLatLng"></l-marker>
-                            </l-map>  
-                        </div>
-                        <div class="features-style" stacked left>
-                            <h4>Accommodation Features</h4>
-                            <b-row>
-                                <b-col class="m-1">
-                                    <b-checkbox id="pool" v-model="features[0].pool" value="1" disabled>Pool</b-checkbox>
-                                </b-col>
-                                <b-col class="m-1">
-                                    <b-checkbox id="bbq" v-model="features[0].bbq" value="1" disabled> BBQ</b-checkbox>
-                                </b-col>
-                                <b-col class="m-1">
-                                    <b-checkbox id="pool_table" v-model="features[0].pool_table" value="1" disabled> Pool table</b-checkbox>
-                                </b-col>
-                            </b-row>
+                    <div class="map">
+                        <h4>Location: </h4>
+                        <l-map :zoom="zoom" :center="center">
+                            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                            <l-marker :lat-lng="markerLatLng"></l-marker>
+                        </l-map>  
+                    </div>
+                    <div class="features-style" stacked>
+                        <h4>Accommodation Features</h4>
+                        <b-row>
+                            <b-col class="m-1">
+                                <b-checkbox id="pool" v-model="features[0].pool" value="1" disabled>Pool</b-checkbox>
+                            </b-col>
+                            <b-col class="m-1">
+                                <b-checkbox id="bbq" v-model="features[0].bbq" value="1" disabled> BBQ</b-checkbox>
+                            </b-col>
+                            <b-col class="m-1">
+                                <b-checkbox id="pool_table" v-model="features[0].pool_table" value="1" disabled> Pool table</b-checkbox>
+                            </b-col>
+                        </b-row>
                             <b-row>
                                 <b-col class="m-1">
                                     <b-checkbox id="wifi" v-model="features[0].wifi" value="1" disabled>Wifi</b-checkbox>
@@ -99,8 +99,8 @@
                         <br />
                     </div>
                 </div>                                    
-                <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md" id="button-list" inline>
-                    <b-list-group-item>
+                <b-list-group v-if=" accommodation.user_id == usr_id" horizontal="md" id="button-list">
+                    <b-list-group-item >
                         <router-link :to="/updateAccommodation/ + accommodation.id"> <b-button variant="warning" type="submit"> Update </b-button> </router-link>
                     </b-list-group-item>
                     <b-list-group-item>
