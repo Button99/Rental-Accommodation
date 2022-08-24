@@ -71,6 +71,9 @@
 
 .features-layout {
   width: 50%;
+  float: right;
+  margin: 2rem;
+  padding: 2rem;
 }
 
 .my-accommodations ul {
@@ -155,7 +158,7 @@
 }
 
 .features-style {
-  width: 45;
+  width: 45%;
   margin: 2rem;
   float: left;
 }
@@ -198,7 +201,6 @@
 
   .map {
     width: 100%;
-    float: none;
     height: 20vh;
   }
 
@@ -206,9 +208,19 @@
     width: 30%;
   }
 
-  #button-list #b-list-group-item {
-    width: 50%;
-    float: inline-end;
+  .features-style {
+    width: 100%;
+    height: 25vh;
+  }
+
+  #button-list {
+    width: 100%;
+    align-items: center;
+  }
+
+  .features-layout {
+    width: 100%;
+    padding: 4rem;
   }
 }
 /*!
