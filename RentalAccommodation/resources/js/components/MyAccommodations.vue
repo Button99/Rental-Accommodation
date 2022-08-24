@@ -2,9 +2,10 @@
     <div class="container" style="height: 85vh;">
         <h1>My Accommodations Page</h1>
         <section class="my-accommodations" v-if="accommodations.length > 0">
+            <b-pagination v-model="currentPage" :total-rows="accommodations.length" :per-page="perPage" aria-controls="accommodationList" align="center"></b-pagination>
             <ul class="justify-content-center" id="accommodationList">
                 <div class="col-md-7">
-                    <li v-for="accommodation in accommodations" class="p-3 col-md-4 mt-5">
+                    <li v-for="accommodation in accommodations.slice((currentPage -1) * perPage, perPage * currentPage)" class="p-3 col-md-4 mt-5" id="accommodationList" :per-page="perPage" :current-page="currentPage">
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
                             <div class="card">
                                 <img :src="picture[0].path" v-for="picture in pictures" v-if="accommodation.id == picture[0].accommodation_id" style=" height: 30vh;" class="card-img-top" />
@@ -40,7 +41,7 @@ import AppStorage from '../helpers/AppStorage';
                 pictures: [],
                 show: false,
                 currentPage: 1,
-                perPage: 3,
+                perPage: 5,
             }
         },
     
