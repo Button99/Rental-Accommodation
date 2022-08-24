@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="height: 85vh;">
+    <div class="container" style="min-height: 85vh; ">
         <h1>My Accommodations Page</h1>
         <section class="my-accommodations" v-if="accommodations.length > 0">
             <b-pagination v-model="currentPage" :total-rows="accommodations.length" :per-page="perPage" aria-controls="accommodationList" align="center"></b-pagination>
