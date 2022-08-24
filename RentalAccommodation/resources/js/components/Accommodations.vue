@@ -2,7 +2,7 @@
     <div>
         <h1> Accommodations </h1>
         <br />
-        <section class="settings-menu">
+        <section class="settings-menu border-right border-top border-bottom">
             <b-list-group >
                 <h2>Filter by</h2>
                 <br />
@@ -27,14 +27,14 @@
             <b-pagination v-model="currentPage" :total-rows="filteredAccommodations.length" :per-page="perPage" aria-controls="accommodationList" align="center"></b-pagination>
 
             <ul class="justify-content-center">
-                <div class="col-md-7">
+                <div class="col-md-9">
                     <li v-for="accommodation in filteredAccommodations.slice((currentPage -1) * perPage, perPage * currentPage)" class="p-3 col-md-4 mt-5" id="accommodationList" :per-page="perPage" :current-page="currentPage">
 
                         <router-link :to="{ name: 'accommodation', params: {id: accommodation.id}}">
                             <div class="card">
                                 <img :src="picture[0].path" v-for="picture in pictures" v-if="accommodation.id == picture[0].accommodation_id" style=" height: 30vh;" class="card-img-top" />
                                 <div class="card-body">
-                                    <h5 class="card-title">{{accommodation.name}}</h5>
+                                    <h5 class="card-title">{{accommodation.name.slice(0, 10)}}</h5>
                                     <p class="card-text">
                                         Rooms: {{accommodation.rooms}} <br />
                                         Town: {{accommodation.town}} <br />
@@ -82,7 +82,7 @@
                 selected_budget: [],
                 selected_stars: [],
                 selected_features: [],
-                perPage: 5,
+                perPage: 6,
                 currentPage: 0,
             }
         },
