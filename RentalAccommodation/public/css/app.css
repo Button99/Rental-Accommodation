@@ -42,9 +42,8 @@
 
 .settings-menu {
   width: 15%;
-  border-right: 1px solid black;
   float: left;
-  height: 110vh;
+  min-height: 110vh;
 }
 
 .settings-options {
