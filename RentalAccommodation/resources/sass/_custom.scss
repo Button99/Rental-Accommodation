@@ -103,6 +103,37 @@
 #accommodation-page #card-norm #carousel-layout {
     width: 60%;
 }
+
+// For Change /////
+
+// #accommodation-page .card-body {
+//     float: right;
+//     width: 50%;
+//     padding-left: 3rem;
+// }
+
+
+#button-list {
+    width: 18%;
+}
+
+#accommodation-page #carousel {
+    width: 50%;
+    float: left;
+}
+
+#accommodation-page #data {
+    width: 50%;
+    padding-left: 3rem;
+    float: right;
+}
+
+#accommodation-page #opinion {
+    padding-left: 2rem;
+    width: 55%;
+    float: left;
+}
+
 #card-horizontal img {
     height: 30vh;
 }
@@ -127,7 +158,8 @@
 
 .map {
     float: right;
-    width: 40%;
+    width: 45%;
+    height: 45vh;
 }
 
 .features-style {
@@ -142,4 +174,48 @@
 
 .verify-layout {
     height: 85vh;
+}
+
+@media only screen and (max-device-width: 480px) {
+        .accommodation-card-layout {
+            float: none;
+            width: 100%;
+            max-height: 250vh;
+        }
+
+        #accommodation-page {
+            height: 200vh;
+            width: auto;
+            float: none;
+            border: 0;
+        }
+
+        #accommodation-page #carousel {
+            width: 100%;
+        }
+
+        #accommodation-page #data {
+            width: 100%;
+            float: left;
+        }
+
+        #accommodation-page #opinion {    
+            width: 100%;
+            float: none;
+        }
+
+        .map {
+            width: 100%;
+            float: none;
+            height: 20vh;
+        }
+
+        .settings-menu {
+            width: 30%;
+        }
+
+        #button-list #b-list-group-item{
+            width: 50%;
+            float: inline-end;
+        }
 }
