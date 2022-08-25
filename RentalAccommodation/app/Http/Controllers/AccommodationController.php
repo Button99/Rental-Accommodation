@@ -30,9 +30,9 @@ class AccommodationController extends Controller
         $accommodation= Accommodation::find($id);
         $pictures[]= Picture::where('accommodation_id', $id)->get();
         $features= Feature::where('accommodation_id', $id)->get();
-        $Comment= Comment::where('accommodation_id', $id)->get();
+        $comment= Comment::where('accommodation_id', $id)->get();
         
-        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'Comment' => $Comment], Response::HTTP_ACCEPTED);
+        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'Comment' => $comment], Response::HTTP_ACCEPTED);
     }
 
     public function store(Request $request) {
