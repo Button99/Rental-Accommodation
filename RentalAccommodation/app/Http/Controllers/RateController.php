@@ -24,7 +24,7 @@ class RateController extends Controller
                 ]);
                 
                 if($update) {
-                    return response()->json('Rate has been updated!', Response::HTTP_ACCEPTED);
+                    return response()->json('Rate has been updated!', Response::HTTP_OK);
                 }
             }
             
@@ -36,7 +36,7 @@ class RateController extends Controller
                 ]);
 
                 if($create) {
-                    return response()->json('Rate has been created', Response::HTTP_ACCEPTED);
+                    return response()->json('Rate has been created', Response::HTTP_OK);
                 }
             }
         }
