@@ -274,6 +274,7 @@
                 /* A) Use POST and pass _method inside the file
                 /* B) Use server-side packages that handle the problem (illuminatech/multipart-middleware || pecll/apfd) 
                 */
+               
                 formData.append('_method', 'PUT');
                 Accommodation.updateAccommodation(formData, this.$route.params.id);
             },
