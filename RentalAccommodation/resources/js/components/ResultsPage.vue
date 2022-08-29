@@ -36,11 +36,9 @@
         },
     
         created() {
-            console.log(this.$route.query.keywords);
             const data= this.$route.query.keywords;
             axios.get('api/search/accommodations',  {params: {keywords: data } })
             .then((res) => {
-                console.log(res.data);
                 this.accommodations= res.data.accommodations;
                 this.pictures= res.data.pictures;
             }).catch((err) => {
