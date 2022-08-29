@@ -9,7 +9,7 @@ use App\Models\Accommodation;
 class LocationController extends Controller
 {
     public function getLocation(Request $request) {
-        $location= Accommodation::select('town')->where('town', 'LIKE', '%'. $request->location .'%')->get();
+        $location= Accommodation::select('town')->where('town', 'LIKE', $request->location .'%')->distinct()->get();
 
         return response()->json(['Location'=> $location], Response::HTTP_ACCEPTED);
     }
