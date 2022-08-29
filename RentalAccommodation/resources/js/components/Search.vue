@@ -7,8 +7,7 @@
                         <b-form action="#" @submit.prevent="search()" method="GET">
                             <b-form-group label="Location: "  label-for="location" class="md-4">
                                 <div v-if="!$v.form.location.required" class="text-danger">Location required</div>
-                                <div v-if="!$v.form.location.alpha" class="text-danger">Needs only alphabetic characters</div>
-                                <b-form-input id="location" v-model="form.location" type="text" @input="onChange"/>
+                                <b-form-input id="location" v-model="form.location" type="text" @input="onChange"></b-form-input>
                                 <b-list-group v-if="form.location.length" v-show="isOpen">
                                     <b-list-group-item v-for="place in places" :key="place.town" @click="setResult(place.town)" button> {{place.town}} </b-list-group-item>
                                 </b-list-group>
@@ -42,7 +41,7 @@
 </template>
 
 <script>
-    import {required, alpha, numeric} from 'vuelidate/lib/validators';
+    import {required, numeric} from 'vuelidate/lib/validators';
 
     export default {
         data() {
@@ -69,7 +68,6 @@
             form: {
                 location: {
                     required,
-                    alpha
                 },
                 checkIn: {
                     required,

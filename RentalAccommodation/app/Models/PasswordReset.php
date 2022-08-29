@@ -20,6 +20,7 @@ class PasswordReset extends Model
         'email',
         'token',
         'created_at',
+        'user_id'
     ];
 
     public function user() {

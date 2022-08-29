@@ -109,9 +109,11 @@ class UserController extends Controller
         if(!$validated->fails()) {
             $key= md5(time().$request->email);
             $user= User::where('email', $request->email)->firstOrFail();
+            
             $psw_reset= PasswordReset::create([
                 'email' => $request->email,
-                'token' => $key
+                'token' => $key,
+                'user_id' => $user->id
             ]);
 
             $email= $user->email;
@@ -122,6 +124,7 @@ class UserController extends Controller
                 $message->setBody( 'Helloo');
                 $message->addPart('to reset your password please press the link http://127.0.0.1:8000/forgotPassword?key='. $key, 'text/plain');
             });
+
             return response()->json('OK', Response::HTTP_ACCEPTED);
 
         }
@@ -142,7 +145,6 @@ class UserController extends Controller
            ]);
 
            if($updated) {
-            print_r($email[0]['email']);
             Mail::raw('Hello from Rental Accommodation', function($message) use ($email) {
                 $message->from('RentalAccommodations@works.com', 'Rental Accommodation');
                 $message->to($email[0]['email']);
