@@ -9,7 +9,7 @@
                                 <b-form-group label="Email: " label-for="email" class="mb-4 ">
                                     <div v-if="!$v.form.email.required" class="text-danger">Email is required</div>
                                     <div v-if="!$v.form.email.email" class="text-danger">Not valid email type</div>
-                                    <b-form-input id="email" v-model="form.email" type="email" placeholder="Enter your password" required> </b-form-input>
+                                    <b-form-input id="email" v-model="form.email" type="email" placeholder="Enter your email" required> </b-form-input>
                                 </b-form-group>
                                 <b-button type="submit" variant="submit btn btn-primary text-uppercase fw-bold">Send Email</b-button>
                             </b-form>
@@ -29,7 +29,6 @@
                                 <b-button type="submit" variant="submit btn btn-primary text-uppercase fw-bold">Reset Password</b-button>
                             </b-form>
                         </div>
-
                     </b-card-body>
                 </b-card>
             </div>
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-    import {required, minLength, sameAs} from 'vuelidate/lib/validators';
+    import {required, minLength, sameAs, email} from 'vuelidate/lib/validators';
     export default {
         data() {
             return {
@@ -54,10 +53,16 @@
 
         validations: {
             form: {
+                email: {
+                    required,
+                    email
+                },
+
                 password: {
                     required,
                     minLength: minLength(8)
                 },
+
                 passwordRetype: {
                     required,
                     sameAsPassword: sameAs('password')

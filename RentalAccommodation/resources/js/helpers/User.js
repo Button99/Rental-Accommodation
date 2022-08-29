@@ -138,6 +138,7 @@ class User {
     forgotPassword(data) {
         axios.post('api/forgotPassword', data)
             .then((res) => {
+                alert('An email has been send to your email address');
             }).catch((err) => {
                 console.log(err);
             });
