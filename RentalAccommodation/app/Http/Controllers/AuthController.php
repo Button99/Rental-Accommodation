@@ -40,11 +40,11 @@ class AuthController extends Controller
         
                         return response()->json($res, Response::HTTP_ACCEPTED);
                 }
-                return response()->json('Please verify your email', Response::HTTP_FORBIDDEN);
+                return response()->json('Please verify your email', Response::HTTP_UNAUTHORIZED);
             }
         }
 
-        return response()->json('Wrong email or password', Response::HTTP_FORBIDDEN);
+        return response()->json('Wrong email or password', Response::HTTP_NOT_ACCEPTABLE);
     }
     
 
@@ -93,10 +93,10 @@ class AuthController extends Controller
                 return response()->json('User created Successfully', Response::HTTP_CREATED);
             }
 
-            return response()->json('Error with db', Response::HTTP_FORBIDDEN);
+            return response()->json('Error while creating the user', Response::HTTP_CONFLICT);
         }
 
-        return response()->json('Error with validation!', Response::HTTP_FORBIDDEN);
+        return response()->json('Error with validation!', Response::HTTP_NOT_ACCEPTABLE);
     }
 
     public function logout(Request $request) {
@@ -105,8 +105,8 @@ class AuthController extends Controller
             $request->user()->last_login= Carbon::now()->toDateTimeString();
             $request->user()->last_ip= $request->getClientIp();
             $request->user()->save();
-            return response()->json('Logged out!', Response::HTTP_ACCEPTED);
+            return response()->json('Logged out!', Response::HTTP_OK);
         }
-        return response()->json('Not Logged out!', Response::HTTP_FORBIDDEN);
+        return response()->json('Error while logging out!', Response::HTTP_UNAUTHORIZED);
     }
 }

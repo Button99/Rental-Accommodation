@@ -13,9 +13,9 @@ class VerificationController extends Controller
         if($user->is_valid == 0) {
             $user->is_valid= 1;
             $user->save();
-            return response()->json('User is verified', Response::HTTP_ACCEPTED);
+            return response()->json('User is verified', Response::HTTP_OK);
         }
 
-        return response()->json('User is already verified', Response::HTTP_FORBIDDEN);
+        return response()->json('User is already verified', Response::HTTP_CONFLICT);
     }
 }

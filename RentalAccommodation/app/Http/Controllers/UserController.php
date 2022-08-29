@@ -43,11 +43,11 @@ class UserController extends Controller
                     ]);
 
                     if($updated) {
-                        return response()->json('Updated!', Response::HTTP_ACCEPTED);
+                        return response()->json('Updated!', Response::HTTP_CREATED);
                     }
                 }
 
-                return response()->json('Forbidden', Response::HTTP_FORBIDDEN);
+                return response()->json('Unauthorized!', Response::HTTP_UNAUTHORIZED);
             }
     }
 
@@ -63,10 +63,10 @@ class UserController extends Controller
             ]);
 
             if($updated) {
-                return response()->json('Phone updated', Response::HTTP_ACCEPTED);
+                return response()->json('Phone updated', Response::HTTP_OK);
             }
         }
-        return response()->json('Error', Response::HTTP_FORBIDDEN);
+        return response()->json('Error', Response::HTTP_CONFLICT);
     }
 
     public function changePassword($id, Request $request) {
@@ -83,7 +83,7 @@ class UserController extends Controller
                 ]);
 
                 if($updated) {
-                    return response()->json('Password updated!', Response::HTTP_ACCEPTED);
+                    return response()->json('Password updated!', Response::HTTP_OK);
                 }
             }
         }
@@ -95,11 +95,11 @@ class UserController extends Controller
         
         if($user->id == $id) {
             if($user->delete()) {
-                return response()->json('User Deleted!', Response::HTTP_ACCEPTED);
+                return response()->json('User Deleted!', Response::HTTP_OK);
             }
         }
 
-        return response()->json('Cant be deleted!', Response::HTTP_FORBIDDEN);
+        return response()->json('Cant be deleted!', Response::HTTP_UNAUTHORIZED);
     }
 
     public function forgotPassword(Request $request) {
@@ -125,7 +125,7 @@ class UserController extends Controller
                 $message->addPart('to reset your password please press the link http://127.0.0.1:8000/forgotPassword?key='. $key, 'text/plain');
             });
 
-            return response()->json('OK', Response::HTTP_ACCEPTED);
+            return response()->json('OK', Response::HTTP_OK);
 
         }
 
@@ -152,7 +152,7 @@ class UserController extends Controller
                 $message->setBody('Helloo');
                 $message->addPart('Hello User we inform you that your password has changed.');
             });                
-                return response()->json('IT WORKS', Response::HTTP_ACCEPTED);
+                return response()->json('IT WORKS', Response::HTTP_OK);
            }
 
         }

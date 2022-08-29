@@ -21,9 +21,9 @@ class AccommodationController extends Controller
             $features[]= Feature::where('accommodation_id', $accommodation->id)->get();
         }
         if(!empty($pictures) && !empty($features)) {
-            return response()->json(['accommodations' => $accommodations, 'features' => $features, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+            return response()->json(['accommodations' => $accommodations, 'features' => $features, 'pictures' => $pictures], Response::HTTP_OK);
         }
-        return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
+        return response()->json('Sorry, We do not have any accommodations yet...', Response::HTTP_OK);
     }
 
     public function show($id) {
@@ -32,7 +32,7 @@ class AccommodationController extends Controller
         $features= Feature::where('accommodation_id', $id)->get();
         $comment= Comment::where('accommodation_id', $id)->get();
         
-        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'Comment' => $comment], Response::HTTP_ACCEPTED);
+        return response()->json(['accommodation' => $accommodation, 'pictures' => $pictures, 'features' => $features, 'Comment' => $comment], Response::HTTP_OK);
     }
 
     public function store(Request $request) {
@@ -114,7 +114,7 @@ class AccommodationController extends Controller
                 return response()->json('Accommodation Created!', Response::HTTP_CREATED);
             }
         }
-        return response()->json('Accommodation not created!', Response::HTTP_FORBIDDEN);
+        return response()->json('Accommodation not created!', Response::HTTP_NOT_ACCEPTABLE);
 
     }
 
@@ -123,10 +123,10 @@ class AccommodationController extends Controller
         $features= Feature::where('accommodation_id', $id);
         $pictures= Picture::where('accommodation_id', $id);
         if($features->delete() && $accommodation->delete() && $pictures->delete()) {
-            return response()->json('Accommodation deleted successfully', Response::HTTP_ACCEPTED);
+            return response()->json('Accommodation deleted successfully', Response::HTTP_OK);
         }
 
-        return response()->json('Error while doing that!', Response::HTTP_FORBIDDEN);
+        return response()->json('Accommodation could not be deleted!', Response::HTTP_NOT_ACCEPTABLE);
     }
 
     public function update(Request $request, $id) {
@@ -178,6 +178,7 @@ class AccommodationController extends Controller
                 'smoke_alarm' => $request->smoke_alarm,
                 'hot_tub' => $request->hot_tub
             ]);
+
             foreach($request->images as $img) {
                 $generatedName= $img->getClientOriginalName() . time(). '.' . $img->getClientOriginalExtension();
                 $path= 'upload' . '/' . $generatedName;
@@ -192,7 +193,7 @@ class AccommodationController extends Controller
             }
                 
             if($accommodation && $features &&   $picture) {
-                return response()->json('Updated!', Response::HTTP_ACCEPTED);
+                return response()->json('Updated!', Response::HTTP_OK);
             }
         }
 
@@ -207,7 +208,7 @@ class AccommodationController extends Controller
         if(!empty($pictures)) {
             return response()->json(['accommodations' => $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
         }
-        return response()->json(['accommodations' => $accommodations], Response::HTTP_ACCEPTED);
+        return response()->json(['accommodations' => $accommodations], Response::HTTP_OK);
     }
 
     public function search(Request $request) {
@@ -227,9 +228,9 @@ class AccommodationController extends Controller
                 $pictures[]= Picture::where('accommodation_id', '=', $accommodation->id)->get();
             }
             
-            return response()->json(['accommodations'=> $accommodations, 'pictures' => $pictures], Response::HTTP_ACCEPTED);
+            return response()->json(['accommodations'=> $accommodations, 'pictures' => $pictures], Response::HTTP_OK);
         }
 
-        return response()->json('Error', Response::HTTP_FORBIDDEN);
+        return response()->json('Error', Response::HTTP_NOT_ACCEPTABLE);
     }
 }

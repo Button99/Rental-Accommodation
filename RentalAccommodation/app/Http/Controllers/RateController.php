@@ -24,7 +24,7 @@ class RateController extends Controller
                 ]);
                 
                 if($update) {
-                    return response()->json('Rate has been updated!', Response::HTTP_OK);
+                    return response()->json('Rate has been updated!', Response::HTTP_CREATED);
                 }
             }
             
@@ -36,19 +36,19 @@ class RateController extends Controller
                 ]);
 
                 if($create) {
-                    return response()->json('Rate has been created', Response::HTTP_OK);
+                    return response()->json('Rate has been created', Response::HTTP_CREATED);
                 }
             }
         }
 
-        return response()->json('Failed', Response::HTTP_FORBIDDEN);
+        return response()->json('Failed', Response::HTTP_UNAUTHORIZED);
     }
 
     public function show($id) {
         $rate= Rate::where('accommodation_id', $id)->avg('rate');
 
         if($rate) {
-            return response()->json($rate, Response::HTTP_ACCEPTED);
+            return response()->json($rate, Response::HTTP_OK);
         }
 
         return response()->json('Error', Response::HTTP_NO_CONTENT);

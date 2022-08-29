@@ -29,7 +29,7 @@ class CommentController extends Controller
                 ]);
 
                 if($comment) {
-                        return response()->json('Comment updated successfully', Response::HTTP_OK);
+                        return response()->json('Comment updated successfully', Response::HTTP_CREATED);
                 }
             }
 
@@ -44,13 +44,12 @@ class CommentController extends Controller
                 }
             }
 
-        return response()->json('Comment can\'t be created!', Response::HTTP_BAD_REQUEST);
+        return response()->json('Comment can\'t be created!', Response::HTTP_UNAUTHORIZED);
         }
     }
     
     public function index($id) {
          
-        // Comments should show based on the accommodation id
         $comments= Comment::where('accommodation_id', $id)->orderBy('updated_at', 'desc')->get();
         foreach($comments as $comment) {
             $userFirstNames=User::select('first_name')->where('id', $comment['user_id'])->get()->toArray();
@@ -59,7 +58,7 @@ class CommentController extends Controller
             }
         }
         if($message) {
-            return response()->json($message, Response::HTTP_ACCEPTED);
+            return response()->json($message, Response::HTTP_OK);
         }
 
         return response()->json('', Response::HTTP_NO_CONTENT);
