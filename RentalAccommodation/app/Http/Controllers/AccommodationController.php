@@ -220,7 +220,7 @@ class AccommodationController extends Controller
         ]);
                 
         if(!$validated->fails()) {
-            $accommodations= Accommodation::where('town', 'LIKE', '%'. $data['location'] . '%')
+            $accommodations= Accommodation::where('town', 'LIKE', '%'. $data['location'] . '%')->distinct()
                 ->where('rooms', '>=', $data['rooms'])->get();
 
             foreach($accommodations as $accommodation) {
