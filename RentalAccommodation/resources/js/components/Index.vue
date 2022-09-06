@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="card-title">Paris</div>
                                 <p class="card-text">
-                                    Lorem ipsum in Paris
+                                    Find a place to stay in Paris!
                                 </p>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         <div class="card-body">
                             <div class="card-title">Athens</div>
                                 <p class="card-text">
-                                    Lorem ipsum in Athens
+                                    Find a place to stay in Athens!
                                 </p>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <div class="card-title">Rome</div>
                                 <p class="card-text">
-                                    Lorem ipsum in Rome
+                                    Find a place to stay in Rome!
                                 </p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <div class="card-body">
                             <div class="card-title">UK</div>
                                 <p class="card-text">
-                                    Lorem ipsum in London
+                                    Find a place to stay in London!
                                 </p>
                         </div>
                     </div>
@@ -63,25 +63,10 @@
         </div>
         <br />
         <br />
-        <br />
-        <div class="container">
-            <div class="row text-center">
-                <p class="col-md-5 border-right border-bottom" id="how-to-book"> How to book
-                    <br />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p class="col-md-5 border-bottom" id="about-us"> About us
-                    <br />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </div>
-        </div>
     </div>
 </template>
 
-
 <script>
-
 export default {
     methods: {
         getPhoto() {
