@@ -222,6 +222,18 @@
     width: 100%;
     padding: 4rem;
   }
+
+  .login-layout .fixed-height {
+    min-height: 60vh;
+  }
+
+  .my-account-layout .settings-menu {
+    width: 30%;
+  }
+
+  .settings-options {
+    width: 65%;
+  }
 }
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
