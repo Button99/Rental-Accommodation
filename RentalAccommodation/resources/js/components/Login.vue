@@ -1,9 +1,9 @@
 <template>
     <div class="login-layout">
-        <div class="container p-5">
+        <div class="container">
             <div class="row d-flex justify-content-center align-items-center m-5">
                 <b-card class="shadow-3-strong m-4 color-light border-0 d-flex" header-class="h3" header="Login" >
-                    <b-card-body class="text-center m-5">
+                    <b-card-body class="text-center fixed-height">
                         <b-form @submit.prevent="loginUser()" @reset="onReset()" action="#" method="POST">
                             <b-form-group label="Email: " label-for="email" class="mb-4 ">
                                 <div v-if="!$v.form.email.required" class="text-danger">Email is required</div>
