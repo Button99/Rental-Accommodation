@@ -4,4 +4,10 @@ Final year university project.
 
 Create a web application with Laravel and Vue.
 
-The goal is to create a functional website were user can create, delete, search, look for a place to stay!
+### Goal
+
+  Create a functional Website where:
+  
+    * Users have CRUD mechanisms.
+
+    * Accommodations have CRUD mechanisms.
