@@ -1,9 +1,9 @@
 <template>
     <div class="login-layout">
-        <div class="container p-5">
+        <div class="container">
             <div class="row d-flex justify-content-center align-items-center m-5">
                 <b-card class="shadow-3-strong m-4" header-class="h3" header="Register">
-                    <b-card-body class="text-center m-5">
+                    <b-card-body class="text-center fixed-height">
                         <b-form action="#" @submit.prevent="signup()" method="POST">
                             <b-form-group label="First name: " label-for="first_name" class="md-4">
                                 <div v-if="!$v.form.first_name.required" class="text-danger">First name is required</div>
