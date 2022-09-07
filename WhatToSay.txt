@@ -11,6 +11,7 @@
 Laravel
 
 Το Laravel είναι ένα framework ανοιχτου κώδικα βασισμένο στην γλώσσα PHP. Δημιουργήθηκε το 2011 απο τον Taylor Otwell και σήμερα είναι το ποιο γνωστό Back-end framework με βάση τα αστέρια στο github.
+Ο Taylor Otwell θέλησε να φτιάξει το framework παρόμοιο στο CodeIgniter αλλά πιο αναβαθμισμένο σε σχέση με αυτό.
 Ακολουθεί αρχιτεκτονική MVC (Model-View-Controller) καθώς και έχει πολλά πακέτα απο το Symfony framework.
 
 Επιπλέον, αξίζει να αναφερθει ότι το οικοσύστημα της Laravel αναπτύσεται συνέχεια δημιουργόντας νέα βοηθητικά πακέτα για τους Laravel Developers.
