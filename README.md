@@ -2,7 +2,7 @@
 
 Final year university project.
 
-Create a web application with Laravel and Vue.
+Create a web application with Laravel8.x and Vue2.x.
 
 ### Goal
 
